@@ -3,6 +3,19 @@
         <header-view></header-view>
         <nav><router-link to="/">Home</router-link> |</nav>
         <router-view />
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
+        <h1>test</h1>
     </div>
 </template>
 
@@ -13,6 +26,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    background-color: #faf4eb;
 }
 
 nav {
@@ -30,7 +44,7 @@ nav a.router-link-exact-active {
 </style>
 
 <script>
-import HeaderView from './views/HeaderView.vue';
+import HeaderView from '@/components/layout/HeaderView.vue';
 
 export default {
     name: 'HomeView',
