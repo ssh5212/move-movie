@@ -20,9 +20,14 @@
                             <b-nav-item href="#">공지사항</b-nav-item>
                         </b-navbar-nav>
                     </b-collapse>
+                    <b-collapse id="nav-collapse" class="justify-content-end d-none d-md-block" is-nav>
+                        <b-icon-person-square class="justify-content-end"></b-icon-person-square>
+                    </b-collapse>
                 </b-container>
             </b-navbar>
         </div>
+        <div class="d-none d-md-block">hello</div>
+        <div class="d-none d-md-block">hide on screens smaller than lg</div>
     </div>
 </template>
 
