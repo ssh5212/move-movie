@@ -1,7 +1,6 @@
 <template>
     <div>
         <div id="header">
-            <!-- <div id="scroll-target" style="height: 200px; overflow-y: scroll"></div> -->
             <b-navbar toggleable="md" class="fixed-top" :style="headerColor">
                 <b-container fluid="xl">
                     <!-- 로고 -->

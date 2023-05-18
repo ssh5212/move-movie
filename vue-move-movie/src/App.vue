@@ -1,8 +1,6 @@
 <template>
     <div id="app">
         <header-view></header-view>
-        <div id="top-margin"></div>
-        <nav><router-link to="/">Home</router-link> |</nav>
         <router-view />
         <h1>test</h1>
         <h1>test</h1>
