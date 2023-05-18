@@ -15,6 +15,8 @@
         </div>
         <!-- [E] Movie -->
 
+        <div class="margin-div"></div>
+
         <!-- [S] body -->
         <div class="container">
             <!-- 소개 1 -->
@@ -46,8 +48,20 @@
                     <img src="@/assets/img/intro-half-img02.jpg" width="100%" alt="intro-half-img02" />
                 </div>
             </div>
+
+            <!-- 소개 3 -->
+            <div class="row justify-content-xl-center my-5 align-items-center">
+                <div class="col-md-10 intro-half-text mb-5">
+                    <img src="@/assets/img/intro-half-img03.jpg" width="100%" alt="intro-half-img03" class="mb-5" />
+                    <h1>나만의 여행지를<br />다른 사람들에게 소개해주세요!</h1>
+                    <br />
+                    <button type="button" class="btn btn-secondary">바로가기</button>
+                </div>
+            </div>
         </div>
         <!-- [E] body -->
+
+        <div class="margin-div"></div>
     </div>
 </template>
 

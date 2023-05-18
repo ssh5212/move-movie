@@ -2,19 +2,6 @@
     <div id="app">
         <header-view></header-view>
         <router-view />
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
     </div>
 </template>
 
@@ -25,7 +12,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    background-color: #faf4eb;
 }
 
 nav {
@@ -46,6 +32,14 @@ nav a.router-link-exact-active {
     width: auto;
     height: 75px;
     visibility: hidden;
+}
+
+/* 각 아이템간 분리 */
+.margin-div {
+    margin-bottom: 96px;
+}
+.padding-div {
+    margin-bottom: 96px;
 }
 </style>
 
