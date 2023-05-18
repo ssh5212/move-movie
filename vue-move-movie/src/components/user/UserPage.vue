@@ -14,36 +14,61 @@
         <!-- [S] body -->
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <!-- 로그인 form -->
-                    <form class="form-signin">
-                        <div class="text-center mb-4">
-                            <img class="mb-4" src="@/assets/logo.png" alt="" width="72" height="auto" />
-                            <h1 class="mb-3 font-weight-normal">Hello Morld!</h1>
-                            <p>필름의 한 장 속으로 뛰어들 준비는 되셨나요?</p>
-                        </div>
-                        <hr class="mb-4" />
+                <div class="col-md-4" style="background-color: white">
+                    <img class="rounded-circle my-5" alt="avatar1" src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp" />
+                    <h1 class="mb-2">연예인 원영</h1>
+                    <h3 class="mb-4">lv. 999</h3>
 
-                        <div class="form-label-group m-3">
-                            <label for="inputEmail">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
-                        </div>
+                    <div class="progress mb-4 mx-4">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                    </div>
 
-                        <div class="form-label-group m-3">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
-                        </div>
-
-                        <div class="checkbox m-3">
-                            <label> <input type="checkbox" value="remember-me" /> Remember me </label>
-                        </div>
-                        <hr class="mb-4" />
-
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                    </form>
+                    <button type="button" class="btn btn-dark mb-2">개인정보 수정하기</button><br />
+                    <button type="button" class="btn btn-dark mb-5">탈퇴하기</button>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
+                <div class="col-md-7 overflow-auto" style="overflow: scroll; height: 631px; background-color: white">
+                    <h1 class="my-5">내 버킷리스트</h1>
+
+                    <div class="mb-4">
+                        <h5 style="text-align: left">리포 따라가기</h5>
+                        <div class="progress" style="height: 20px">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>
+                        <p class="mt-1" style="text-align: right">자세히 보기 ></p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 style="text-align: left">리포 따라가기</h5>
+                        <div class="progress" style="height: 20px">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>
+                        <p class="mt-1" style="text-align: right">자세히 보기 ></p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 style="text-align: left">리포 따라가기</h5>
+                        <div class="progress" style="height: 20px">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>
+                        <p class="mt-1" style="text-align: right">자세히 보기 ></p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 style="text-align: left">리포 따라가기</h5>
+                        <div class="progress" style="height: 20px">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>
+                        <p class="mt-1" style="text-align: right">자세히 보기 ></p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 style="text-align: left">리포 따라가기</h5>
+                        <div class="progress" style="height: 20px">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>
+                        <p class="mt-1" style="text-align: right">자세히 보기 ></p>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- [E] body -->
