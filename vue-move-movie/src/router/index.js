@@ -14,6 +14,34 @@ const routes = [
         path: '/notice',
         name: 'notice',
         component: () => import('@/views/NoticeView.vue'),
+        redirect: '/notice/list',
+        children: [
+            {
+                path: 'list',
+                name: 'noticeList',
+                component: () => import('@/components/notice/NoticeList.vue'),
+            },
+            {
+                path: 'view/:no',
+                name: 'noticeDetail',
+                component: () => import('@/components/notice/NoticeDetail.vue'),
+            },
+            {
+                path: 'write',
+                name: 'noticeWrtie',
+                component: () => import('@/components/notice/NoticeWrtie.vue'),
+            },
+            {
+                path: 'delete',
+                name: 'noticeDelete',
+                component: () => import('@/components/notice/NoticeDelete.vue'),
+            },
+            {
+                path: 'modify',
+                name: 'noticeModify',
+                component: () => import('@/components/notice/NoticeModify.vue'),
+            },
+        ],
     },
 ];
 
