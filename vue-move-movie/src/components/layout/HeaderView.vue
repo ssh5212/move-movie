@@ -1,15 +1,13 @@
 <template>
     <div>
         <div id="header">
-            <b-navbar toggleable="md" class="fixed-top" :style="headerColor">
+            <b-navbar toggleable="md" class="fixed-top py-3" :style="headerColor">
                 <b-container fluid="xl">
                     <!-- 로고 -->
                     <b-navbar-brand href="#">
-                        <b-navbar-brand href="#">
-                            <router-link to="/">
-                                <img src="@/assets/logo.png" class="d-inline-block align-middle header-logo" width="100px" alt="ssafy" />
-                            </router-link>
-                        </b-navbar-brand>
+                        <router-link to="/">
+                            <img src="@/assets/logo.png" class="d-inline-block align-middle header-logo" width="100px" alt="ssafy" />
+                        </router-link>
                         <span>MoveMovie</span>
                     </b-navbar-brand>
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -22,7 +20,7 @@
                     </b-collapse>
                     <!-- 오른쪽 사이드바 버튼 -->
                     <b-collapse id="nav-collapse" class="justify-content-end d-none d-md-block" is-nav>
-                        <b-icon-person-square class="justify-content-end h5"></b-icon-person-square>
+                        <b-icon-person-square class="justify-content-end h2 pt-1"></b-icon-person-square>
                     </b-collapse>
                 </b-container>
             </b-navbar>
