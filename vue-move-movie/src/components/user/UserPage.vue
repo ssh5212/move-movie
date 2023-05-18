@@ -14,8 +14,8 @@
         <!-- [S] body -->
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
                     <!-- 로그인 form -->
                     <form class="form-signin">
                         <div class="text-center mb-4">
@@ -43,7 +43,7 @@
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     </form>
                 </div>
-                <div class="col-md-1"></div>
+                <div class="col-md-2"></div>
             </div>
         </div>
         <!-- [E] body -->
