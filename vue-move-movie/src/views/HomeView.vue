@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div id="margin-top" style="height: 70px"></div>
+        <div id="margin-top" style="height: 77px"></div>
         <!-- [S] Movie -->
         <div class="jb-box">
             <video muted autoplay loop>
@@ -24,7 +24,6 @@
                 <div class="col-md-6 intro-half-img mb-5">
                     <img src="@/assets/img/intro-half-img01.jpg" width="100%" alt="intro-half-img01" />
                 </div>
-                <!-- <div class="col-md-2"></div> -->
                 <div class="col-md-6 intro-half-text mb-5">
                     <h1>영화 속 장면을 찾아서</h1>
                     <br />
@@ -43,7 +42,6 @@
                     <br />
                     <button type="button" class="btn btn-secondary">바로가기</button>
                 </div>
-                <!-- <div class="col-md-2"></div> -->
                 <div class="col-md-6 intro-half-img mb-5">
                     <img src="@/assets/img/intro-half-img02.jpg" width="100%" alt="intro-half-img02" />
                 </div>
