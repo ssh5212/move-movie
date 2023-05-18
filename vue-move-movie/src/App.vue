@@ -2,6 +2,7 @@
     <div id="app">
         <header-view></header-view>
         <router-view />
+        <sidebar-view></sidebar-view>
         <footer-view></footer-view>
     </div>
 </template>
@@ -47,12 +48,14 @@ nav a.router-link-exact-active {
 <script>
 import HeaderView from "@/components/layout/HeaderView.vue";
 import FooterView from "@/components/layout/FooterView.vue";
+import SidebarView from "@/components/layout/SidebarView.vue";
 
 export default {
     name: "HomeView",
     components: {
         HeaderView,
         FooterView,
+        SidebarView,
     },
 };
 </script>
