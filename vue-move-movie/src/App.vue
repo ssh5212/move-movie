@@ -1,8 +1,11 @@
 <template>
     <div id="app">
-        <header-view></header-view>
-        <router-view />
-        <sidebar-view></sidebar-view>
+        <div id="wrap-content">
+            <header-view></header-view>
+            <router-view />
+            <sidebar-view></sidebar-view>
+        </div>
+
         <footer-view></footer-view>
     </div>
 </template>
@@ -43,15 +46,40 @@ nav a.router-link-exact-active {
 .padding-div {
     margin-bottom: 96px;
 }
+
+/* footer 고정을 위한 코드 */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#app {
+    min-height: 100%;
+    position: relative;
+}
+
+#wrap-content {
+    /* margin-top: 100px; */
+    padding-bottom: 143px; /* footer의 높이 */
+}
+
+#footer {
+    width: 100%;
+    height: 143px; /* footer의 높이 */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
 </style>
 
 <script>
-import HeaderView from "@/components/layout/HeaderView.vue";
-import FooterView from "@/components/layout/FooterView.vue";
-import SidebarView from "@/components/layout/SidebarView.vue";
+import HeaderView from '@/components/layout/HeaderView.vue';
+import FooterView from '@/components/layout/FooterView.vue';
+import SidebarView from '@/components/layout/SidebarView.vue';
 
 export default {
-    name: "HomeView",
+    name: 'HomeView',
     components: {
         HeaderView,
         FooterView,
