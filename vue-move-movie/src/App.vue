@@ -2,19 +2,7 @@
     <div id="app">
         <header-view></header-view>
         <router-view />
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
+        <footer-view></footer-view>
     </div>
 </template>
 
@@ -25,7 +13,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    background-color: #faf4eb;
 }
 
 nav {
@@ -47,15 +34,25 @@ nav a.router-link-exact-active {
     height: 75px;
     visibility: hidden;
 }
+
+/* 각 아이템간 분리 */
+.margin-div {
+    margin-bottom: 96px;
+}
+.padding-div {
+    margin-bottom: 96px;
+}
 </style>
 
 <script>
 import HeaderView from "@/components/layout/HeaderView.vue";
+import FooterView from "@/components/layout/FooterView.vue";
 
 export default {
     name: "HomeView",
     components: {
         HeaderView,
+        FooterView,
     },
 };
 </script>
