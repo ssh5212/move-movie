@@ -61,6 +61,7 @@
                         </div>
                         <p class="mt-1" style="text-align: right">자세히 보기 ></p>
                     </div>
+
                     <div class="mb-4">
                         <h5 style="text-align: left">리포 따라가기</h5>
                         <div class="progress" style="height: 20px">
