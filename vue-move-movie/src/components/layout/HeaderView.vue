@@ -20,7 +20,7 @@
                     </b-collapse>
                     <!-- 오른쪽 사이드바 버튼 -->
                     <b-collapse id="nav-collapse" class="justify-content-end d-none d-md-block" is-nav>
-                        <b-icon-person-square class="justify-content-end h2 pt-1"></b-icon-person-square>
+                        <b-icon-person-square id="b-icon-person-square" class="justify-content-end h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-person-square>
                     </b-collapse>
                 </b-container>
             </b-navbar>
@@ -69,5 +69,11 @@ export default {
 .header-logo {
     height: 35px;
     width: auto;
+}
+
+/* 버튼처럼 호버되면 변하게 변경 */
+#b-icon-person-square:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
 }
 </style>

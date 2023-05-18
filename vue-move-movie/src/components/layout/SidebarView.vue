@@ -1,7 +1,7 @@
 <template>
-    <div class="d-flex justify-content-end fixed-bottom" style="margin-right: 30px; margin-bottom: 30px">
+    <div class="d-flex justify-content-end fixed-bottom" style="margin-right: 16px; margin-bottom: 16px">
         <!-- 수정된 부분 -->
-        <b-button v-b-toggle.sidebar-backdrop>
+        <b-button v-b-toggle.sidebar-backdrop class="d-none d-sm-block d-md-none">
             <b-icon-person-square class="justify-content-end" style="margin-top: 6px; margin-bottom: 2px"></b-icon-person-square>
         </b-button>
 
