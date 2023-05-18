@@ -14,11 +14,40 @@
             </div>
         </div>
         <!-- [E] Movie -->
-        <div class="row my-5">
-            <div class="col-md-5">col-8</div>
-            <div class="col-md-2">col-2</div>
-            <div class="col-md-5">col-8</div>
+
+        <!-- [S] body -->
+        <div class="container">
+            <!-- 소개 1 -->
+            <div class="row justify-content-xl-center my-5 align-items-center">
+                <div class="col-md-6 intro-half-img mb-5">
+                    <img src="@/assets/img/intro-half-img01.jpg" width="100%" alt="intro-half-img01" />
+                </div>
+                <!-- <div class="col-md-2"></div> -->
+                <div class="col-md-6 intro-half-text mb-5">
+                    <h1>영화 속 장면을 찾아서</h1>
+                    <br />
+                    <p>내가 좋아하는 영화의<br />실제 장소를 찾아가보세요!</p>
+                    <br />
+                    <button type="button" class="btn btn-secondary">바로가기</button>
+                </div>
+            </div>
+
+            <!-- 소개 2 -->
+            <div class="row justify-content-xl-center my-5 align-items-center">
+                <div class="col-md-6 intro-half-text mb-5">
+                    <h1>최고의 인생샷</h1>
+                    <br />
+                    <p>가장 좋아하는 장소에서<br />최고의 인생샷을 찍고 공유해보아요!</p>
+                    <br />
+                    <button type="button" class="btn btn-secondary">바로가기</button>
+                </div>
+                <!-- <div class="col-md-2"></div> -->
+                <div class="col-md-6 intro-half-img mb-5">
+                    <img src="@/assets/img/intro-half-img02.jpg" width="100%" alt="intro-half-img02" />
+                </div>
+            </div>
         </div>
+        <!-- [E] body -->
     </div>
 </template>
 
@@ -59,5 +88,15 @@ video {
 .jb-text h1 {
     text-align: center;
     color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .intro-half-img {
+        order: -1;
+    }
+
+    .intro-half-text {
+        order: 1;
+    }
 }
 </style>
