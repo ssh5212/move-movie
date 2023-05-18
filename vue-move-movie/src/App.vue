@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <header-view></header-view>
+        <div id="top-margin"></div>
         <nav><router-link to="/">Home</router-link> |</nav>
         <router-view />
         <h1>test</h1>
@@ -41,13 +42,20 @@ nav a {
 nav a.router-link-exact-active {
     color: #42b983;
 }
+
+#top-margin {
+    /* background-color: red; */
+    width: auto;
+    height: 75px;
+    visibility: hidden;
+}
 </style>
 
 <script>
-import HeaderView from '@/components/layout/HeaderView.vue';
+import HeaderView from "@/components/layout/HeaderView.vue";
 
 export default {
-    name: 'HomeView',
+    name: "HomeView",
     components: {
         HeaderView,
     },
