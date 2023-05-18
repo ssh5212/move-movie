@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div id="margin-top" style="height: 77px"></div>
+        <!-- <div id="margin-top" style="height: 77px"></div> -->
         <!-- [S] Movie -->
         <div class="jb-box">
             <video muted autoplay loop>
