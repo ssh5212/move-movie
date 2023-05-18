@@ -71,6 +71,31 @@ body {
     bottom: 0;
     left: 0;
 }
+
+/* 각 화면의 시작 이미지 */
+.jb-box {
+    overflow: hidden;
+    margin: 0px auto;
+    position: relative;
+}
+
+.jb-box img {
+    object-fit: cover;
+    width: 100%;
+    height: 500px;
+}
+
+.jc-text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    color: whitesmoke;
+}
+
+.vtext-big {
+    font-weight: 700;
+    font-size: 70px;
+}
 </style>
 
 <script>
