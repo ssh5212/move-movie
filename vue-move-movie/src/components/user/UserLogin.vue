@@ -23,6 +23,7 @@
                             <h1 class="mb-3 font-weight-normal">Hello Morld!</h1>
                             <p>필름의 한 장 속으로 뛰어들 준비는 되셨나요?</p>
                         </div>
+                        <hr class="mb-4" />
 
                         <div class="form-label-group m-3">
                             <label for="inputEmail">Email address</label>
@@ -37,6 +38,8 @@
                         <div class="checkbox m-3">
                             <label> <input type="checkbox" value="remember-me" /> Remember me </label>
                         </div>
+                        <hr class="mb-4" />
+
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     </form>
                 </div>
