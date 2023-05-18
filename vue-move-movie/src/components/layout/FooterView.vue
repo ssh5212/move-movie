@@ -1,6 +1,6 @@
 <template>
-    <div id="footer" style="background-color: rgba(255, 255, 255, 0.7)">
-        <div class="container justify-content-end align-items-center p-4">
+    <div id="footer">
+        <div id="inner-footer" class="container justify-content-end align-items-center p-4">
             <div class="row">
                 <div class="col-lg-1 h-100 text-center text-lg-start my-auto">
                     <a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp" target="_blank">
@@ -51,11 +51,11 @@
 
 <script>
 export default {
-    name: "FooterView",
+    name: 'FooterView',
     components: {},
     data() {
         return {
-            message: "",
+            message: '',
         };
     },
     created() {},
@@ -63,4 +63,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#footer,
+#inner-footer {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+</style>
