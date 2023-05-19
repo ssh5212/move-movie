@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
                 <div class="col-md-12">
-                    <b-card>
+                    <b-card class="bg-transparent">
                         <b-card-header>
                             <div class="row">
                                 <div class="col-md-3"></div>
@@ -28,7 +28,7 @@
                                 <!-- <div class="col-md-2">등록일 : {{ notice.registertime }}</div> -->
                             </div>
                         </b-card-header>
-                        <b-card-body>
+                        <b-card-body class="px-0">
                             <p class="card-text">
                                 <b-form-textarea
                                     id="textarea"

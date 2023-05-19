@@ -28,7 +28,7 @@
                                 <!-- <div class="col-md-2">등록일 : {{ notice.registertime }}</div> -->
                             </div>
                         </b-card-header>
-                        <b-card-body>
+                        <b-card-body class="px-0">
                             <p class="card-text">
                                 <b-form-textarea
                                     id="textarea"
