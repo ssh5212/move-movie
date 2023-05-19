@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  
+  <typeAliases>
+  	<typeAlias type="com.ssafy.web.dto.BoardDto" alias="boardDto"/>
+  	<typeAlias type="com.ssafy.web.dto.MemberDto" alias="memberDto"/>
+  	<typeAlias type="com.ssafy.web.dto.UserDto" alias="userDto"/>
+  	<typeAlias type="com.ssafy.web.dto.AttractionDto" alias="attractionDto"/>
+  	<typeAlias type="com.ssafy.web.dto.InfoBoardDto" alias="infoBoardDto"/>
+  </typeAliases>
+  
+  <mappers>
+    <mapper resource="mybatis/boardMapper.xml"/>
+    <mapper resource="mybatis/AttractionMapper.xml"/>
+    <mapper resource="mybatis/userMapper.xml"/>
+    <mapper resource="mybatis/infoBoardMapper.xml"/>
+    <!-- <mapper resource="mybatis/boardMapper2.xml"/> -->
+  </mappers>
+</configuration>
