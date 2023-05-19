@@ -17,7 +17,7 @@
             <div class="row justify-content-xl-center my-5 align-items-center">
                 <!-- 본문 내용 -->
                 <div class="col-md-12">
-                    <b-card>
+                    <b-card class="bg-transparent">
                         <b-card-header>
                             <h2 class="mb-0">{{ notice.notice_title }}</h2>
                             <div class="row">
@@ -51,7 +51,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-12">
                             <!-- col-lg-10 col-xl-8 -->
-                            <div class="card">
+                            <div class="bg-transparent card">
                                 <div class="card-body p-4">
                                     <h4 class="text-center mb-4 pb-2">Nested comments section</h4>
 
@@ -68,7 +68,7 @@
                                                     style="padding-right: 10px"
                                                 />
                                                 <div class="flex-grow-1 flex-shrink-1">
-                                                    <div>
+                                                    <div class="py-2">
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <p class="mb-1">Maria Smantha <span class="small">- 2 hours ago</span></p>
                                                             <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
@@ -76,7 +76,7 @@
                                                         <p class="small mb-0 text-left">It is a long established fact th</p>
                                                     </div>
                                                     <!-- 대댓글 -->
-                                                    <div class="d-flex flex-start mt-4">
+                                                    <div class="d-flex flex-start mt-4 py-2">
                                                         <a class="me-3" href="#" style="padding-right: 10px">
                                                             <img
                                                                 class="rounded-circle shadow-1-strong"
@@ -100,7 +100,7 @@
                                                     </div>
 
                                                     <!-- 대댓글 -->
-                                                    <div class="d-flex flex-start mt-4">
+                                                    <div class="d-flex flex-start mt-4 py-2">
                                                         <a class="me-3" href="#" style="padding-right: 10px">
                                                             <img
                                                                 class="rounded-circle shadow-1-strong"
