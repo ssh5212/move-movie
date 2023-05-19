@@ -15,90 +15,48 @@
         <!-- [S] body -->
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <!-- [S] map -->
-                <div class="col-md-7 pb-2 pt-5">
-                    <h3 class="pb-2">작품 스팟</h3>
-                    <div id="map" style="width: 100%; height: 377px"></div>
-                </div>
-                <!-- [E] map -->
-
                 <!-- [S] Movie -->
-                <div class="col-md-5 pb-2 pt-5">
-                    <h3 class="pb-2">작품 소개</h3>
+                <div class="col-lg-7 pb-2 pt-5">
+                    <h3 class="pb-2">작중 스팟 장면</h3>
+                    <img src="https://via.placeholder.com/1920x1080" alt="..." style="width: 100%" />
 
-                    <div class="card p-3" style="max-width: 540px">
-                        <div class="row no-gutters">
-                            <div class="col-md-6">
-                                <div class="h-100 d-flex align-items-center">
-                                    <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" alt="..." style="width: 100%" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card-body">
-                                    <p class="card-text">영화명 :</p>
-                                    <p class="card-text">감독 :</p>
-                                    <p class="card-text">제작사 :</p>
-                                    <p class="card-text">출연 배우 :</p>
-                                    <p class="card-text">제작년도 :</p>
-                                    <p class="card-text">개봉일 :</p>
-                                    <p class="card-text">누적 매출액 :</p>
-                                    <p class="card-text">주제곡 :</p>
-                                    <p class="card-text">삽입곡 :</p>
-                                    <p class="card-text">줄거리 :</p>
-                                    <p class="card-text">촬영장소 :</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 class="pt-4 pb-3">[건축학개론] 남주와 여주가 만나서 엘렐레</h4>
+                    <p class="mb-2 text-left">주소 : 사랑시 고백구 행복동</p>
+                    <p class="mb-2 text-left">스팟 등록자 : 연예인원영</p>
+                    <p class="text-left">스팟 소개 : 영화 중반부에 남주와 여주가 함께 걸어가는 장면입니다.</p>
+
+                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="Modify">내 사진 올리기</button>
+                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="Modify">스폿 관련 버킷 리스트 보기</button>
+
+                    <b-icon-basket2-fill id="b-icon" class="h2 col-md-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
                 </div>
                 <!-- [E] Movie -->
+
+                <!-- [S] map -->
+                <div class="col-lg-5 pb-2 pt-5">
+                    <h3 class="pb-2">작품 스팟</h3>
+                    <div id="map" style="width: 100%; height: 600px"></div>
+                </div>
+                <!-- [E] map -->
             </div>
 
             <hr class="mb-4" />
-            <!-- 상세 스팟 -->
-            <div class="card mb-3 my-5" style="width: 100%">
-                <div class="row no-gutters align-items-center">
-                    <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">
-                        <img src="https://via.placeholder.com/1920x1080" alt="..." style="width: 100%" />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">spot title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">사랑시 고백구 행복동</small></p>
-                        </div>
-                    </div>
-                    <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
-                        <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
-                        <b-icon-basket2-fill id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
-                        <!-- <b-icon-heart id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart> -->
-                        <b-icon-heart-fill id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                        <p class="card-text text-center"><small class="text-muted">1000</small></p>
+            <!-- [S] 상세 스팟 -->
+            <h3 class="pb-2 mt-5">사용자 스팟 사진</h3>
+
+            <!-- 영화 1 -->
+            <div class="col-md-4 my-4 position-relative">
+                <div class="card">
+                    <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
+                    <div class="card-body pb-5" style="text-align: left">
+                        <h5 class="card-title" style="text-align: left">포토 제목</h5>
+                        <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                        <span class="card-text"><small class="text-muted">1000</small></span>
                     </div>
                 </div>
             </div>
-            <!-- 상세 스팟 -->
-            <div class="card mb-3 my-5" style="width: 100%">
-                <div class="row no-gutters align-items-center">
-                    <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">
-                        <img src="https://via.placeholder.com/1920x1080" alt="..." style="width: 100%" />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">spot title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">사랑시 고백구 행복동</small></p>
-                        </div>
-                    </div>
-                    <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
-                        <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
-                        <b-icon-basket2-fill id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
-                        <!-- <b-icon-heart id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart> -->
-                        <b-icon-heart-fill id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                        <p class="card-text text-center"><small class="text-muted">1000</small></p>
-                    </div>
-                </div>
-            </div>
+
+            <!-- [E] 상세 스팟 -->
         </div>
         <!-- [E] body -->
     </div>
