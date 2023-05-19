@@ -41,8 +41,7 @@
                         </b-card-body>
                         <b-card-footer>
                             <div class="row">
-                                <div class="col-md-10"></div>
-
+                                <div class="col-md-12"></div>
                                 <b-button class="mr-3" variant="primary" @click="register">등록</b-button>
                                 <b-button variant="primary" @click="moveList">취소</b-button>
                             </div>
