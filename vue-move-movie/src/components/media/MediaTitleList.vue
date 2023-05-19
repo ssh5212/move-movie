@@ -16,11 +16,11 @@
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
                 <!-- 영화 1 -->
-                <a href=""></a>
                 <div class="col-md-3 my-4 position-relative">
                     <div class="card bg-dark text-white img-bg-dark">
                         <div class="img-bg-dark">
-                            <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" class="card-img" />
+                            <!-- 이게 먼저 클릭되니 여기에 옵션 주고 onclick 주면 될듯 -->
+                            <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" class="card-img" name="1" />
                         </div>
                     </div>
                     <div class="card-overlay">
