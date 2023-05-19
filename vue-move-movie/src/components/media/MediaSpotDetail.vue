@@ -44,14 +44,49 @@
             <!-- [S] 상세 스팟 -->
             <h3 class="pb-2 mt-5">사용자 스팟 사진</h3>
 
-            <!-- 영화 1 -->
-            <div class="col-md-4 my-4 position-relative">
-                <div class="card">
-                    <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
-                    <div class="card-body pb-5" style="text-align: left">
-                        <h5 class="card-title" style="text-align: left">포토 제목</h5>
-                        <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                        <span class="card-text"><small class="text-muted">1000</small></span>
+            <!-- 화면 1 -->
+            <div class="row justify-content-xlㅌ-center my-5 align-items-center">
+                <div class="col-md-4 my-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
+                        <div class="card-body pb-5" style="text-align: left">
+                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
+                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                            <span class="card-text"><small class="text-muted">1000</small></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 화면 1 -->
+                <div class="col-md-4 my-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
+                        <div class="card-body pb-5" style="text-align: left">
+                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
+                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                            <span class="card-text"><small class="text-muted">1000</small></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 화면 1 -->
+                <div class="col-md-4 my-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
+                        <div class="card-body pb-5" style="text-align: left">
+                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
+                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                            <span class="card-text"><small class="text-muted">1000</small></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 화면 1 -->
+                <div class="col-md-4 my-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
+                        <div class="card-body pb-5" style="text-align: left">
+                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
+                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                            <span class="card-text"><small class="text-muted">1000</small></span>
+                        </div>
                     </div>
                 </div>
             </div>
