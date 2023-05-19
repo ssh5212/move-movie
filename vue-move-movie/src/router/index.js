@@ -69,6 +69,19 @@ const routes = [
             },
         ],
     },
+    {
+        path: '/bucket',
+        name: 'bucket',
+        component: () => import('@/views/BucketView.vue'),
+        redirect: '/bucket/list',
+        children: [
+            {
+                path: 'list',
+                name: 'bucketList',
+                component: () => import('@/components/bucket/BucketList.vue'),
+            },
+        ],
+    },
 ];
 
 const router = new VueRouter({
