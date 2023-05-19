@@ -64,16 +64,13 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">spot title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                            </p>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                             <p class="card-text"><small class="text-muted">사랑시 고백구 행복동</small></p>
                         </div>
                     </div>
                     <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                         <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
                         <b-icon-basket2-fill id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
-                        <!-- <b-icon-heart id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart> -->
                         <b-icon-heart-fill id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
                         <p class="card-text text-center"><small class="text-muted">1000</small></p>
                     </div>
@@ -88,16 +85,13 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">spot title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                            </p>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                             <p class="card-text"><small class="text-muted">사랑시 고백구 행복동</small></p>
                         </div>
                     </div>
                     <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                         <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
                         <b-icon-basket2-fill id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
-                        <!-- <b-icon-heart id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart> -->
                         <b-icon-heart-fill id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
                         <p class="card-text text-center"><small class="text-muted">1000</small></p>
                     </div>
@@ -110,11 +104,11 @@
 
 <script>
 export default {
-    name: "MediaSpotList",
+    name: 'MediaSpotList',
     components: {},
     data() {
         return {
-            message: "",
+            message: '',
         };
     },
 
@@ -134,8 +128,8 @@ export default {
     methods: {
         //api 불러오기
         loadScript() {
-            const script = document.createElement("script");
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+            const script = document.createElement('script');
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -145,7 +139,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
