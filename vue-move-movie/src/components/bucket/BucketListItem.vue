@@ -29,7 +29,9 @@ export default {
       message: "",
     };
   },
-  created() {},
+  created() {
+    console.log(this.BucketList.spotList[0].spot_img_src);
+  },
   methods: {},
 };
 </script>

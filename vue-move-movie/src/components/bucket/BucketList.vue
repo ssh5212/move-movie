@@ -31,7 +31,7 @@ export default {
         {
           spot_pk: 0,
           spot_name: "goodplace",
-          spot_img_src: "@/assets/img/350x250.png",
+          spot_img_src: "https://placekitten.com/1000/300",
         },
       ],
     };
