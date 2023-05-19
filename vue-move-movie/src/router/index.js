@@ -80,6 +80,16 @@ const routes = [
                 name: 'bucketList',
                 component: () => import('@/components/bucket/BucketList.vue'),
             },
+            {
+                path: 'view/:no',
+                name: 'bucketDetail',
+                component: () => import('@/components/bucket/BucketSpotListDetail.vue'),
+            },
+            {
+                path: 'create',
+                name: 'bucketCreate',
+                component: () => import('@/components/bucket/BucketSpotListCreate.vue'),
+            },
         ],
     },
 ];
