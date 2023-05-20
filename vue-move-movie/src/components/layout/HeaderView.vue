@@ -4,18 +4,18 @@
             <b-navbar toggleable="md" class="fixed-top py-3" :style="headerColor">
                 <b-container fluid="xl">
                     <!-- 로고 -->
-                    <b-navbar-brand href="#">
-                        <router-link to="/">
+                    <b-navbar-brand>
+                        <router-link to="/" style="text-decoration: none; cursor: pointer">
                             <img src="@/assets/logo.png" class="d-inline-block align-middle header-logo mr-2" width="100px" alt="ssafy" />
+                            <span style="color: black">MoveMovie</span>
                         </router-link>
-                        <span>MoveMovie</span>
                     </b-navbar-brand>
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
                     <b-collapse id="nav-collapse" is-nav>
                         <b-navbar-nav>
-                            <b-nav-item href="#">영화 찾아보기</b-nav-item>
-                            <b-nav-item href="/bucket">버킷 살펴보기</b-nav-item>
-                            <b-nav-item href="/notice">공지사항</b-nav-item>
+                            <b-nav-item><router-link to="/media" class="nav-link p-md-0">영화 찾아보기</router-link></b-nav-item>
+                            <b-nav-item><router-link to="/bucket" class="nav-link p-md-0">버킷 살펴보기</router-link></b-nav-item>
+                            <b-nav-item><router-link to="/notice" class="nav-link p-md-0">공지사항</router-link></b-nav-item>
                         </b-navbar-nav>
                     </b-collapse>
                     <!-- 오른쪽 사이드바 버튼 -->
@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             target: null, // 스크롤 이벤트 저장 변수
-            headerColor: 'background-color: white; opacity:0.9;', // 스크롤 변경 시 마다 색상 변경 바인딩
+            headerColor: 'background-color: rgba(255, 255, 255, 0.9);', // 스크롤 변경 시 마다 색상 변경 바인딩
             scrollTop: 0, // 스크롤 위치 저장 변수
         };
     },
@@ -57,9 +57,9 @@ export default {
         // 현재 스크롤 위치를 확인하고 색상 변경 여부 판단
         handleScroll() {
             if (window.pageYOffset > 0) {
-                this.headerColor = 'background-color: white; opacity:0.9;';
+                this.headerColor = 'background-color: rgba(255, 255, 255, 0.9);';
             } else {
-                this.headerColor = 'background-color: white; opacity:0.9;';
+                this.headerColor = 'background-color: rgba(255, 255, 255, 0.9);';
             }
         },
     },
@@ -75,11 +75,19 @@ export default {
 /* 버튼처럼 호버되면 변하게 변경 */
 #b-icon-person-square,
 #b-icon-basket2-fill {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 #b-icon-person-square:hover,
 #b-icon-basket2-fill:hover {
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.8) !important;
+    cursor: pointer;
+}
+
+.nav-link {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+.nav-link:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
     cursor: pointer;
 }
 </style>
