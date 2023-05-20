@@ -25,7 +25,6 @@
                 <!-- [S] Movie -->
                 <div class="col-md-5 pb-2 pt-5">
                     <h3 class="pb-2">작품 소개</h3>
-
                     <div class="card p-3" style="max-width: 540px">
                         <div class="row no-gutters">
                             <div class="col-md-6">
@@ -35,17 +34,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <p class="card-text">영화명 : {{ mediaTitle.movie_title }}</p>
-                                    <p class="card-text">감독 : {{ mediaTitle.movie_director_name }}</p>
-                                    <p class="card-text">제작사 : {{ mediaTitle.movie_actor_name }}</p>
-                                    <p class="card-text">출연 배우 : {{ mediaTitle.movie_company }}</p>
-                                    <p class="card-text">제작년도 : {{ mediaTitle.movie_plot }}</p>
-                                    <p class="card-text">개봉일 : {{ mediaTitle.movie_genre }}</p>
-                                    <p class="card-text">누적 매출액 : {{ mediaTitle.movie_title }}</p>
-                                    <p class="card-text">주제곡 : {{ mediaTitle.movie_keywords }}</p>
-                                    <p class="card-text">삽입곡 : {{ mediaTitle.movie_posterurl }}</p>
-                                    <p class="card-text">줄거리 : {{ mediaTitle.movie_vod_url }}</p>
-                                    <p class="card-text">촬영장소 : {{ mediaTitle.user_pk }}</p>
+                                    <p class="">영화명 : {{ mediaTitle.movie_title }}</p>
+                                    <p class="card-text-left">감독1111111111111111111 : {{ mediaTitle.movie_director_name }}</p>
+                                    <p class="card-text-left">제작사 : {{ mediaTitle.movie_actor_name }}</p>
+                                    <p class="card-text-left">출연 배우 : {{ mediaTitle.movie_company }}</p>
+                                    <p class="card-text-left">제작년도 : {{ mediaTitle.movie_plot }}</p>
+                                    <p class="card-text-left">개봉일 : {{ mediaTitle.movie_genre }}</p>
+                                    <p class="card-text-left">누적 매출액 : {{ mediaTitle.movie_title }}</p>
+                                    <p class="card-text-left">주제곡 : {{ mediaTitle.movie_keywords }}</p>
+                                    <p class="card-text-left">삽입곡 : {{ mediaTitle.movie_posterurl }}</p>
+                                    <p class="card-text-left">줄거리 : {{ mediaTitle.movie_vod_url }}</p>
+                                    <p class="card-text-left">촬영장소 : {{ mediaTitle.user_pk }}</p>
                                 </div>
                             </div>
                         </div>
@@ -114,20 +113,24 @@ export default {
     },
 
     mounted() {
+        console.log('========================= 1');
+
         if (window.kakao && window.kakao.maps) {
             this.loadMap();
         } else {
             this.loadScript();
         }
+        console.log('========================= 2');
 
-        this.loadArea(); // 지역 불러오기
-        this.addEventMethod(); // 이벤트 등록
+        // this.loadArea(); // 지역 불러오기
+        // this.addEventMethod(); // 이벤트 등록
     },
 
     methods: {
         //api 불러오기
         loadScript() {
             const script = document.createElement('script');
+
             script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
@@ -170,7 +173,7 @@ export default {
     width: 200px;
 }
 
-.card-text {
+.card-text-left {
     text-align: left;
     margin-bottom: 4px;
 }

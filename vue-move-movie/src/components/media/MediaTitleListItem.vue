@@ -6,7 +6,7 @@
                 <img :src="mediaTitle.movie_posterurl" class="card-img" name="1" @click="moveSpotList" />
             </div>
         </div>
-        <div @click="moveSpotDetail" class="card-overlay">
+        <div class="card-overlay">
             <h3 class="h3 card-text">{{ mediaTitle.movie_title }}</h3>
             <p class="card-text mb-1 hide-overflow">{{ mediaTitle.movie_keywords }}</p>
             <p class="card-text mb-1 hide-overflow">{{ mediaTitle.movie_plot }}</p>
