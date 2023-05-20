@@ -70,6 +70,7 @@ const routes = [
         ],
     },
     {
+        // [function - 필수] : user 경로로 들어왔을 때 로그인 되어 있다면 메인 화면으로, 로그인 되어 있지 않다면 로그인 화면으로 이동
         path: '/user',
         name: 'user',
         component: UserView,
@@ -120,6 +121,7 @@ const routes = [
     {
         path: '/media',
         name: 'media',
+        redirect: '/media/list/title',
         component: () => import('@/views/MediaView.vue'),
         children: [
             {
@@ -144,7 +146,7 @@ const routes = [
             },
             {
                 path: 'spot/create',
-                name: 'spotcreate',
+                name: 'spotCreate',
                 component: () => import('@/components/media/MediaSpotCreate.vue'),
             },
         ],

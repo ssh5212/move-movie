@@ -25,8 +25,8 @@
                     <p class="mb-2 text-left">스팟 등록자 : 연예인원영</p>
                     <p class="text-left">스팟 소개 : 영화 중반부에 남주와 여주가 함께 걸어가는 장면입니다.</p>
 
-                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="Modify">내 사진 올리기</button>
-                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="Modify">스폿 관련 버킷 리스트 보기</button>
+                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveSpotCreate">내 사진 올리기</button>
+                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveRelationBucket">스폿 관련 버킷 리스트 보기</button>
 
                     <b-icon-basket2-fill id="b-icon" class="h2 col-md-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
                 </div>
@@ -41,54 +41,12 @@
             </div>
 
             <hr class="mb-4" />
-            <!-- [S] 상세 스팟 -->
+            <!-- [S] 스팟 인스턴스-->
             <h3 class="pb-2 mt-5">사용자 스팟 사진</h3>
 
             <!-- 화면 1 -->
             <div class="row justify-content-xlㅌ-center my-5 align-items-center">
-                <div class="col-md-4 my-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
-                        <div class="card-body pb-5" style="text-align: left">
-                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
-                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                            <span class="card-text"><small class="text-muted">1000</small></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- 화면 1 -->
-                <div class="col-md-4 my-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
-                        <div class="card-body pb-5" style="text-align: left">
-                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
-                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                            <span class="card-text"><small class="text-muted">1000</small></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- 화면 1 -->
-                <div class="col-md-4 my-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
-                        <div class="card-body pb-5" style="text-align: left">
-                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
-                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                            <span class="card-text"><small class="text-muted">1000</small></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- 화면 1 -->
-                <div class="col-md-4 my-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
-                        <div class="card-body pb-5" style="text-align: left">
-                            <h5 class="card-title" style="text-align: left">포토 제목</h5>
-                            <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                            <span class="card-text"><small class="text-muted">1000</small></span>
-                        </div>
-                    </div>
-                </div>
+                <MediaSpotDetailItem v-for="(spotInstance, index) in spotInstanceList" :key="index" :spotInstance="spotInstance"></MediaSpotDetailItem>
             </div>
 
             <!-- [E] 상세 스팟 -->
@@ -98,16 +56,51 @@
 </template>
 
 <script>
+import MediaSpotDetailItem from '@/components/media/MediaSpotDetailItem.vue';
+
 export default {
-    name: 'MediaSpotList',
-    components: {},
+    name: 'MediaSpotDetail',
+    components: { MediaSpotDetailItem },
     data() {
         return {
-            message: '',
+            spotInstanceList: [],
+            spotInstance: Object, // 미디어는 별도로 불러오도록 일단 구현
+            mediaSpot: Object,
         };
     },
 
-    created() {},
+    created() {
+        this.mediaSpot = {
+            spot_pk: 77,
+            spot_name: 'b',
+            spot_scene_desc: 'c',
+            spot_img_src: 'https://placekitten.com/192/108',
+            spot_lat: 11,
+            spot_lon: 22,
+            spot_address: 'ㅍㅍㅍ',
+            spot_road_address: 'b',
+            spot_characters: 'b',
+            spot_movie_title: 'b',
+            spot_filming_seq: 'b',
+            user_pk: 77,
+            sido_code: 'b',
+            gugun_code: 'b',
+        };
+
+        this.spotInstance = {
+            spot_instance_pk: 66,
+            spot_instance_title: 'c',
+            spot_instance_heart: 'c',
+            spot_instance_content: 'c',
+            spot_instance_img_src: 'https://placekitten.com/100/100',
+            registertime: 'c',
+            spot_pk: 66,
+            user_pk: 66,
+        };
+        this.spotInstanceList.push(this.spotInstance);
+        this.spotInstanceList.push(this.spotInstance);
+        this.spotInstanceList.push(this.spotInstance);
+    },
 
     mounted() {
         if (window.kakao && window.kakao.maps) {
@@ -141,6 +134,20 @@ export default {
             };
 
             this.map = new window.kakao.maps.Map(mapContainer, mapOption);
+        },
+
+        moveSpotCreate() {
+            this.$router.push({
+                name: 'spotCreate',
+            });
+        },
+
+        // [function - 필수] 검색 기능 구현 완료 후 연결하기
+        moveRelationBucket() {
+            this.$router.push({
+                name: 'bucketList',
+                params: { no: this.spotInstance.spot_instance_pk },
+            });
         },
     },
 };

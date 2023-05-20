@@ -15,20 +15,7 @@
         <!-- [S] body -->
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <!-- 영화 1 -->
-                <div class="col-md-3 my-4 position-relative">
-                    <div class="card bg-dark text-white img-bg-dark">
-                        <div class="img-bg-dark">
-                            <!-- 이게 먼저 클릭되니 여기에 옵션 주고 onclick 주면 될듯 -->
-                            <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" class="card-img" name="1" />
-                        </div>
-                    </div>
-                    <div class="card-overlay">
-                        <h3 class="h3 card-text">Card title</h3>
-                        <p class="card-text mb-1">사랑시 고백구 행복동 11번가 37번리 맛집입니다.</p>
-                        <p class="card-text mb-1">Last updated 3 mins ago</p>
-                    </div>
-                </div>
+                <MediaTitleListItem v-for="(mediaTitle, index) in mediaTitleList" :key="index" :mediaTitle="mediaTitle"></MediaTitleListItem>
             </div>
         </div>
         <!-- [E] body -->
@@ -36,15 +23,35 @@
 </template>
 
 <script>
+import MediaTitleListItem from '@/components/media/MediaTitleListItem.vue';
+
 export default {
-    name: "MediaTitleList",
-    components: {},
+    name: 'MediaTitleList',
+    components: { MediaTitleListItem },
     data() {
         return {
-            message: "",
+            mediaTitleList: [],
+            mediaTitle: Object,
         };
     },
-    created() {},
+    created() {
+        this.mediaTitle = {
+            movie_pk: 88,
+            movie_title: '1',
+            movie_director_name: '1',
+            movie_actor_name: '1',
+            movie_company: '1',
+            movie_plot: '21111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112',
+            movie_genre: '1',
+            movie_keywords: '31111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111113',
+            movie_posterurl: 'https://placekitten.com/300/400',
+            movie_vod_url: '1',
+            user_pk: 0,
+        };
+        this.mediaTitleList.push(this.mediaTitle);
+        this.mediaTitleList.push(this.mediaTitle);
+        this.mediaTitleList.push(this.mediaTitle);
+    },
     methods: {},
 };
 </script>
