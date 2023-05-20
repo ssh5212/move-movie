@@ -30,22 +30,22 @@
                         <div class="row no-gutters">
                             <div class="col-md-6">
                                 <div class="h-100 d-flex align-items-center">
-                                    <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" alt="..." style="width: 100%" />
+                                    <img :src="mediaTitle.movie_posterurl" alt="..." style="width: 100%" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <p class="card-text">영화명 :</p>
-                                    <p class="card-text">감독 :</p>
-                                    <p class="card-text">제작사 :</p>
-                                    <p class="card-text">출연 배우 :</p>
-                                    <p class="card-text">제작년도 :</p>
-                                    <p class="card-text">개봉일 :</p>
-                                    <p class="card-text">누적 매출액 :</p>
-                                    <p class="card-text">주제곡 :</p>
-                                    <p class="card-text">삽입곡 :</p>
-                                    <p class="card-text">줄거리 :</p>
-                                    <p class="card-text">촬영장소 :</p>
+                                    <p class="card-text">영화명 : {{ mediaTitle.movie_title }}</p>
+                                    <p class="card-text">감독 : {{ mediaTitle.movie_director_name }}</p>
+                                    <p class="card-text">제작사 : {{ mediaTitle.movie_actor_name }}</p>
+                                    <p class="card-text">출연 배우 : {{ mediaTitle.movie_company }}</p>
+                                    <p class="card-text">제작년도 : {{ mediaTitle.movie_plot }}</p>
+                                    <p class="card-text">개봉일 : {{ mediaTitle.movie_genre }}</p>
+                                    <p class="card-text">누적 매출액 : {{ mediaTitle.movie_title }}</p>
+                                    <p class="card-text">주제곡 : {{ mediaTitle.movie_keywords }}</p>
+                                    <p class="card-text">삽입곡 : {{ mediaTitle.movie_posterurl }}</p>
+                                    <p class="card-text">줄거리 : {{ mediaTitle.movie_vod_url }}</p>
+                                    <p class="card-text">촬영장소 : {{ mediaTitle.user_pk }}</p>
                                 </div>
                             </div>
                         </div>
@@ -81,10 +81,10 @@ export default {
             spot_pk: 77,
             spot_name: 'b',
             spot_scene_desc: 'c',
-            spot_img_src: 'd',
+            spot_img_src: 'https://placekitten.com/192/108',
             spot_lat: 11,
             spot_lon: 22,
-            spot_address: 'https://placekitten.com/300/400',
+            spot_address: 'ㅍㅍㅍ',
             spot_road_address: 'b',
             spot_characters: 'b',
             spot_movie_title: 'b',
