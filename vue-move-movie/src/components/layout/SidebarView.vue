@@ -41,7 +41,6 @@
             <b-sidebar id="sidebar-backdrop" title="" :backdrop-variant="variant" backdrop shadow right>
                 <div class="px-3 py-2">
                     <!-- [function - 필수] 데이터 바인딩 : 사용자 데이터로 동적으로 바뀌도록 해야 함 -->
-
                     <img class="rounded-circle my-3" alt="avatar1" src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp" />
                     <h2 class="mb-2">연예인 원영</h2>
                     <h4 class="mb-3">lv. 999</h4>

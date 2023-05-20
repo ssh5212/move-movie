@@ -29,9 +29,8 @@
                         <b-card-body>
                             <p class="card-text">
                                 {{ notice.notice_content }}
-                                Some quick example text to build on the card and make up the bulk of the card's content. Some quick example text to build on the
-                                card and make up the bulk of the card's content. Some quick example text to build on the card and make up the bulk of the card's
-                                content. Some quick example text to build on the card and make up the bulk of the card's content.
+                                Some quick example text to build on the card and make up the bulk of the card's content. Some quick example text to build on the card and make up the bulk of the card's content. Some quick example text to build on the
+                                card and make up the bulk of the card's content. Some quick example text to build on the card and make up the bulk of the card's content.
                             </p>
                         </b-card-body>
                         <b-card-footer>
@@ -59,14 +58,7 @@
                                         <div class="col">
                                             <!-- 댓글 -->
                                             <div class="d-flex flex-start">
-                                                <img
-                                                    class="rounded-circle shadow-1-strong me-3"
-                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
-                                                    alt="avatar"
-                                                    width="65"
-                                                    height="65"
-                                                    style="padding-right: 10px"
-                                                />
+                                                <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65" height="65" style="padding-right: 10px" />
                                                 <div class="flex-grow-1 flex-shrink-1">
                                                     <div class="py-2">
                                                         <div class="d-flex justify-content-between align-items-center">
@@ -78,23 +70,14 @@
                                                     <!-- 대댓글 -->
                                                     <div class="d-flex flex-start mt-4 py-2">
                                                         <a class="me-3" href="#" style="padding-right: 10px">
-                                                            <img
-                                                                class="rounded-circle shadow-1-strong"
-                                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
-                                                                alt="avatar"
-                                                                width="65"
-                                                                height="65"
-                                                            />
+                                                            <img class="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar" width="65" height="65" />
                                                         </a>
                                                         <div class="flex-grow-1 flex-shrink-1">
                                                             <div>
                                                                 <div class="d-flex justify-content-between align-items-center">
                                                                     <p class="mb-1">Simona Disa <span class="small">- 3 hours ago</span></p>
                                                                 </div>
-                                                                <p class="small mb-0 text-left">
-                                                                    letters, as opposed to using 'Content here, content here', making it look like readable
-                                                                    English.
-                                                                </p>
+                                                                <p class="small mb-0 text-left">letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -102,13 +85,7 @@
                                                     <!-- 대댓글 -->
                                                     <div class="d-flex flex-start mt-4 py-2">
                                                         <a class="me-3" href="#" style="padding-right: 10px">
-                                                            <img
-                                                                class="rounded-circle shadow-1-strong"
-                                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                                                                alt="avatar"
-                                                                width="65"
-                                                                height="65"
-                                                            />
+                                                            <img class="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" />
                                                         </a>
                                                         <div class="flex-grow-1 flex-shrink-1">
                                                             <div>
@@ -116,14 +93,11 @@
                                                                     <p class="mb-1">John Smith <span class="small">- 4 hours ago</span></p>
                                                                 </div>
                                                                 <p class="small mb-0 text-left">
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
-                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words.
+                                                                    the majority have suffered alteration in some form, by injected humour, or randomised words. the majority have suffered alteration in some form, by injected humour, or randomised
+                                                                    words. the majority have suffered alteration in some form, by injected humour, or randomised words. the majority have suffered alteration in some form, by injected humour, or
+                                                                    randomised words. the majority have suffered alteration in some form, by injected humour, or randomised words. the majority have suffered alteration in some form, by injected humour,
+                                                                    or randomised words. the majority have suffered alteration in some form, by injected humour, or randomised words. the majority have suffered alteration in some form, by injected
+                                                                    humour, or randomised words.
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -147,7 +121,7 @@
 
 <script>
 export default {
-    name: "NoticeDetail",
+    name: 'NoticeDetail',
     components: {},
     data() {
         return {
@@ -163,11 +137,11 @@ export default {
 
         //test 용도
         this.notice = {
-            notice_pk: "no",
-            notice_title: "title",
-            notice_content: "content",
+            notice_pk: 'no',
+            notice_title: 'title',
+            notice_content: 'content',
             hit: 10,
-            registertime: "2023.01.01",
+            registertime: '2023.01.01',
             user_pk: 0,
         };
     },
