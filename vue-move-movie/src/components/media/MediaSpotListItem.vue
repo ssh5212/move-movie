@@ -6,7 +6,7 @@
                 <img :src="mediaSpot.spot_img_src" alt="..." style="width: 100%" />
             </div>
             <div class="col-md-8">
-                <div class="card-body">
+                <div class="card-body" @click="moveSpotDetail">
                     <h5 class="card-title">{{ mediaSpot.mediaTitle }}</h5>
                     <p class="card-text">{{ mediaSpot.spot_filming_seq }}</p>
                     <p class="card-text">
@@ -36,10 +36,10 @@ export default {
         console.log(this.mediaSpot);
     },
     methods: {
-        moveSpotList() {
+        moveSpotDetail() {
             this.$router.push({
-                name: 'spotList',
-                params: { no: this.mediaTitle.movie_pk },
+                name: 'spotDetail',
+                params: { no: this.mediaSpot.spot_pk },
             });
         },
     },
