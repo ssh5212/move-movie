@@ -1,5 +1,5 @@
 <template>
-    <!-- 상세 스팟 -->
+    <!-- 스팟 -->
     <div class="card mb-3 my-5" style="width: 100%">
         <div class="row no-gutters align-items-center">
             <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">

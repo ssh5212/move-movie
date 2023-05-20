@@ -121,7 +121,7 @@ const routes = [
             },
             {
                 path: 'spot/create',
-                name: 'spotcreate',
+                name: 'spotCreate',
                 component: () => import('@/components/media/MediaSpotCreate.vue'),
             },
         ],
