@@ -20,7 +20,7 @@
                     <div class="card bg-dark text-white img-bg-dark">
                         <div class="img-bg-dark">
                             <!-- 이게 먼저 클릭되니 여기에 옵션 주고 onclick 주면 될듯 -->
-                            <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" class="card-img" name="1" />
+                            <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" class="card-img" name="1" @click="moveSpotlist" />
                         </div>
                     </div>
                     <div class="card-overlay">
@@ -37,15 +37,21 @@
 
 <script>
 export default {
-    name: "MediaTitleList",
+    name: 'MediaTitleList',
     components: {},
     data() {
         return {
-            message: "",
+            message: '',
         };
     },
     created() {},
-    methods: {},
+    methods: {
+        moveCreate() {
+            this.$router.push({
+                name: `bucketCreate`,
+            });
+        },
+    },
 };
 </script>
 
