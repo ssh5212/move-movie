@@ -15,7 +15,7 @@
         <!-- [S] body -->
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <!-- 여기에 Media Item 생성 -->
+                <MediaTitleListItem v-for="(mediaTitle, index) in mediaTitleList" :key="index" :mediaTitle="mediaTitle"></MediaTitleListItem>
             </div>
         </div>
         <!-- [E] body -->
@@ -23,22 +23,36 @@
 </template>
 
 <script>
+import MediaTitleListItem from '@/components/media/MediaTitleListItem.vue';
+
 export default {
     name: 'MediaTitleList',
-    components: {},
+    components: { MediaTitleListItem },
     data() {
         return {
-            message: '',
+            mediaTitleList: [],
+            mediaTitle: Object,
         };
     },
-    created() {},
-    methods: {
-        moveCreate() {
-            this.$router.push({
-                name: `bucketCreate`,
-            });
-        },
+    created() {
+        this.mediaTitle = {
+            movie_pk: 88,
+            movie_title: '1',
+            movie_director_name: '1',
+            movie_actor_name: '1',
+            movie_company: '1',
+            movie_plot: '21111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112',
+            movie_genre: '1',
+            movie_keywords: '31111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111113',
+            movie_posterurl: 'https://placekitten.com/300/400',
+            movie_vod_url: '1',
+            user_pk: 0,
+        };
+        this.mediaTitleList.push(this.mediaTitle);
+        this.mediaTitleList.push(this.mediaTitle);
+        this.mediaTitleList.push(this.mediaTitle);
     },
+    methods: {},
 };
 </script>
 

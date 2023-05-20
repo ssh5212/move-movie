@@ -56,63 +56,62 @@
 
             <hr class="mb-4" />
             <!-- 상세 스팟 -->
-            <div class="card mb-3 my-5" style="width: 100%">
-                <div class="row no-gutters align-items-center">
-                    <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">
-                        <img src="https://via.placeholder.com/1920x1080" alt="..." style="width: 100%" />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">spot title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">사랑시 고백구 행복동</small></p>
-                        </div>
-                    </div>
-                    <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
-                        <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
-                        <b-icon-basket2-fill id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
-                        <b-icon-heart-fill id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                        <p class="card-text text-center"><small class="text-muted">1000</small></p>
-                    </div>
-                </div>
-            </div>
-            <!-- 상세 스팟 -->
-            <div class="card mb-3 my-5" style="width: 100%">
-                <div class="row no-gutters align-items-center">
-                    <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">
-                        <img src="https://via.placeholder.com/1920x1080" alt="..." style="width: 100%" />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">spot title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">사랑시 고백구 행복동</small></p>
-                        </div>
-                    </div>
-                    <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
-                        <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
-                        <b-icon-basket2-fill id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
-                        <b-icon-heart-fill id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                        <p class="card-text text-center"><small class="text-muted">1000</small></p>
-                    </div>
-                </div>
-            </div>
+            <MediaSpotListItem v-for="(mediaSpot, index) in mediaSpotList" :key="index" :mediaSpot="mediaSpot"></MediaSpotListItem>
         </div>
         <!-- [E] body -->
     </div>
 </template>
 
 <script>
+import MediaSpotListItem from '@/components/media/MediaSpotListItem.vue';
+
 export default {
     name: 'MediaSpotList',
-    components: {},
+    components: { MediaSpotListItem },
     data() {
         return {
-            message: '',
+            mediaSpotList: [],
+            mediaSpot: Object,
+            mediaTitle: Object, // 미디어는 별도로 불러오도록 일단 구현
         };
     },
 
-    created() {},
+    created() {
+        this.mediaSpot = {
+            spot_pk: 77,
+            spot_name: 'b',
+            spot_scene_desc: 'c',
+            spot_img_src: 'd',
+            spot_lat: 11,
+            spot_lon: 22,
+            spot_address: 'https://placekitten.com/300/400',
+            spot_road_address: 'b',
+            spot_characters: 'b',
+            spot_movie_title: 'b',
+            spot_filming_seq: 'b',
+            user_pk: 77,
+            sido_code: 'b',
+            gugun_code: 'b',
+        };
+        this.mediaSpotList.push(this.mediaSpot);
+        this.mediaSpotList.push(this.mediaSpot);
+        this.mediaSpotList.push(this.mediaSpot);
+        this.mediaSpotList.push(this.mediaSpot);
+
+        this.mediaTitle = {
+            movie_pk: 88,
+            movie_title: '1',
+            movie_director_name: '1',
+            movie_actor_name: '1',
+            movie_company: '1',
+            movie_plot: '21111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112',
+            movie_genre: '1',
+            movie_keywords: '31111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111113',
+            movie_posterurl: 'https://placekitten.com/300/400',
+            movie_vod_url: '1',
+            user_pk: 0,
+        };
+    },
 
     mounted() {
         if (window.kakao && window.kakao.maps) {

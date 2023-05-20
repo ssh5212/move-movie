@@ -1,24 +1,45 @@
 <template>
-    <div>
-        <!-- 영화 1 -->
-        <div class="col-md-3 my-4 position-relative">
-            <div class="card bg-dark text-white img-bg-dark">
-                <div class="img-bg-dark">
-                    <!-- 이게 먼저 클릭되니 여기에 옵션 주고 onclick 주면 될듯 -->
-                    <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87032/87032_320.jpg" class="card-img" name="1" @click="moveSpotlist" />
-                </div>
+    <!-- 영화 1 -->
+    <div class="col-md-3 my-4 position-relative">
+        <div class="card bg-dark text-white img-bg-dark">
+            <div class="img-bg-dark">
+                <img :src="mediaTitle.movie_posterurl" class="card-img" name="1" @click="moveSpotList" />
             </div>
-            <div class="card-overlay">
-                <h3 class="h3 card-text">Card title</h3>
-                <p class="card-text mb-1">사랑시 고백구 행복동 11번가 37번리 맛집입니다.</p>
-                <p class="card-text mb-1">Last updated 3 mins ago</p>
-            </div>
+        </div>
+        <div @click="moveSpotDetail" class="card-overlay">
+            <h3 class="h3 card-text">{{ mediaTitle.movie_title }}</h3>
+            <p class="card-text mb-1 hide-overflow">{{ mediaTitle.movie_keywords }}</p>
+            <p class="card-text mb-1 hide-overflow">{{ mediaTitle.movie_plot }}</p>
+            <br />
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    name: 'MediaTitleListItem',
+    props: {
+        mediaTitle: Object,
+    },
+    created() {
+        console.log(this.mediaTitle);
+    },
+    methods: {
+        moveSpotList() {
+            this.$router.push({
+                name: 'spotList',
+                params: { no: this.mediaTitle.movie_pk },
+            });
+        },
+    },
+};
 </script>
 
-<style></style>
+<style>
+.hide-overflow {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+</style>
