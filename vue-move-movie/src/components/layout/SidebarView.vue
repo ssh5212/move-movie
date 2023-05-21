@@ -23,7 +23,7 @@
         </div>
 
         <!-- 오른쪽 사이드바 -->
-        <div v-if="isLogin">
+        <div v-if="userInfo">
             <LoginAfter></LoginAfter>
         </div>
         <div v-else>
@@ -45,11 +45,12 @@ export default {
         return {
             mediaTitleList: [],
             mediaTitle: Object,
+            variant: "",
         };
     },
     created() {},
     computed: {
-        ...mapState(userStore, ["isLogin"]),
+        ...mapState(userStore, ["isLogin", "userInfo"]),
     },
 };
 </script>

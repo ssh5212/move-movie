@@ -24,6 +24,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            variant: "",
+        };
+    },
     methods: {
         moveLogin() {
             this.$router.push({

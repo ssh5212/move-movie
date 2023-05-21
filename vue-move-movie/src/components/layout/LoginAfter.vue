@@ -77,7 +77,6 @@ export default {
         logout() {
             sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
             sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
-            console.log(this.userInfo);
             this.userLogout(this.userInfo.user_email);
             console.log("success logout!");
             this.movehome();
@@ -93,6 +92,7 @@ export default {
     data() {
         return {
             ...mapState(userStore, ["userInfo", "isLogin"]),
+            variant: "",
         };
     },
     computed: {
