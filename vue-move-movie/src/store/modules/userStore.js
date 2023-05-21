@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { login, findById, tokenRegeneration, logout, register } from "@/api/user";
+import { login, findById, tokenRegeneration, logout, register, edit } from "@/api/user";
 
 const userStore = {
     namespaced: true,
@@ -147,6 +147,18 @@ const userStore = {
         async userRegister({ commit }, user) {
             console.log(user);
             await register(user, ({ data }) => {
+                if (data.message === "success") {
+                    console.log("good");
+                } else {
+                    commit("SET_IS_LOGIN", false);
+                    console.log("bad");
+                }
+            });
+        },
+
+        async userEdit({ commit }, user) {
+            console.log(user);
+            await edit(user, ({ data }) => {
                 if (data.message === "success") {
                     console.log("good");
                 } else {

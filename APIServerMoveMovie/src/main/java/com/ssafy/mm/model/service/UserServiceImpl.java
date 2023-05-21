@@ -54,4 +54,10 @@ public class UserServiceImpl implements UserService {
 		sqlSession.getMapper(UserMapper.class).register(userdto);
 	}
 
+	@Override
+	public void edit(UserDto userdto) throws Exception {
+		sqlSession.getMapper(UserMapper.class).edit(userdto);
+		
+	}
+
 }
