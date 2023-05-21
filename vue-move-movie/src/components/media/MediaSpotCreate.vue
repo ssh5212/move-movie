@@ -42,9 +42,7 @@
                     <!-- 좌 -->
                     <div class="col-md-6">
                         <!-- 이미지 -->
-                        <div class="mt-3">
-                            <img :src="selectedImage" alt="Uploaded Image" width="100%" />
-                        </div>
+                        <div class="mt-3"><img v-if="Object.keys(selectedImage).length > 0" :src="selectedImage" alt="Uploaded Image" width="100%" /></div>
                     </div>
                     <!-- 우 -->
                     <div class="col-md-6">

@@ -15,4 +15,5 @@ public interface UserMapper {
 	public Object getRefreshToken(String user_email) throws SQLException;
 	public void deleteRefreshToken(Map<String, String> map) throws SQLException;
 	public void register(UserDto userdto) throws Exception;
+	public void edit(UserDto userdto) throws Exception;
 }

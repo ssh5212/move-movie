@@ -23,8 +23,8 @@
                         <b-progress :value="checkUserInfo.user_exp" :max="100" show-progress animated></b-progress>
                     </div>
 
-                    <button type="button" class="btn btn-dark mb-2">개인정보 수정하기</button><br />
-                    <button type="button" class="btn btn-dark mb-5">탈퇴하기</button>
+                    <button type="button" class="btn btn-dark mb-2" @click="goEdit">개인정보 수정하기</button><br />
+                    <button type="button" class="btn btn-dark mb-5" @click="goDropout">탈퇴하기</button>
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-7 overflow-auto" style="overflow: scroll; height: 631px; background-color: white">
@@ -86,6 +86,17 @@ export default {
     },
     computed: {
         ...mapGetters(userStore, ["checkUserInfo"]),
+    },
+    methods: {
+        goEdit() {
+            this.$router.push({ name: "edit" });
+        },
+        // [function] : 탈퇴 기능 구현 필요
+        goDropout() {},
+    },
+    mounted() {
+        console.log("mount");
+        console.log(userStore.checkUserInfo);
     },
 };
 </script>

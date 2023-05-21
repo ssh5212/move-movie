@@ -37,4 +37,10 @@
 		INSERT INTO user(user_nickname,user_email,user_pw,user_name,user_profile_img_src)
 		VALUES(#{user_nickname},#{user_email},#{user_pw},#{user_name},#{user_profile_img_src});
 	</insert>
+	
+	<update id="edit" parameterType="UserDto">
+		update user
+		set user_nickname = #{user_nickname}, user_pw = #{user_pw}, user_name= #{user_name}, user_profile_img_src = #{user_profile_img_src}
+		where user_email = #{user_email}
+	</update>
 </mapper>

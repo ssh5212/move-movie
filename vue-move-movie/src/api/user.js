@@ -26,4 +26,9 @@ async function register(user, success, fail) {
     await api.post(`/user/register`, user).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout, register };
+async function edit(user, success, fail) {
+    console.log(user);
+    await api.post(`/user/edit`, user).then(success).catch(fail);
+}
+
+export { login, findById, tokenRegeneration, logout, register, edit };

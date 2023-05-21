@@ -93,6 +93,12 @@ const routes = [
                 name: "mypage",
                 component: () => import(/* webpackChunkName: "user" */ "@/components/user/UserPage.vue"),
             },
+            {
+                // 수정
+                path: "edit",
+                name: "edit",
+                component: () => import(/* webpackChunkName: "user" */ "@/components/user/UserEdit.vue"),
+            },
         ],
     },
     {

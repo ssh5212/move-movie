@@ -58,15 +58,20 @@ public class UserController {
 				resultMap.put("access-token", accessToken);
 				resultMap.put("refresh-token", refreshToken);
 				resultMap.put("message", SUCCESS);
-				status = HttpStatus.ACCEPTED;
+				status = HttpStatus.OK;
+
 			} else {
 				resultMap.put("message", FAIL);
 				status = HttpStatus.ACCEPTED;
+				System.out.println("else");
+
+				System.out.println(status);
 			}
 		} catch (Exception e) {
 			logger.error("로그인 실패 : {}", e);
 			resultMap.put("message", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
+
 		}
 		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
@@ -164,5 +169,27 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
+	// 수정
+	@PostMapping("/edit")
+	public ResponseEntity<?> edit(@RequestBody UserDto userdto){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		
+		System.out.println("에디트 나오니?");
+		
+		System.out.println(userdto);
+		try {
+			userService.edit(userdto);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			logger.error("회원정보 수정 실패 : ", e);
+			resultMap.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }
 
