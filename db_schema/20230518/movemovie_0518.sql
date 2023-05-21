@@ -25,8 +25,8 @@ DROP TABLE IF EXISTS `bucket`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bucket` (
-  `bucket_pk` int NOT NULL,
-  `bucket_heart` int DEFAULT NULL,
+  `bucket_pk` int NOT NULL AUTO_INCREMENT,
+  `bucket_heart` int DEFAULT 0,
   `bucket_title` varchar(20) DEFAULT NULL,
   `bucket_content` varchar(80) DEFAULT NULL,
   `user_pk` int DEFAULT NULL,
