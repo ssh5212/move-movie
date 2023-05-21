@@ -58,15 +58,23 @@ public class UserController {
 				resultMap.put("access-token", accessToken);
 				resultMap.put("refresh-token", refreshToken);
 				resultMap.put("message", SUCCESS);
-				status = HttpStatus.ACCEPTED;
+				status = HttpStatus.OK;
+				System.out.println("if");
+				System.out.println(status);
 			} else {
 				resultMap.put("message", FAIL);
 				status = HttpStatus.ACCEPTED;
+				System.out.println("else");
+
+				System.out.println(status);
 			}
 		} catch (Exception e) {
 			logger.error("로그인 실패 : {}", e);
 			resultMap.put("message", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
+			System.out.println("catch");
+
+			System.out.println(status);
 		}
 		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
