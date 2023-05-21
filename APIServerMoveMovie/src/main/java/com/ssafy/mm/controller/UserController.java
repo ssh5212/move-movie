@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.mm.model.UserDto;
@@ -45,6 +46,7 @@ public class UserController {
 			@RequestBody UserDto userdto){
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
+		System.out.println(userdto);
 		try {
 			UserDto loginUser = userService.login(userdto);
 			if (loginUser != null) {
@@ -75,7 +77,7 @@ public class UserController {
 	public ResponseEntity<Map<String, Object>> getInfo(
 			@PathVariable("user_email") @ApiParam(value = "인증할 회원의 아이디.", required = true) String user_email,
 			HttpServletRequest request) {
-//		logger.debug("userid : {} ", userid);
+		logger.info("userinfo : user_email : {} ", user_email);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
 		if (jwtService.checkToken(request.getHeader("access-token"))) {
@@ -102,6 +104,7 @@ public class UserController {
 //	@ApiOperation(value = "로그아웃", notes = "회원 정보를 담은 Token을 제거한다.", response = Map.class)
 	@GetMapping("/logout/{user_email}")
 	public ResponseEntity<?> removeToken(@PathVariable("user_email") String user_email) {
+		System.out.println(user_email);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {

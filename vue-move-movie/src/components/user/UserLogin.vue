@@ -27,12 +27,12 @@
 
                         <div class="form-label-group m-3">
                             <label for="inputEmail">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="user.user_email" required autofocus />
                         </div>
 
                         <div class="form-label-group m-3">
                             <label for="password">Password</label>
-                            <input type="password" id="password" class="form-control" placeholder="Password" required />
+                            <input type="password" id="password" class="form-control" placeholder="Password" v-model="user.user_pw" required />
                         </div>
 
                         <div class="checkbox m-3">
@@ -40,7 +40,7 @@
                         </div>
                         <hr class="mb-4" />
 
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="button" @click="confirm">Sign in</button>
                     </form>
                 </div>
                 <div class="col-md-2"></div>
@@ -51,7 +51,40 @@
 </template>
 
 <script>
-export default {};
+import { mapState, mapActions } from "vuex";
+const userStore = "userStore";
+
+export default {
+    name: "UserLogin",
+    data() {
+        return {
+            user: {
+                user_email: null,
+                user_pw: null,
+            },
+        };
+    },
+    computed: {
+        ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"]),
+    },
+    methods: {
+        ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
+        async confirm() {
+            console.log(this.user);
+            await this.userConfirm(this.user);
+            let token = sessionStorage.getItem("access-token");
+            console.log(this.isLogin);
+            if (this.isLogin) {
+                await this.getUserInfo(token);
+                this.$router.push({ name: "home" });
+            }
+        },
+    },
+
+    movePage() {
+        this.$router.push({ name: "register" });
+    },
+};
 </script>
 
 <style></style>

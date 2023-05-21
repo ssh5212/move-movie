@@ -35,7 +35,9 @@
 <script>
 import LoginAfter from "@/components/layout/LoginAfter.vue";
 import LoginBefore from "@/components/layout/LoginBefore.vue";
+import { mapState } from "vuex";
 
+const userStore = "userStore";
 export default {
     name: "SidebarView",
     components: { LoginAfter, LoginBefore },
@@ -43,10 +45,12 @@ export default {
         return {
             mediaTitleList: [],
             mediaTitle: Object,
-            isLogin: false,
         };
     },
     created() {},
+    computed: {
+        ...mapState(userStore, ["isLogin"]),
+    },
 };
 </script>
 

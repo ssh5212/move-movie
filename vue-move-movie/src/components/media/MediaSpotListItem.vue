@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    name: "MediaSpotListItem",
+    name: 'MediaSpotListItem',
     props: {
         mediaSpot: Object,
     },
@@ -38,7 +38,7 @@ export default {
     methods: {
         moveSpotDetail() {
             this.$router.push({
-                name: "spotDetail",
+                name: 'spotDetail',
                 params: { no: this.mediaSpot.spot_pk },
             });
         },

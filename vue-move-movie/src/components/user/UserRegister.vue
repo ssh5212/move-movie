@@ -27,33 +27,33 @@
                     <form class="needs-validation" novalidate>
                         <div class="mb-3">
                             <label for="email">Email <span class="text-muted"></span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com" />
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com" v-model="user.user_email" />
                             <div class="invalid-feedback">Please enter a valid email address for shipping updates.</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="" required />
+                            <input type="password" class="form-control" id="password" placeholder="" v-model="user.user_pw" required />
                             <div class="invalid-feedback">Please enter your shipping address.</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="password-check">Password Check</label>
-                            <input type="password" class="form-control" id="password-check" placeholder="" required />
+                            <input type="password" class="form-control" id="password-check" placeholder="" v-model="pw_check" required />
                         </div>
                         <div class="mb-3">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="" required />
+                            <input type="text" class="form-control" id="name" placeholder="" v-model="user.user_name" required />
                             <div class="invalid-feedback">Please enter your shipping address.</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="nickname">NickName</label>
-                            <input type="text" class="form-control" id="nickname" placeholder="" required />
+                            <input type="text" class="form-control" id="nickname" placeholder="" v-model="user.user_nickname" required />
                         </div>
 
                         <hr class="mb-4" />
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="button" @click="register">Continue to checkout</button>
                     </form>
                 </div>
 
@@ -65,7 +65,34 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+const userStore = "userStore";
+
+export default {
+    name: "UserRegister",
+    data() {
+        return {
+            user: {
+                user_email: null,
+                user_pw: null,
+                user_name: null,
+                user_nickname: "default",
+            },
+            pw_check: null,
+        };
+    },
+    methods: {
+        ...mapActions(userStore, ["userRegister"]),
+        register() {
+            this.userRegister(this.user);
+            alert("회원 등록 완료");
+            this.movehome();
+        },
+        movehome() {
+            this.$router.push({ name: "home" });
+        },
+    },
+};
 </script>
 
 <style></style>
