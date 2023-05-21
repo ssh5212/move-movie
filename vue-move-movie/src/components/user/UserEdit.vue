@@ -39,7 +39,7 @@
 
                         <div class="mb-3">
                             <label for="password-check">Password Check</label>
-                            <input type="password" class="form-control" id="password-check" placeholder="" v-model="user.user_pw" required />
+                            <input type="password" class="form-control" id="password-check" placeholder="" v-model="user_pw" required />
                         </div>
                         <div class="mb-3">
                             <label for="name">Name</label>
@@ -72,7 +72,9 @@ export default {
     name: "UserEdit",
     data() {
         return {
+            // [feature : 필수] 비밀번호 체크 기능 추가
             user: Object,
+            user_pw: "",
         };
     },
     methods: {
