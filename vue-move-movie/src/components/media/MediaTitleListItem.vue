@@ -27,7 +27,7 @@ export default {
         moveSpotList() {
             this.$router.push({
                 name: "spotList",
-                params: { no: this.mediaTitle.movie_pk },
+                params: { title: this.mediaTitle.title, prodYear: this.mediaTitle.prodYear },
             });
         },
     },

@@ -63,6 +63,7 @@
 
 <script>
 import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
+import { mediaList } from "@/api/media.js";
 
 export default {
     name: "MediaSpotList",
@@ -72,44 +73,14 @@ export default {
             mediaSpotList: [],
             mediaSpot: Object,
             mediaTitle: Object, // 미디어는 별도로 불러오도록 일단 구현
+            searchTitle: String,
+            searchYear: String,
         };
     },
 
     created() {
-        this.mediaSpot = {
-            spot_pk: 77,
-            spot_name: "b",
-            spot_scene_desc: "c",
-            spot_img_src: "https://placekitten.com/192/108",
-            spot_lat: 11,
-            spot_lon: 22,
-            spot_address: "ㅍㅍㅍ",
-            spot_road_address: "b",
-            spot_characters: "b",
-            spot_movie_title: "b",
-            spot_filming_seq: "b",
-            user_pk: 77,
-            sido_code: "b",
-            gugun_code: "b",
-        };
-        this.mediaSpotList.push(this.mediaSpot);
-        this.mediaSpotList.push(this.mediaSpot);
-        this.mediaSpotList.push(this.mediaSpot);
-        this.mediaSpotList.push(this.mediaSpot);
-
-        this.mediaTitle = {
-            movie_pk: 88,
-            movie_title: "1",
-            movie_director_name: "1",
-            movie_actor_name: "1",
-            movie_company: "1",
-            movie_plot: "21111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112",
-            movie_genre: "1",
-            movie_keywords: "31111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111113",
-            movie_posterurl: "https://placekitten.com/300/400",
-            movie_vod_url: "1",
-            user_pk: 0,
-        };
+        console.log("===================");
+        console.log(this.$route.params.title);
     },
 
     mounted() {
@@ -127,6 +98,38 @@ export default {
     },
 
     methods: {
+        searchMedia() {
+            this.mediaTitleList = [];
+            const params = {
+                listCount: this.listCount, // 한 화면에 최대 영화 출력 수
+                title: this.title, // 타이틀 명 검색 시
+                actor: this.actor, // 배우 검색 시
+                keyword: this.keyword, // 키워드 검색 시
+            };
+
+            mediaList(
+                params,
+                ({ data }) => {
+                    console.log(data["Data"][0]["Result"]);
+                    const resultData = data["Data"][0]["Result"][0];
+                    // resultData.forEach((e) => {
+                    this.mediaTitle = {
+                        title: resultData.title.replace(/!HS |!HE /g, "").trim(),
+                        kmdbUrl: resultData.kmdbUrl,
+                        prodYear: resultData.prodYear,
+                        keyword: resultData.keyword,
+                        stlls: resultData.stlls.split("|")[0],
+                    };
+                    // this.mediaTitleList.push(this.mediaTitle);
+                    // console.log(this.mediaTitle);
+                    // });
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        },
+
         //api 불러오기
         loadScript() {
             const script = document.createElement("script");

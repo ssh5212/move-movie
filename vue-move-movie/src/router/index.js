@@ -135,7 +135,7 @@ const routes = [
             //     component: () => import('@/components/media/MediaLocationList.vue'),
             // },
             {
-                path: "spot/list/:no",
+                path: "spot/title/:title/prodYear/:prodYear",
                 name: "spotList",
                 component: () => import("@/components/media/MediaSpotList.vue"),
             },

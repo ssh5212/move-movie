@@ -71,11 +71,11 @@ export default {
                     const resultData = data["Data"][0]["Result"];
                     resultData.forEach((e) => {
                         this.mediaTitle = {
-                            title: e.title.replace(/!HS |!HE /g, ""),
+                            title: e.title.replace(/!HS |!HE /g, "").trim(),
                             kmdbUrl: e.kmdbUrl,
                             prodYear: e.prodYear,
                             keyword: e.keyword,
-                            stlls: e.stlls.split("|")[0],
+                            stlls: e.posters.split("|")[0],
                         };
                         this.mediaTitleList.push(this.mediaTitle);
                         // console.log(this.mediaTitle);
