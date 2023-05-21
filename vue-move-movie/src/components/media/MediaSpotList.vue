@@ -79,19 +79,16 @@ export default {
     },
 
     created() {
-        console.log("===================");
         console.log(this.$route.params.title);
+        console.log(this.$route.params.prodYear);
     },
 
     mounted() {
-        console.log("========================= 1");
-
         if (window.kakao && window.kakao.maps) {
             this.loadMap();
         } else {
             this.loadScript();
         }
-        console.log("========================= 2");
 
         // this.loadArea(); // 지역 불러오기
         // this.addEventMethod(); // 이벤트 등록

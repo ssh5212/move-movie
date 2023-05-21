@@ -60,6 +60,7 @@ export default {
             const params = {
                 listCount: this.listCount, // 한 화면에 최대 영화 출력 수
                 title: this.title, // 타이틀 명 검색 시
+                query: this.title, // 정확도를 높이기 위해 query로 동시에 검색
                 actor: this.actor, // 배우 검색 시
                 keyword: this.keyword, // 키워드 검색 시
             };
@@ -73,7 +74,8 @@ export default {
                         this.mediaTitle = {
                             title: e.title.replace(/!HS |!HE /g, "").trim(),
                             kmdbUrl: e.kmdbUrl,
-                            prodYear: e.prodYear,
+                            prodYear: e.prodYear, // 제작년도
+                            // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
                             keyword: e.keyword,
                             stlls: e.posters.split("|")[0],
                         };
@@ -88,7 +90,6 @@ export default {
         },
         searchByTitle() {
             this.searchMedia();
-            console.log(123);
         },
     },
 };
