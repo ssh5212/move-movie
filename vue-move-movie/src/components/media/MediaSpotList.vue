@@ -14,37 +14,31 @@
 
         <!-- [S] body -->
         <div class="container">
-            <div class="row justify-content-xl-center my-5 align-items-center">
+            <div class="row justify-content-xl-center my-5 align-items-start">
                 <!-- [S] map -->
-                <div class="col-md-7 pb-2 pt-5">
+                <div class="col-lg-7 pb-2 pt-5">
                     <h3 class="pb-2">작품 스팟</h3>
                     <div id="map" style="width: 100%; height: 377px"></div>
                 </div>
                 <!-- [E] map -->
 
                 <!-- [S] Movie -->
-                <div class="col-md-5 pb-2 pt-5">
+                <div class="col-lg-5 pb-2 pt-5">
                     <h3 class="pb-2">작품 소개</h3>
-                    <div class="card p-3" style="max-width: 540px">
+                    <div class="card p-3" style="max-width: auto">
                         <div class="row no-gutters">
                             <div class="col-md-6">
                                 <div class="h-100 d-flex align-items-center">
-                                    <img :src="mediaTitle.movie_posterurl" alt="..." style="width: 100%" />
+                                    <img :src="mediaTitle.stills" alt="..." style="width: 100%" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <p class="">영화명 : {{ mediaTitle.movie_title }}</p>
-                                    <p class="card-text-left">감독1111111111111111111 : {{ mediaTitle.movie_director_name }}</p>
-                                    <p class="card-text-left">제작사 : {{ mediaTitle.movie_actor_name }}</p>
-                                    <p class="card-text-left">출연 배우 : {{ mediaTitle.movie_company }}</p>
-                                    <p class="card-text-left">제작년도 : {{ mediaTitle.movie_plot }}</p>
-                                    <p class="card-text-left">개봉일 : {{ mediaTitle.movie_genre }}</p>
-                                    <p class="card-text-left">누적 매출액 : {{ mediaTitle.movie_title }}</p>
-                                    <p class="card-text-left">주제곡 : {{ mediaTitle.movie_keywords }}</p>
-                                    <p class="card-text-left">삽입곡 : {{ mediaTitle.movie_posterurl }}</p>
-                                    <p class="card-text-left">줄거리 : {{ mediaTitle.movie_vod_url }}</p>
-                                    <p class="card-text-left">촬영장소 : {{ mediaTitle.user_pk }}</p>
+                                    <h4 class="">{{ mediaTitle.title }}</h4>
+                                    <p class="card-text-left"><b>제작년도</b> : {{ mediaTitle.prodYear }}</p>
+                                    <p class="card-text-left"><b>장르</b> : {{ mediaTitle.genre }}</p>
+                                    <p class="card-text-left"><b>키워드</b> : {{ mediaTitle.keywords }}</p>
+                                    <p class="card-text-left"><b>상세</b> : <a :href="mediaTitle.kmdbUrl">KMDB 홈페이지</a></p>
                                 </div>
                             </div>
                         </div>
@@ -73,14 +67,14 @@ export default {
             mediaSpotList: [],
             mediaSpot: Object,
             mediaTitle: Object, // 미디어는 별도로 불러오도록 일단 구현
-            searchTitle: String,
-            searchYear: String,
+            title: String,
+            listCount: 1,
         };
     },
 
     created() {
-        console.log(this.$route.params.title);
-        console.log(this.$route.params.prodYear);
+        this.title = this.$route.params.title;
+        this.searchMedia();
     },
 
     mounted() {
@@ -96,29 +90,30 @@ export default {
 
     methods: {
         searchMedia() {
-            this.mediaTitleList = [];
             const params = {
                 listCount: this.listCount, // 한 화면에 최대 영화 출력 수
                 title: this.title, // 타이틀 명 검색 시
-                actor: this.actor, // 배우 검색 시
-                keyword: this.keyword, // 키워드 검색 시
+                query: this.title, // 정확도를 높이기 위해 query로 동시에 검색
             };
 
             mediaList(
                 params,
                 ({ data }) => {
-                    console.log(data["Data"][0]["Result"]);
                     const resultData = data["Data"][0]["Result"][0];
+                    console.log(resultData);
+
                     // resultData.forEach((e) => {
                     this.mediaTitle = {
                         title: resultData.title.replace(/!HS |!HE /g, "").trim(),
                         kmdbUrl: resultData.kmdbUrl,
-                        prodYear: resultData.prodYear,
-                        keyword: resultData.keyword,
-                        stlls: resultData.stlls.split("|")[0],
+                        prodYear: resultData.prodYear, // 제작년도
+                        // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
+                        keywords: resultData.keywords,
+                        stills: resultData.posters.split("|")[0],
+                        genre: resultData.genre,
                     };
                     // this.mediaTitleList.push(this.mediaTitle);
-                    // console.log(this.mediaTitle);
+                    console.log(this.mediaTitle);
                     // });
                 },
                 (error) => {
