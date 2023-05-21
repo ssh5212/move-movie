@@ -6,9 +6,11 @@
   
   <typeAliases>
   	<typeAlias type="com.ssafy.mm.model.UserDto" alias="UserDto"/>
+  	<typeAlias type="com.ssafy.mm.model.SpotDto" alias="SpotDto"/>
   </typeAliases>
   
   <mappers>
     <mapper resource="mappers/user.xml"/>
+    <mapper resource="mappers/spot.xml"/>
   </mappers>
 </configuration>
