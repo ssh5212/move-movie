@@ -8,7 +8,7 @@
 
         <b-sidebar id="sidebar-backdrop" title="" :backdrop-variant="variant" backdrop shadow right>
             <div class="px-3 py-2">
-                <img class="rounded-circle my-3" style="width: 50px" alt="avatar1" src="https://via.placeholder.com/300x411" />
+                <img class="rounded-circle my-3" style="width: 100px" alt="avatar1" src="https://via.placeholder.com/300x411" />
                 <h2 class="mt-2 mb-4">로그인이 필요합니다.</h2>
 
                 <div class="progress mb-4 mx-4">
