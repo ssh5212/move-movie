@@ -14,45 +14,83 @@
 
         <!-- [S] body -->
         <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-md-5">
+                    <div class="input-group pt-5 mt-5">
+                        <input type="text" class="form-control" placeholder="영화 제목을 입력하세요" aria-label="영화 제목을 입력하세요" aria-describedby="searchTitle" v-model="title" @keydown.enter="searchByTitle" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="searchTitle" @click="searchByTitle">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row justify-content-xl-center my-5 align-items-center">
                 <MediaTitleListItem v-for="(mediaTitle, index) in mediaTitleList" :key="index" :mediaTitle="mediaTitle"></MediaTitleListItem>
             </div>
         </div>
+
         <!-- [E] body -->
     </div>
 </template>
 
 <script>
-import MediaTitleListItem from '@/components/media/MediaTitleListItem.vue';
+import MediaTitleListItem from "@/components/media/MediaTitleListItem.vue";
+import { mediaList } from "@/api/media.js";
 
 export default {
-    name: 'MediaTitleList',
+    name: "MediaTitleList",
     components: { MediaTitleListItem },
     data() {
         return {
             mediaTitleList: [],
             mediaTitle: Object,
+            title: "", // 타이틀 명 검색 시
+            actor: "", // 배우 검색 시
+            keyword: "", // 키워드 검색 시
+            listCount: 20,
         };
     },
     created() {
-        this.mediaTitle = {
-            movie_pk: 88,
-            movie_title: '1',
-            movie_director_name: '1',
-            movie_actor_name: '1',
-            movie_company: '1',
-            movie_plot: '21111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112',
-            movie_genre: '1',
-            movie_keywords: '31111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111113',
-            movie_posterurl: 'https://placekitten.com/300/400',
-            movie_vod_url: '1',
-            user_pk: 0,
-        };
-        this.mediaTitleList.push(this.mediaTitle);
-        this.mediaTitleList.push(this.mediaTitle);
-        this.mediaTitleList.push(this.mediaTitle);
+        this.searchMedia();
     },
-    methods: {},
+    methods: {
+        searchMedia() {
+            this.mediaTitleList = [];
+            const params = {
+                listCount: this.listCount, // 한 화면에 최대 영화 출력 수
+                title: this.title, // 타이틀 명 검색 시
+                actor: this.actor, // 배우 검색 시
+                keyword: this.keyword, // 키워드 검색 시
+            };
+
+            mediaList(
+                params,
+                ({ data }) => {
+                    console.log(data["Data"][0]["Result"]);
+                    const resultData = data["Data"][0]["Result"];
+                    resultData.forEach((e) => {
+                        this.mediaTitle = {
+                            title: e.title.replace(/!HS |!HE /g, ""),
+                            kmdbUrl: e.kmdbUrl,
+                            prodYear: e.prodYear,
+                            keyword: e.keyword,
+                            stlls: e.stlls.split("|")[0],
+                        };
+                        this.mediaTitleList.push(this.mediaTitle);
+                        // console.log(this.mediaTitle);
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        },
+        searchByTitle() {
+            this.searchMedia();
+            console.log(123);
+        },
+    },
 };
 </script>
 

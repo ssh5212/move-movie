@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import userStore from "@/store/modules/userStore";
+import mediaStore from "@/store/modules/mediaStore";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     actions: {},
     modules: {
         userStore,
+        mediaStore,
     },
 
     plugins: [
