@@ -27,7 +27,7 @@
 
                         <div class="form-label-group m-3">
                             <label for="inputEmail">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="user.user_email" required autofocus />
+                            <input id="inputEmail" class="form-control" placeholder="Email address" v-model="user.user_email" required autofocus />
                         </div>
 
                         <div class="form-label-group m-3">
