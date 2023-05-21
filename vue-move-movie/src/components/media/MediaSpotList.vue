@@ -29,7 +29,7 @@
                         <div class="row no-gutters">
                             <div class="col-md-6">
                                 <div class="h-100 d-flex align-items-center">
-                                    <img :src="mediaTitle.stills" alt="..." style="width: 100%" />
+                                    <img :src="mediaTitle.stills || require('@/assets/img/no_img.png')" alt="..." style="width: 100%" />
                                 </div>
                             </div>
                             <div class="col-md-6">
