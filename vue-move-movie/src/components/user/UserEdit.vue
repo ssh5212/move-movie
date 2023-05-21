@@ -52,8 +52,15 @@
                             <input type="text" class="form-control" id="nickname" placeholder="" v-model="user.user_nickname" required />
                         </div>
 
+                        <div class="mb-3">
+                            <label for="fileInput">fileInput</label><br />
+                            <input type="file" id="fileInput" ref="fileInput" @change="handleFileUpload" />
+                            <b-button @click="uploadImage">업로드</b-button><br />
+                            <img v-if="Object.keys(selectedImage).length > 0" :src="selectedImage" alt="Uploaded Image" class="rounded-circle my-2" style="width: 220px; height: 220px; object-fit: cover" /><br />
+                        </div>
+
                         <hr class="my-5" />
-                        <button class="btn btn-primary btn-lg btn-block" type="button" @click="edit">수정하기</button>
+                        <button class="btn btn-dark btn-lg btn-block" type="button" @click="edit">수정하기</button>
                     </form>
                 </div>
 
@@ -75,6 +82,7 @@ export default {
             // [feature : 필수] 비밀번호 체크 기능 추가
             user: Object,
             user_pw: "",
+            selectedImage: Object,
         };
     },
     methods: {
