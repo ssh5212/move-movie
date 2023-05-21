@@ -10,4 +10,5 @@ public interface UserService {
 	public Object getRefreshToken(String user_email) throws Exception;
 	public void deleteRefreshToken(String user_email) throws Exception;
 	public void register(UserDto userdto) throws Exception;
+	public void edit(UserDto userdto) throws Exception;
 }

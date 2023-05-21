@@ -19,12 +19,14 @@
                 </div>
                 <!-- [function - 필수] 이동 : 마이페이지 -->
                 <div>
-                    <b-button type="button" @click="logout">로그아웃</b-button>
+                    <b-button type="button" class="btn btn-dark mb-2 mt-2" style="width: 80%" @click="logout">로그아웃</b-button>
                 </div>
-                <div><button type="button" class="btn btn-dark mb-4 mt-2" @click="moveMypage">마이페이지</button><br /></div>
+                <div>
+                    <button type="button" class="btn btn-dark mb-5 mt-2" style="width: 80%" @click="moveMypage">마이페이지</button>
+                </div>
 
                 <!-- [function - 필수] 데이터 바인딩 : 버킷 리스트 연결 -->
-                <h5 class="mb-1">내 버킷리스트 진행도</h5>
+                <h4 class="mb-3">내 버킷리스트 진행도</h4>
                 <div class="mb-4">
                     <p style="text-align: left; margin-bottom: 5px">리포 따라가기</p>
                     <div class="progress" style="height: 5px">
