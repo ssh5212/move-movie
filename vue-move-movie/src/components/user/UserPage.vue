@@ -16,11 +16,11 @@
             <div class="row justify-content-xl-center my-5 align-items-center">
                 <div class="col-md-4" style="background-color: white">
                     <img class="rounded-circle my-5" alt="avatar1" src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp" />
-                    <h1 class="mb-2">연예인 원영</h1>
-                    <h3 class="mb-4">lv. 999</h3>
+                    <h1 class="mb-2">{{ checkUserInfo.user_email }}</h1>
+                    <h3 class="mb-4">{{ checkUserInfo.user_exp }}</h3>
 
                     <div class="progress mb-4 mx-4">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        <b-progress :value="checkUserInfo.user_exp" :max="100" show-progress animated></b-progress>
                     </div>
 
                     <button type="button" class="btn btn-dark mb-2">개인정보 수정하기</button><br />
@@ -77,7 +77,17 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+const userStore = "userStore";
+
+export default {
+    data() {
+        return {};
+    },
+    computed: {
+        ...mapGetters(userStore, ["checkUserInfo"]),
+    },
+};
 </script>
 
 <style></style>
