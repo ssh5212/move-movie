@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.mm.model.SidoGugunCodeDto;
 import com.ssafy.mm.model.SpotDto;
 import com.ssafy.mm.model.mapper.SpotMapper;
 
@@ -33,11 +34,10 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public List<SpotDto> find_sido_gugun_spot(int sido_code, int gugun_code) throws Exception {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("sido_code", sido_code);
-		map.put("gugun_code", gugun_code);
-		return sqlSession.getMapper(SpotMapper.class).find_sido_gugun_spot(map);
+	public List<SpotDto> find_sido_gugun_spot(String gugun_code) throws SQLException {
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		map.put("gugun_code", gugun_code);
+		return sqlSession.getMapper(SpotMapper.class).find_sido_gugun_spot(gugun_code);
 	}
 
 	@Override
@@ -48,6 +48,16 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public void delete_spot(SpotDto spotdto) throws Exception {
 		sqlSession.getMapper(SpotMapper.class).delete_spot(spotdto);
+	}
+
+	@Override
+	public List<SidoGugunCodeDto> getSido() throws SQLException {
+		return sqlSession.getMapper(SpotMapper.class).getSido();
+	}
+
+	@Override
+	public List<SidoGugunCodeDto> getGugun(String sido) throws SQLException {
+		return sqlSession.getMapper(SpotMapper.class).getGugun(sido);
 	}
 	
 
