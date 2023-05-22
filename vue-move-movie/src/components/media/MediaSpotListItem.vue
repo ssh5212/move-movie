@@ -7,8 +7,9 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body" @click="moveSpotDetail">
-                    <h5 class="card-title text-left">{{ mediaSpot.spot_name }}</h5>
-                    <p class="card-text-left">{{ mediaSpot.spot_address }}</p>
+                    <h4 class="card-title text-left mb-5">{{ mediaSpot.spot_name }}</h4>
+                    <p class="text-left">영화명 : {{ mediaSpot.spot_movie_title }}</p>
+                    <p class="text-left">주소 : {{ mediaSpot.spot_address }}</p>
                     <!-- <p class="card-text-left">
                         <small class="text-muted">작성자 : {{ mediaSpot.spot_address }}</small>
                     </p> -->
@@ -65,7 +66,7 @@ export default {
                     this.bucket.push(this.mediaSpot);
                 }
             }
-            // console.log(this.bucket);
+            console.log(this.bucket);
         },
     },
 };

@@ -48,26 +48,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.badge-parent {
-    position: relative;
-}
-
-.notification-badge {
-    position: absolute;
-    top: 13px; /* 원하는 위치로 조정하세요 */
-    right: -5px; /* 원하는 위치로 조정하세요 */
-    background-color: red; /* 배지의 배경색 */
-    color: white; /* 배지의 텍스트 색상 */
-    border-radius: 50%; /* 원형 배지를 위해 원하는 값을 지정하세요 */
-    width: 30px; /* 배지의 너비 */
-    height: 30px; /* 배지의 높이 */
-    justify-content: center;
-    align-items: center;
-    font-size: 20px; /* 텍스트 크기 */
-    font-weight: bold; /* 텍스트 굵기 */
-}
-.notification-badge:hover {
-    cursor: pointer;
-}
-</style>
+<style scoped></style>

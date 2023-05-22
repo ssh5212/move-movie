@@ -15,7 +15,7 @@
 
 <script>
 export default {
-    name: 'MediaSpotDetailItem',
+    name: "MediaSpotDetailItem",
     props: {
         spotInstance: Object,
     },
