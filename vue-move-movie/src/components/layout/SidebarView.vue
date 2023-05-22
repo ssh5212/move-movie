@@ -2,23 +2,13 @@
     <div>
         <!-- 왼쪽 사이드바 -->
         <div class="d-flex justify-content-end fixed-bottom" style="margin-right: 16px; margin-bottom: 78px">
-            <!-- 수정된 부분 -->
             <b-button v-b-toggle.sidebar-left class="d-sm-block d-md-none">
                 <b-icon-basket2-fill class="justify-content-end" style="margin-top: 6px; margin-bottom: 2px"></b-icon-basket2-fill>
             </b-button>
 
             <!-- [function - 필수] 기능 구현 : 왼쪽 사이드바 (바구니)에 들어갈 내용으로 수정 필요 -->
             <b-sidebar id="sidebar-left" title="" :backdrop-variant="variant" backdrop shadow left>
-                <div class="px-3 py-2">
-                    <div class="badge-parent">
-                        <img class="my-3 p-2" alt="avatar1" src="https://via.placeholder.com/1920x1080" style="width: 100%" />
-                        <!-- 클릭 시 제거 기능 구현 필요함 -->
-                        <div class="notification-badge">
-                            <span>-</span>
-                        </div>
-                        <p>해당 스폿 명</p>
-                    </div>
-                </div>
+                <BucketItem v-for="(bucketItem, index) in bucket" :key="index" :bucketItem="bucketItem"></BucketItem>
             </b-sidebar>
         </div>
 
@@ -35,12 +25,14 @@
 <script>
 import LoginAfter from "@/components/layout/LoginAfter.vue";
 import LoginBefore from "@/components/layout/LoginBefore.vue";
+import BucketItem from "./BucketItem.vue";
 import { mapState } from "vuex";
 
 const userStore = "userStore";
+const mediaStore = "mediaStore";
 export default {
     name: "SidebarView",
-    components: { LoginAfter, LoginBefore },
+    components: { LoginAfter, LoginBefore, BucketItem },
     data() {
         return {
             mediaTitleList: [],
@@ -51,6 +43,7 @@ export default {
     created() {},
     computed: {
         ...mapState(userStore, ["isLogin", "userInfo"]),
+        ...mapState(mediaStore, ["bucket"]),
     },
 };
 </script>

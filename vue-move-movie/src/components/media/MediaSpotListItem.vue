@@ -51,12 +51,21 @@ export default {
             });
         },
         addThisSpot() {
-            this.bucket.forEach((b) => {
-                if (!b.spot_pk(this.mediaSpot.spot_pk)) {
+            // bucket이 비어 있는 경우
+            if (this.bucket.length == 0) {
+                this.bucket.push(this.mediaSpot);
+            } else {
+                let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
+                this.bucket.forEach((b) => {
+                    if (b.spot_pk == this.mediaSpot.spot_pk) {
+                        isok = 0;
+                    }
+                });
+                if (isok == 1) {
                     this.bucket.push(this.mediaSpot);
                 }
-            });
-            console.log(this.bucket);
+            }
+            // console.log(this.bucket);
         },
     },
 };
