@@ -24,7 +24,7 @@
                 <div class="mt-5">
                     <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
                         <!-- detailitem.vue로 빼야함 -->
-                        <bucket-spot-list-detail-item v-for="(spot, index) in spots" :key="index" :spot="spot.spot_pk"></bucket-spot-list-detail-item>
+                        <bucket-spot-list-detail-item v-for="(spot, index) in spots" :key="index" :spot_pk="spot.spot_pk"></bucket-spot-list-detail-item>
                     </div>
                 </div>
                 <!-- [S] map -->
