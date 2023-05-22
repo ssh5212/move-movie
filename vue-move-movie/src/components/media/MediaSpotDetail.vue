@@ -136,6 +136,8 @@ export default {
             this.map = new window.kakao.maps.Map(mapContainer, mapOption);
         },
 
+        
+
         moveSpotCreate() {
             this.$router.push({
                 name: 'spotCreate',

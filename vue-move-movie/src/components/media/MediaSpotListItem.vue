@@ -3,7 +3,7 @@
     <div class="card mb-3 my-5" style="width: 100%">
         <div class="row no-gutters align-items-center">
             <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">
-                <img :src="mediaSpot.spot_img_src" alt="..." style="width: 100%" />
+                <img :src="mediaSpot.spot_img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
             </div>
             <div class="col-md-8">
                 <div class="card-body" @click="moveSpotDetail">

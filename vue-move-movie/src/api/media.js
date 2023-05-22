@@ -11,4 +11,8 @@ async function spotList(params, success, fail) {
     await localApi.get(`/spot/spot/${params}`).then(success).catch(fail);
 }
 
-export { mediaList, spotList };
+async function spotDetailList(params, success, fail) {
+    await localApi.get(`/spot/spot/${params}`).then(success).catch(fail);
+}
+
+export { mediaList, spotList, spotDetailList };
