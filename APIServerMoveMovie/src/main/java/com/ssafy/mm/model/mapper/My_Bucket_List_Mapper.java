@@ -19,9 +19,9 @@ public interface My_Bucket_List_Mapper {
 
 	public List<my_bucket_list_DTO> select() throws SQLException;
 
-	public List<my_bucket_list_DTO> select(int user_pk, int bucket_pk);
+	public List<my_bucket_list_DTO> selectUserBucket(int user_pk, int bucket_pk) throws SQLException;
 
-	public void updateChecked(int user_pk, int spot_pk, int bucket_pk, int checked);
+	public void updateChecked(int user_pk, int spot_pk, int bucket_pk, int checked) throws SQLException;
 
-	public void delete(int user_pk, int spot_pk, int bucket_pk);
+	public void delete(int user_pk, int spot_pk, int bucket_pk) throws SQLException;
 }

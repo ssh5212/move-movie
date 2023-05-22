@@ -10,6 +10,7 @@ import com.ssafy.mm.model.BucketDto;
 import com.ssafy.mm.model.Bucket_detail_List_DTO;
 import com.ssafy.mm.model.Request_bucket_create_DTO;
 import com.ssafy.mm.model.SpotDto;
+import com.ssafy.mm.model.my_bucket_list_DTO;
 import com.ssafy.mm.model.mapper.BucketMapper;
 import com.ssafy.mm.model.mapper.Bucket_Detail_List_Mapper;
 import com.ssafy.mm.model.mapper.My_Bucket_List_Mapper;
@@ -55,18 +56,21 @@ public class BucketServiceImpl implements BucketService {
 		
 		// 버킷 추가
 		bucketMapper.bucket_create(bucket);
+		
 		// bucket_detail_list 추가
-		// bucket_detail_list 생성 
-		// bucket_pk, spot_pk
- 
 		List<Bucket_detail_List_DTO> detail_list = new ArrayList<Bucket_detail_List_DTO>();
 		for(SpotDto spotDto : spots) {
 			detail_list.add(new Bucket_detail_List_DTO(bucket.getBucket_pk(), spotDto.getSpot_pk()));
 		}
-		
+		bucketDetailMapper.insertDetail(detail_list);
 		
 		// my_bucket_list 에도 추가
 		// bucket_pk, spot_pk, user_pk 
+		List<my_bucket_list_DTO> myBucketList = new ArrayList();
+		for(SpotDto spotDto : spots) {
+			myBucketList.add(new my_bucket_list_DTO(bucket.getBucket_pk(),spotDto.getSpot_pk() ,bucket.getUser_pk(), 0));
+		}
+		bucketMyListMapper.insertList(myBucketList);
 	}
 
 	@Override

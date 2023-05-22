@@ -28,7 +28,7 @@ public class MyBucketListServiceImpl implements MyBucketListService {
 
 	@Override
 	public List<my_bucket_list_DTO> select(int user_pk, int bucket_pk) throws Exception {
-		return mapper.select(user_pk, bucket_pk);
+		return mapper.selectUserBucket(user_pk, bucket_pk);
 	}
 
 	@Override
