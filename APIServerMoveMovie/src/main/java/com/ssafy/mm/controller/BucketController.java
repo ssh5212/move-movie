@@ -31,9 +31,6 @@ public class BucketController {
 	private static final String FAIL = "fail";
 
 	@Autowired
-	private JwtServiceImpl jwtService;
-
-	@Autowired
 	private BucketService bucketService;
 
 	@GetMapping("/all")
@@ -128,6 +125,7 @@ public class BucketController {
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.OK;
 		} catch (Exception e) {
+			e.printStackTrace();
 			resultMap.put("message", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}

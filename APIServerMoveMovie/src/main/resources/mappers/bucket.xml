@@ -16,7 +16,7 @@
 	</select>
 	
 	<!-- public List<BucketDto> bucket_spot_pk(int spot_pk); -->
-	<select id="bucket_spot_pk" resultType="Bucket">
+	<select id="bucket_spot_pk" resultType="BucketDto">
 		SELECT b.*
 		FROM bucket b
 		JOIN bucket_detail_list bdl ON b.bucket_pk = bdl.bucket_pk
@@ -35,11 +35,15 @@
 	</update>
 	
 	<!-- public void bucket_create(BucketDto bucketDto); -->
-	<insert id="bucket_create">
+	<insert id="bucket_create" useGeneratedKeys="true" keyProperty="bucket_pk" keyColumn="bucket_pk">
 		insert into 
 		bucket(bucket_title, bucket_content, user_pk) 
 		values(#{bucket_title}, #{bucket_content}, #{user_pk});
 	</insert>
+<!-- 	<insert id="insertPlan" useGeneratedKeys="true" keyProperty="planId" keyColumn="plan_id">
+        INSERT INTO plan (user_id, title, created_at)
+          VALUES (#{userId}, #{title}, NOW())
+    </insert> -->
 	
 	<!--  public void bucket_delete(int bucket_pk); -->
 	<delete id="bucket_delete">

@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper
-	namespace="com.ssafy.mm.model.mapper.Bucket_Detail_List_Mapper">
+				<!-- com.ssafy.mm.model.mapper.Bucket_Detail_List_Mapper -->
+<mapper namespace="com.ssafy.mm.model.mapper.Bucket_Detail_List_Mapper">
 	<!-- public List<Bucket_detail_List_DTO> selectDetails() throws SQLException; -->
 	<select id="selectDetails">
 		select * from bucket_detail_list;
 	</select>
-	<!-- public List<Bucket_detail_List_DTO> selectDetailsBucket(int bucket_pk) 
-		throws SQLException; -->
+	<!-- public List<Bucket_detail_List_DTO> selectDetailsBucket(int bucket_pk) throws SQLException; -->
 	<select id="selectDetailsBucket">
-		select * from bucket_detail_list where bucket_pk =
-		#{bucket_pk};
+		select * from bucket_detail_list where bucket_pk = #{bucket_pk};
 	</select>
-	<!-- public List<Bucket_detail_List_DTO> selectDetailsSpot(int spot_pk) 
-		throws SQLException; -->
+	<!-- public List<Bucket_detail_List_DTO> selectDetailsSpot(int spot_pk) throws SQLException; -->
 	<select id="selectDetailsSpot">
-		select * from bucket_detail_list where spot_pk =
-		#{spot_pk};
+		select * from bucket_detail_list where spot_pk = #{spot_pk};
 	</select>
-	<!-- public void insertDetail(List<Bucket_detail_List_DTO> lists) throws 
-		SQLException; -->
+	<!-- public void insertDetail(List<Bucket_detail_List_DTO> lists) throws SQLException; -->
 	<insert id="insertDetail" parameterType="java.util.List">
-		insert into bucket_detail_list(bucket_pk, spot_pk)
-		values
+		insert into bucket_detail_list(bucket_pk, spot_pk) 
+		values 
 		<foreach collection="list" item="item" separator=",">
-			(#{item.bucket_pk}, #{item.spot_pk})
+		(#{item.bucket_pk}, #{item.spot_pk})
 		</foreach>
 	</insert>
 
+	
 </mapper>

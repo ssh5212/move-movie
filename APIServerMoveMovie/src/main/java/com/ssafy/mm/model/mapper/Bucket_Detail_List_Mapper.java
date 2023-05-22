@@ -13,5 +13,5 @@ public interface Bucket_Detail_List_Mapper {
 	public List<Bucket_detail_List_DTO> selectDetails() throws SQLException;
 	public List<Bucket_detail_List_DTO> selectDetailsBucket(int bucket_pk) throws SQLException;
 	public List<Bucket_detail_List_DTO> selectDetailsSpot(int spot_pk) throws SQLException;
-	public void insertDetail(List<Bucket_detail_List_DTO> lists) throws SQLException;
+	public void insertDetail(List<Bucket_detail_List_DTO> list) throws SQLException;
 }

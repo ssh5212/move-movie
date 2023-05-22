@@ -7,10 +7,16 @@
   <typeAliases>
   	<typeAlias type="com.ssafy.mm.model.UserDto" alias="UserDto"/>
   	<typeAlias type="com.ssafy.mm.model.SpotDto" alias="SpotDto"/>
+  	<typeAlias type="com.ssafy.mm.model.BucketDto" alias="BucketDto"/>
+  	<typeAlias type="com.ssafy.mm.model.Bucket_detail_List_DTO" alias="Bucket_detail_List_DTO"/>
+  	<typeAlias type="com.ssafy.mm.model.my_bucket_list_DTO" alias="my_bucket_list_DTO"/>
   </typeAliases>
   
   <mappers>
     <mapper resource="mappers/user.xml"/>
     <mapper resource="mappers/spot.xml"/>
+    <mapper resource="mappers/bucket.xml"/>
+	<mapper resource="mappers/bucketDetailList.xml"/>
+    <mapper resource="mappers/myBucketList.xml"/>
   </mappers>
 </configuration>
