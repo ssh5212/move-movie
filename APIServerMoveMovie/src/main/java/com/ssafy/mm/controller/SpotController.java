@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.mm.model.SidoGugunCodeDto;
 import com.ssafy.mm.model.SpotDto;
 import com.ssafy.mm.model.service.SpotService;
 
@@ -123,4 +125,40 @@ public class SpotController {
 		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	
+	@GetMapping("/sido")
+	public ResponseEntity<Map<String, Object>> sido() throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		
+		try {
+			List<SidoGugunCodeDto> list = spotService.getSido();
+			resultMap.put("spots", list);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);		
+	}
+	
+	@GetMapping("/gugun")
+	public ResponseEntity<Map<String, Object>> gugun(@RequestParam("sido") String sido) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		
+		try {
+			List<SidoGugunCodeDto> list = spotService.getGugun(sido);
+			resultMap.put("spots", list);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);		
+	}
+
 }

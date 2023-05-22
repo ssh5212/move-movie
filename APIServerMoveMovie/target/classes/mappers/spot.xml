@@ -27,4 +27,17 @@
 	</update>
 	<delete id="delete_spot" parameterType="SpotDto">
 	</delete>
+	
+	<select id="getSido" resultType="sidoGugunCodeDto">
+		select left(sido_code,2) sido_code, sido_name
+		from sido_code
+		order by sido_code
+	</select>
+	
+	<select id="getGugun" parameterType="string" resultType="sidoGugunCodeDto">
+		select left(gugun_code,5) gugun_code, gugun_name
+		from gugun_code
+		where left(gugunCode,2) = #{sido}
+		order by gugunCode
+	</select>
 </mapper>

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.mm.model.SidoGugunCodeDto;
 import com.ssafy.mm.model.SpotDto;
 import com.ssafy.mm.model.mapper.SpotMapper;
 
@@ -48,6 +49,16 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public void delete_spot(SpotDto spotdto) throws SQLException {
 		sqlSession.getMapper(SpotMapper.class).delete_spot(spotdto);
+	}
+
+	@Override
+	public List<SidoGugunCodeDto> getSido() throws SQLException {
+		return sqlSession.getMapper(SpotMapper.class).getSido();
+	}
+
+	@Override
+	public List<SidoGugunCodeDto> getGugun(String sido) throws SQLException {
+		return sqlSession.getMapper(SpotMapper.class).getGugun(sido);
 	}
 	
 
