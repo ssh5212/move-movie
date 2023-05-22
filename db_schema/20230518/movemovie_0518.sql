@@ -1,3 +1,4 @@
+-- drop database movemovie;
 CREATE DATABASE  IF NOT EXISTS `movemovie` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `movemovie`;
 -- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
@@ -25,8 +26,8 @@ DROP TABLE IF EXISTS `bucket`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bucket` (
-  `bucket_pk` int NOT NULL,
-  `bucket_heart` int DEFAULT NULL,
+  `bucket_pk` int NOT NULL AUTO_INCREMENT,
+  `bucket_heart` int DEFAULT 0,
   `bucket_title` varchar(20) DEFAULT NULL,
   `bucket_content` varchar(80) DEFAULT NULL,
   `user_pk` int DEFAULT NULL,
@@ -53,10 +54,9 @@ DROP TABLE IF EXISTS `bucket_detail_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bucket_detail_list` (
-  `idbucket_detail_list` int NOT NULL,
   `bucket_pk` int NOT NULL,
   `spot_pk` int NOT NULL,
-  PRIMARY KEY (`idbucket_detail_list`,`bucket_pk`,`spot_pk`),
+  PRIMARY KEY (`bucket_pk`,`spot_pk`),
   KEY `bucket_detail_list_bucket_bucket_pk_idx` (`bucket_pk`),
   KEY `bucket_detail_list_spot_spot_pk_idx` (`spot_pk`),
   CONSTRAINT `bucket_detail_list_bucket_bucket_pk` FOREIGN KEY (`bucket_pk`) REFERENCES `bucket` (`bucket_pk`),
@@ -173,13 +173,13 @@ CREATE TABLE `my_bucket_list` (
   `bucket_pk` int NOT NULL,
   `spot_pk` int NOT NULL,
   `user_pk` int NOT NULL,
-  `checked` tinyint DEFAULT NULL,
+  `checked` tinyint NOT NULL DEFAULT 0,
   PRIMARY KEY (`bucket_pk`,`spot_pk`,`user_pk`),
   KEY `my_bucket_list_spot_spot_pk_idx` (`spot_pk`),
   KEY `my_bucket_list_user_pk_idx` (`user_pk`),
   CONSTRAINT `my_bucket_list_bucket_bucket_pk` FOREIGN KEY (`bucket_pk`) REFERENCES `bucket` (`bucket_pk`),
   CONSTRAINT `my_bucket_list_spot_spot_pk` FOREIGN KEY (`spot_pk`) REFERENCES `spot` (`spot_pk`),
-  CONSTRAINT `my_bucket_list_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `my_bucket_list_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -391,7 +391,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_pk` int NOT NULL AUTO_INCREMENT,
   `user_nickname` varchar(20) NOT NULL,
-  `user_email` varchar(40) NOT NULL,
+  `user_email` varchar(40) NOT NULL unique,
   `user_pw` varchar(100) NOT NULL,
   `user_name` varchar(20) NOT NULL,
   `user_exp` int DEFAULT '0',
@@ -410,6 +410,9 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES (0,'admin','admin','admin','admin',0,1,'2023-05-18 15:07:42',NULL,NULL);
+INSERT INTO `user` VALUES (2,'admin','ssafy','ssafy','admin',0,0,'2023-05-18 15:07:42',NULL,NULL);
+INSERT INTO `user` VALUES (1,'admin','jewon','jewon','admin',0,1,'2023-05-18 15:07:42',NULL,NULL);
+INSERT INTO `user` VALUES (3,'admin','sunghun','sunghun','admin',0,1,'2023-05-18 15:07:42',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -423,3 +426,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-05-18 16:50:15
+
+insert into bucket(bucket_title, bucket_content, user_pk) 
+values ("first bucket", "first bucket content", 2);

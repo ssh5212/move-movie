@@ -5,8 +5,8 @@ public class SpotDto {
 	private String spot_name;
 	private String spot_scene_desc;
 	private String spot_img_src;
-	private int spot_lat;
-	private int spot_lon;
+	private double spot_lat;
+	private double spot_lon;
 	private String spot_address;
 	private String spot_road_address;
 	private String spot_characters;
@@ -39,16 +39,16 @@ public class SpotDto {
 	public void setSpot_img_src(String spot_img_src) {
 		this.spot_img_src = spot_img_src;
 	}
-	public int getSpot_lat() {
+	public double getSpot_lat() {
 		return spot_lat;
 	}
-	public void setSpot_lat(int spot_lat) {
+	public void setSpot_lat(double spot_lat) {
 		this.spot_lat = spot_lat;
 	}
-	public int getSpot_lon() {
+	public double getSpot_lon() {
 		return spot_lon;
 	}
-	public void setSpot_lon(int spot_lon) {
+	public void setSpot_lon(double spot_lon) {
 		this.spot_lon = spot_lon;
 	}
 	public String getSpot_address() {
