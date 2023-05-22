@@ -24,26 +24,7 @@
                 <div class="mt-5">
                     <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
                         <!-- detailitem.vue로 빼야함 -->
-                        <div class="m-3">
-                            <img src="https://via.placeholder.com/130x100" alt="img" />
-                            <div>text</div>
-                        </div>
-                        <div class="m-3">
-                            <img src="https://via.placeholder.com/130x100" alt="img" />
-                            <div>text</div>
-                        </div>
-                        <div class="m-3">
-                            <img src="https://via.placeholder.com/130x100" alt="img" />
-                            <div>text</div>
-                        </div>
-                        <div class="m-3">
-                            <img src="https://via.placeholder.com/130x100" alt="img" />
-                            <div>text</div>
-                        </div>
-                        <div class="m-3">
-                            <img src="https://via.placeholder.com/130x100" alt="img" />
-                            <div>text</div>
-                        </div>
+                        <bucket-spot-list-detail-item v-for="(spot, index) in spots" :key="index" :spot="spot.spot_pk"></bucket-spot-list-detail-item>
                     </div>
                 </div>
                 <!-- [S] map -->
@@ -63,16 +44,23 @@
 </template>
 
 <script>
+import { bucketListBybucketpk } from "@/api/bucketList.js";
+import BucketSpotListDetailItem from "@/components/bucket/BucketSpotListDetailItem.vue";
+
 export default {
     name: "BucketSpotListDetail",
-    components: {},
+    components: {
+        BucketSpotListDetailItem,
+    },
     data() {
         return {
-            message: "",
+            spots: [],
         };
     },
     created() {
-        console.log(this.$route.params.no);
+        bucketListBybucketpk(this.$route.params.no, ({ data }) => {
+            this.spots = data.BucketDetailList;
+        });
     },
     mounted() {
         if (window.kakao && window.kakao.maps) {
@@ -80,9 +68,6 @@ export default {
         } else {
             this.loadScript();
         }
-
-        this.loadArea(); // 지역 불러오기
-        this.addEventMethod(); // 이벤트 등록
     },
     methods: {
         //api 불러오기

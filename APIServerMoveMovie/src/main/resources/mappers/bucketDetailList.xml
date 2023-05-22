@@ -4,15 +4,15 @@
 				<!-- com.ssafy.mm.model.mapper.Bucket_Detail_List_Mapper -->
 <mapper namespace="com.ssafy.mm.model.mapper.Bucket_Detail_List_Mapper">
 	<!-- public List<Bucket_detail_List_DTO> selectDetails() throws SQLException; -->
-	<select id="selectDetails">
+	<select id="selectDetails" resultType="Bucket_detail_List_DTO">
 		select * from bucket_detail_list;
 	</select>
 	<!-- public List<Bucket_detail_List_DTO> selectDetailsBucket(int bucket_pk) throws SQLException; -->
-	<select id="selectDetailsBucket">
+	<select id="selectDetailsBucket" resultType="Bucket_detail_List_DTO">
 		select * from bucket_detail_list where bucket_pk = #{bucket_pk};
 	</select>
 	<!-- public List<Bucket_detail_List_DTO> selectDetailsSpot(int spot_pk) throws SQLException; -->
-	<select id="selectDetailsSpot">
+	<select id="selectDetailsSpot" resultType="Bucket_detail_List_DTO">
 		select * from bucket_detail_list where spot_pk = #{spot_pk};
 	</select>
 	<!-- public void insertDetail(List<Bucket_detail_List_DTO> lists) throws SQLException; -->

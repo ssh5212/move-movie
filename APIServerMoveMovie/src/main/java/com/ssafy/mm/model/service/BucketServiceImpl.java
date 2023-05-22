@@ -59,8 +59,7 @@ public class BucketServiceImpl implements BucketService {
 
 		// 버킷 추가
 		bucketMapper.bucket_create(bucket);
-		//bucket 추가후 bucket.bucket_pk 에 해당 PK가 들어 있어야함.
-		System.out.println(bucket.getBucket_pk());
+		//bucket 추가후 bucket.bucket_pk 에 해당 PK가 들어감
 		
 		
 		// bucket_detail_list 추가

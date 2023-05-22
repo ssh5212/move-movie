@@ -35,6 +35,7 @@ public class BucketController {
 
 	@GetMapping("/all")
 	public ResponseEntity<Map<String, Object>> all_bucket() {
+		System.out.println("all");
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 
