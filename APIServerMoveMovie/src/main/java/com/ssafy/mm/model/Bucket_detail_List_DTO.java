@@ -4,6 +4,12 @@ public class Bucket_detail_List_DTO {
 	private int bucket_pk;
 	private int spot_pk;
 
+	public Bucket_detail_List_DTO(int bucket_pk, int spot_pk) {
+		super();
+		this.bucket_pk = bucket_pk;
+		this.spot_pk = spot_pk;
+	}
+
 	public int getBucket_pk() {
 		return bucket_pk;
 	}
