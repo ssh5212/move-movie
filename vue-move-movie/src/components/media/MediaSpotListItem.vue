@@ -17,21 +17,29 @@
             <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                 <!-- [function - 필수] : 장바구니 담기 기능 구현 -->
                 <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
-                <b-icon-basket2-fill id="b-icon" class="h3 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
+                <b-icon-basket2-fill id="b-icon" class="h3 pt-1 bucket-btn" @click="addThisSpot"></b-icon-basket2-fill>
                 <!-- [function - 필수] : 장바구니 하트 개수 출력 기능 구현 -->
-                <b-icon-heart-fill id="b-icon" class="h3 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
-                <p class="card-text-left text-center"><small class="text-muted">1000</small></p>
+                <!-- <b-icon-heart-fill id="b-icon" class="h3 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                <p class="card-text-left text-center"><small class="text-muted">1000</small></p> -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+const mediaStore = "mediaStore";
 export default {
     name: "MediaSpotListItem",
+
     props: {
         mediaSpot: Object,
     },
+
+    computed: {
+        ...mapState(mediaStore, ["bucket"]),
+    },
+
     created() {
         console.log(this.mediaSpot);
     },
@@ -42,8 +50,20 @@ export default {
                 params: { no: this.mediaSpot.spot_pk },
             });
         },
+        addThisSpot() {
+            this.bucket.forEach((b) => {
+                if (!b.spot_pk(this.mediaSpot.spot_pk)) {
+                    this.bucket.push(this.mediaSpot);
+                }
+            });
+        },
     },
 };
 </script>
 
-<style></style>
+<style>
+.bucket-btn:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+    cursor: pointer;
+}
+</style>
