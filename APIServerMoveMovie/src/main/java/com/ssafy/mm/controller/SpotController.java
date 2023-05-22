@@ -53,13 +53,16 @@ public class SpotController {
 	
 	@GetMapping("/spot/{spot_movie_title}")
 	public ResponseEntity<Map<String, Object>> find_title_spot(@PathVariable("spot_movie_title") String spot_movie_title){
+		System.out.println(spot_movie_title);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 		
 		try {
 			List<SpotDto> list = spotService.find_title_spot(spot_movie_title);
+			System.out.println("list " + list );
 			resultMap.put("spots", list);
 			resultMap.put("message", SUCCESS);
+			System.out.println(resultMap);
 			status = HttpStatus.OK;
 		} catch (SQLException e) {
 			resultMap.put("message", FAIL);

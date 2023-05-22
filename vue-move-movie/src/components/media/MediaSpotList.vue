@@ -18,7 +18,8 @@
                 <!-- [S] map -->
                 <div class="col-lg-7 pb-2 pt-5">
                     <h3 class="pb-2">작품 스팟</h3>
-                    <div id="map" style="width: 100%; height: 377px"></div>
+                    <KakaoMap :mediaSpotList="mediaSpotList"></KakaoMap>
+                    <!-- <div id="map" style="width: 100%; height: 100px"></div> -->
                 </div>
                 <!-- [E] map -->
 
@@ -57,16 +58,17 @@
 
 <script>
 import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
-import { mediaList } from "@/api/media.js";
+import { mediaList, spotList } from "@/api/media.js";
+import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
     name: "MediaSpotList",
-    components: { MediaSpotListItem },
+    components: { MediaSpotListItem, KakaoMap },
     data() {
         return {
             mediaSpotList: [],
             mediaSpot: Object,
-            mediaTitle: Object, // 미디어는 별도로 불러오도록 일단 구현
+            mediaTitle: Object,
             title: String,
             listCount: 1,
         };
@@ -75,6 +77,7 @@ export default {
     created() {
         this.title = this.$route.params.title;
         this.searchMedia();
+        this.searchSpot();
     },
 
     mounted() {
@@ -89,10 +92,22 @@ export default {
     },
 
     methods: {
+        // 관련 스폿 리스트 가져오기
+        searchSpot() {
+            let params = this.title;
+
+            spotList(params, ({ data }) => {
+                // console.log(data[1]);
+                this.mediaSpotList = data.spots;
+                console.log("++++++++++++++++++++++");
+                console.log(this.mediaSpotList);
+            });
+        },
+
         searchMedia() {
             const params = {
                 listCount: this.listCount, // 한 화면에 최대 영화 출력 수
-                title: this.title, // 타이틀 명 검색 시
+                title: this.title, // 타이틀 명으로 검색
                 query: this.title, // 정확도를 높이기 위해 query로 동시에 검색
             };
 
@@ -122,28 +137,28 @@ export default {
             );
         },
 
-        //api 불러오기
-        loadScript() {
-            const script = document.createElement("script");
+        // //api 불러오기
+        // loadScript() {
+        //     const script = document.createElement("script");
 
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
-            script.onload = () => {
-                window.kakao.maps.load(this.loadMap);
-            };
+        //     script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+        //     script.onload = () => {
+        //         window.kakao.maps.load(this.loadMap);
+        //     };
 
-            document.head.appendChild(script);
-        },
+        //     document.head.appendChild(script);
+        // },
 
-        //맵 출력하기
-        loadMap() {
-            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
-            var mapOption = {
-                center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
-                level: 5, // 지도의 확대 레벨
-            };
+        // //맵 출력하기
+        // loadMap() {
+        //     var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+        //     var mapOption = {
+        //         center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
+        //         level: 5, // 지도의 확대 레벨
+        //     };
 
-            this.map = new window.kakao.maps.Map(mapContainer, mapOption);
-        },
+        //     this.map = new window.kakao.maps.Map(mapContainer, mapOption);
+        // },
     },
 };
 </script>

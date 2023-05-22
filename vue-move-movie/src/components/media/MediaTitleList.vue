@@ -72,7 +72,8 @@ export default {
                     const resultData = data["Data"][0]["Result"];
                     resultData.forEach((e) => {
                         this.mediaTitle = {
-                            title: e.title.replace(/!HS |!HE /g, "").trim(),
+                            // title: e.title,
+                            title: e.title.replace(/ !HS | !HE /g, "").trim(),
                             kmdbUrl: e.kmdbUrl,
                             prodYear: e.prodYear, // 제작년도
                             // prodYear: e.regDatestr.slice(0, 4), // 개봉년도

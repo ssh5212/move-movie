@@ -27,6 +27,8 @@ public class SpotServiceImpl implements SpotService {
 	public List<SpotDto> find_title_spot(String spot_movie_title) throws SQLException {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("spot_movie_title", spot_movie_title);
+//		System.out.println("map");
+//		System.out.println(map);
 		return sqlSession.getMapper(SpotMapper.class).find_title_spot(map);
 	}
 

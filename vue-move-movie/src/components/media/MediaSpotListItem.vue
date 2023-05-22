@@ -3,23 +3,23 @@
     <div class="card mb-3 my-5" style="width: 100%">
         <div class="row no-gutters align-items-center">
             <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">
-                <img :src="mediaSpot.spot_img_src" alt="..." style="width: 100%" />
+                <img :src="mediaSpot.spot_img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
             </div>
             <div class="col-md-8">
                 <div class="card-body" @click="moveSpotDetail">
-                    <h5 class="card-title">{{ mediaSpot.mediaTitle }}</h5>
-                    <p class="card-text-left">{{ mediaSpot.spot_filming_seq }}</p>
-                    <p class="card-text-left">
-                        <small class="text-muted">{{ mediaSpot.spot_address }}</small>
-                    </p>
+                    <h5 class="card-title text-left">{{ mediaSpot.spot_name }}</h5>
+                    <p class="card-text-left">{{ mediaSpot.spot_address }}</p>
+                    <!-- <p class="card-text-left">
+                        <small class="text-muted">작성자 : {{ mediaSpot.spot_address }}</small>
+                    </p> -->
                 </div>
             </div>
             <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                 <!-- [function - 필수] : 장바구니 담기 기능 구현 -->
                 <!-- <b-icon-basket2 id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2> -->
-                <b-icon-basket2-fill id="b-icon" class="h2 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
+                <b-icon-basket2-fill id="b-icon" class="h3 pt-1" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
                 <!-- [function - 필수] : 장바구니 하트 개수 출력 기능 구현 -->
-                <b-icon-heart-fill id="b-icon" class="h2 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                <b-icon-heart-fill id="b-icon" class="h3 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
                 <p class="card-text-left text-center"><small class="text-muted">1000</small></p>
             </div>
         </div>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    name: 'MediaSpotListItem',
+    name: "MediaSpotListItem",
     props: {
         mediaSpot: Object,
     },
@@ -38,7 +38,7 @@ export default {
     methods: {
         moveSpotDetail() {
             this.$router.push({
-                name: 'spotDetail',
+                name: "spotDetail",
                 params: { no: this.mediaSpot.spot_pk },
             });
         },
