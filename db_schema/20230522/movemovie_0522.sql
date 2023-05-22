@@ -33,7 +33,7 @@ CREATE TABLE `bucket` (
   `user_pk` int DEFAULT NULL,
   PRIMARY KEY (`bucket_pk`),
   KEY `bucket_user_user_pk_idx` (`user_pk`),
-  CONSTRAINT `bucket_user_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `bucket_user_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -59,8 +59,8 @@ CREATE TABLE `bucket_detail_list` (
   PRIMARY KEY (`bucket_pk`,`spot_pk`),
   KEY `bucket_detail_list_bucket_bucket_pk_idx` (`bucket_pk`),
   KEY `bucket_detail_list_spot_spot_pk_idx` (`spot_pk`),
-  CONSTRAINT `bucket_detail_list_bucket_bucket_pk` FOREIGN KEY (`bucket_pk`) REFERENCES `bucket` (`bucket_pk`),
-  CONSTRAINT `bucket_detail_list_spot_spot_pk` FOREIGN KEY (`spot_pk`) REFERENCES `spot` (`spot_pk`)
+  CONSTRAINT `bucket_detail_list_bucket_bucket_pk` FOREIGN KEY (`bucket_pk`) REFERENCES `bucket` (`bucket_pk`) on delete cascade, 
+  CONSTRAINT `bucket_detail_list_spot_spot_pk` FOREIGN KEY (`spot_pk`) REFERENCES `spot` (`spot_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,7 +89,7 @@ CREATE TABLE `free_board` (
   `user_pk` int DEFAULT NULL,
   PRIMARY KEY (`free_board_pk`),
   KEY `free_board_user_pk_idx` (`user_pk`),
-  CONSTRAINT `free_board_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `free_board_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -120,9 +120,9 @@ CREATE TABLE `free_board_comment` (
   KEY `free_board_comment_p_pk_idx` (`free_board_comment_p_pk`),
   KEY `free_board_comment_free_board_pk_idx` (`free_board_pk`),
   KEY `free_board_comment_user_pk_idx` (`user_pk`),
-  CONSTRAINT `free_board_comment_free_board_pk` FOREIGN KEY (`free_board_pk`) REFERENCES `free_board` (`free_board_pk`),
-  CONSTRAINT `free_board_comment_p_pk` FOREIGN KEY (`free_board_comment_p_pk`) REFERENCES `free_board_comment` (`free_board_comment_pk`),
-  CONSTRAINT `free_board_comment_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `free_board_comment_free_board_pk` FOREIGN KEY (`free_board_pk`) REFERENCES `free_board` (`free_board_pk`) on delete cascade,
+  CONSTRAINT `free_board_comment_p_pk` FOREIGN KEY (`free_board_comment_p_pk`) REFERENCES `free_board_comment` (`free_board_comment_pk`) on delete cascade,
+  CONSTRAINT `free_board_comment_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -177,8 +177,8 @@ CREATE TABLE `my_bucket_list` (
   PRIMARY KEY (`bucket_pk`,`spot_pk`,`user_pk`),
   KEY `my_bucket_list_spot_spot_pk_idx` (`spot_pk`),
   KEY `my_bucket_list_user_pk_idx` (`user_pk`),
-  CONSTRAINT `my_bucket_list_bucket_bucket_pk` FOREIGN KEY (`bucket_pk`) REFERENCES `bucket` (`bucket_pk`),
-  CONSTRAINT `my_bucket_list_spot_spot_pk` FOREIGN KEY (`spot_pk`) REFERENCES `spot` (`spot_pk`),
+  CONSTRAINT `my_bucket_list_bucket_bucket_pk` FOREIGN KEY (`bucket_pk`) REFERENCES `bucket` (`bucket_pk`) on delete cascade,
+  CONSTRAINT `my_bucket_list_spot_spot_pk` FOREIGN KEY (`spot_pk`) REFERENCES `spot` (`spot_pk`) on delete cascade,
   CONSTRAINT `my_bucket_list_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -208,7 +208,7 @@ CREATE TABLE `notice` (
   `user_pk` int NOT NULL,
   PRIMARY KEY (`notice_pk`),
   KEY `notice_user_pk_idx` (`user_pk`),
-  CONSTRAINT `notice_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `notice_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -239,9 +239,9 @@ CREATE TABLE `notice_comment` (
   KEY `notice_comment_p_pk_idx` (`notice_comment_p_pk`),
   KEY `notice_comment_notice_pk_idx` (`notice_pk`),
   KEY `notice_comment_user_pk_idx` (`user_pk`),
-  CONSTRAINT `notice_comment_notice_pk` FOREIGN KEY (`notice_pk`) REFERENCES `notice` (`notice_pk`),
-  CONSTRAINT `notice_comment_p_pk` FOREIGN KEY (`notice_comment_p_pk`) REFERENCES `notice_comment` (`notice_comment_pk`),
-  CONSTRAINT `notice_comment_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `notice_comment_notice_pk` FOREIGN KEY (`notice_pk`) REFERENCES `notice` (`notice_pk`) on delete cascade,
+  CONSTRAINT `notice_comment_p_pk` FOREIGN KEY (`notice_comment_p_pk`) REFERENCES `notice_comment` (`notice_comment_pk`) on delete cascade,
+  CONSTRAINT `notice_comment_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -306,7 +306,7 @@ CREATE TABLE `spot` (
   KEY `spot_gugun_gugun_code_idx` (`gugun_code`),
   CONSTRAINT `spot_gugun_gugun_code` FOREIGN KEY (`gugun_code`) REFERENCES `gugun` (`gugun_code`),
   CONSTRAINT `spot_sido_sido_code` FOREIGN KEY (`sido_code`) REFERENCES `sido` (`sido_code`),
-  CONSTRAINT `spot_user_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `spot_user_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB AUTO_INCREMENT=32767 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -367,8 +367,8 @@ CREATE TABLE `spot_instance_heart` (
   `user_pk` int NOT NULL,
   PRIMARY KEY (`spot_instance_pk`,`user_pk`),
   KEY `spot_instance_heart_user_user_pk_idx` (`user_pk`),
-  CONSTRAINT `spot_instance_heart_spot_spot_instance_pk` FOREIGN KEY (`spot_instance_pk`) REFERENCES `spot_instance` (`spot_instance_pk`),
-  CONSTRAINT `spot_instance_heart_user_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`)
+  CONSTRAINT `spot_instance_heart_spot_spot_instance_pk` FOREIGN KEY (`spot_instance_pk`) REFERENCES `spot_instance` (`spot_instance_pk`) on delete cascade,
+  CONSTRAINT `spot_instance_heart_user_user_pk` FOREIGN KEY (`user_pk`) REFERENCES `user` (`user_pk`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -330,11 +330,11 @@ DROP TABLE IF EXISTS `spot_instance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `spot_instance` (
-  `spot_instance_pk` int NOT NULL,
+  `spot_instance_pk` int NOT NULL auto_increment,
   `spot_instance_title` varchar(20) NOT NULL,
   `spot_instance_heart` int DEFAULT '0',
   `spot_instance_content` varchar(80) NOT NULL,
-  `spot_instance_img_src` varchar(20) DEFAULT NULL,
+  `spot_instance_img_src` varchar(100) DEFAULT NULL,
   `spot_pk` int DEFAULT NULL,
   `user_pk` int DEFAULT NULL,
   `registertime` datetime DEFAULT CURRENT_TIMESTAMP,
