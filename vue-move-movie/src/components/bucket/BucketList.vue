@@ -17,7 +17,7 @@
 
 <script>
 import BucketListItem from "@/components/bucket/BucketListItem.vue";
-import { apiInstance } from "@/api/index"
+import { bucketListheart } from "@/api/bucket.js";
 export default {
     name: "BucketList",
     components: { BucketListItem },
@@ -28,28 +28,9 @@ export default {
         };
     },
     created() {
-        apiInstance.get
-
-        // test start
-        this.bucketList = {
-            bucket_pk: 77,
-            title: "title_1",
-            content: "content_1",
-            spotList: [
-                {
-                    spot_pk: 0,
-                    spot_name: "goodplace",
-                    spot_img_src: "https://placekitten.com/1000/300",
-                },
-            ],
-        };
-        this.bucketListList.push(this.bucketList);
-        this.bucketListList.push(this.bucketList);
-        this.bucketListList.push(this.bucketList);
-        this.bucketListList.push(this.bucketList);
-        this.bucketListList.push(this.bucketList);
-        this.bucketListList.push(this.bucketList);
-        this.bucketListList.push(this.bucketList);
+        bucketListheart(({ data }) => {
+            this.bucketListList = data.BucketList;
+        });
         // test end
     },
     methods: {

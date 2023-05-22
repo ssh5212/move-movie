@@ -10,9 +10,9 @@
     >
       <b-card-text class=""> {{ this.BucketList.content }} </b-card-text>
     </b-card> -->
-        <b-card id="bucket-list-item" title="Title" :img-src="this.BucketList.spotList[0].spot_img_src" img-alt="Image" img-top @click="movedetail">
+        <b-card id="bucket-list-item" :title="this.BucketList.bucket_title" img-src="https://placekitten.com/1000/300" img-alt="Image" img-top @click="movedetail">
             <b-card-text class="small">
-                {{ this.BucketList.content }}
+                {{ this.BucketList.bucket_content }}
             </b-card-text>
         </b-card>
     </div>
@@ -21,23 +21,19 @@
 <script>
 // "https://placekitten.com/1000/300"
 export default {
-    name: 'BucketListItem',
+    name: "BucketListItem",
     props: {
         BucketList: Object,
     },
     components: {},
     data() {
         return {
-            message: '',
+            message: "",
         };
     },
-    created() {
-        console.log(this.BucketList.spotList[0].spot_img_src);
-        console.log(this.BucketList.bucket_pk);
-    },
+    created() {},
     methods: {
         movedetail() {
-            console.log(this.BucketList.bucket_pk);
             this.$router.push({
                 name: `bucketDetail`,
                 params: { no: this.BucketList.bucket_pk },
