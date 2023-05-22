@@ -17,7 +17,7 @@
 
 <script>
 import BucketListItem from "@/components/bucket/BucketListItem.vue";
-
+import { apiInstance } from "@/api/index"
 export default {
     name: "BucketList",
     components: { BucketListItem },
@@ -28,6 +28,8 @@ export default {
         };
     },
     created() {
+        apiInstance.get
+
         // test start
         this.bucketList = {
             bucket_pk: 77,
