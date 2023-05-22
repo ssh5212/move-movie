@@ -15,4 +15,8 @@ public interface SpotService {
 	public void delete_spot(SpotDto spotdto) throws Exception;
 	public List<SidoGugunCodeDto> getSido() throws Exception;
 	public List<SidoGugunCodeDto> getGugun(String sido) throws Exception;
+<<<<<<< HEAD
+=======
+	public SpotDto spotOne(int spot_pk) throws Exception;
+>>>>>>> feature-vue-13/bucket
 }

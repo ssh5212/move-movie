@@ -24,7 +24,7 @@
                 <div class="mt-5">
                     <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
                         <!-- detailitem.vue로 빼야함 -->
-                        <bucket-spot-list-detail-item v-for="(spot, index) in spots" :key="index" :spot="spot.spot_pk"></bucket-spot-list-detail-item>
+                        <bucket-spot-list-detail-item v-for="(spot, index) in spots" :key="index" :spot_pk="spot.spot_pk"></bucket-spot-list-detail-item>
                     </div>
                 </div>
                 <!-- [S] map -->
@@ -34,8 +34,7 @@
                 <!-- [E] map -->
                 <!--  content -->
                 <div class="mt-5 mb-5">
-                    이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은
-                    내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.
+                    {{ content }}
                 </div>
             </div>
         </div>
@@ -55,12 +54,14 @@ export default {
     data() {
         return {
             spots: [],
+            content: null,
         };
     },
     created() {
         bucketListBybucketpk(this.$route.params.no, ({ data }) => {
             this.spots = data.BucketDetailList;
         });
+        this.content = this.$route.query.content;
     },
     mounted() {
         if (window.kakao && window.kakao.maps) {

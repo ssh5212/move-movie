@@ -37,6 +37,7 @@ export default {
             this.$router.push({
                 name: `bucketDetail`,
                 params: { no: this.BucketList.bucket_pk },
+                query: { content: this.BucketList.bucket_content },
             });
         },
     },

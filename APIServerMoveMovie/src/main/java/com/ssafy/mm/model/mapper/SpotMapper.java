@@ -18,4 +18,5 @@ public interface SpotMapper {
 	public void delete_spot(SpotDto spotdto) throws SQLException;
 	public List<SidoGugunCodeDto> getSido() throws SQLException;
 	public List<SidoGugunCodeDto> getGugun(String sido) throws SQLException;
+	public SpotDto spotOne(int spot_pk) throws SQLException;
 }

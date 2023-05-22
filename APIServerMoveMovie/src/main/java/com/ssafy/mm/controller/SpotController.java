@@ -95,6 +95,25 @@ public class SpotController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	@GetMapping("/{spot_pk}")
+	public ResponseEntity<Map<String, Object>> spotOne(@PathVariable("spot_pk") int spot_pk) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+
+		try {
+			SpotDto spotDto = spotService.spotOne(spot_pk);
+			resultMap.put("spot", spotDto);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			resultMap.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 
 //	@PostMapping("/spot_area")
 //	public ResponseEntity<Map<String, Object>> find_title_spot(@RequestBody int sido_code,

@@ -59,6 +59,11 @@ public class SpotServiceImpl implements SpotService {
 	public List<SidoGugunCodeDto> getGugun(String sido) throws Exception {
 		return sqlSession.getMapper(SpotMapper.class).getGugun(sido);
 	}
+
+	@Override
+	public SpotDto spotOne(int spot_pk) throws Exception {
+		return sqlSession.getMapper(SpotMapper.class).spotOne(spot_pk);
+	}
 	
 
 

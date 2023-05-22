@@ -40,4 +40,9 @@
 		where sido_code = #{sido}
 		order by gugun_code
 	</select>
+	
+	<select id="spotOne" resultType="SpotDto">
+		select * from spot
+		where spot_pk = #{spot_pk}
+	</select>
 </mapper>

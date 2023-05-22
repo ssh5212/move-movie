@@ -10,3 +10,6 @@ $ npm install jwt-decode
 
 토큰의 영속성및 정보 저장 위치 변경을 위해 설치
 $ npm install -save vuex-persistedstate
+
+google img 가져오기위함
+$ npm i cheerio
