@@ -7,7 +7,7 @@ const mediaStore = {
         guguns: [{ value: null, text: "선택하세요" }],
         medias: [],
         media: null,
-        bucket: new Set(),
+        bucket: [],
     },
     getters: {},
     mutations: {

@@ -7,8 +7,9 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body" @click="moveSpotDetail">
-                    <h5 class="card-title text-left">{{ mediaSpot.spot_name }}</h5>
-                    <p class="card-text-left">{{ mediaSpot.spot_address }}</p>
+                    <h4 class="card-title text-left mb-5">{{ mediaSpot.spot_name }}</h4>
+                    <p class="text-left">영화명 : {{ mediaSpot.spot_movie_title }}</p>
+                    <p class="text-left">주소 : {{ mediaSpot.spot_address }}</p>
                     <!-- <p class="card-text-left">
                         <small class="text-muted">작성자 : {{ mediaSpot.spot_address }}</small>
                     </p> -->
@@ -51,11 +52,20 @@ export default {
             });
         },
         addThisSpot() {
-            this.bucket.forEach((b) => {
-                if (!b.spot_pk(this.mediaSpot.spot_pk)) {
+            // bucket이 비어 있는 경우
+            if (this.bucket.length == 0) {
+                this.bucket.push(this.mediaSpot);
+            } else {
+                let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
+                this.bucket.forEach((b) => {
+                    if (b.spot_pk == this.mediaSpot.spot_pk) {
+                        isok = 0;
+                    }
+                });
+                if (isok == 1) {
                     this.bucket.push(this.mediaSpot);
                 }
-            });
+            }
             console.log(this.bucket);
         },
     },
