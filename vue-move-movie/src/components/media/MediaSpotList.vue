@@ -57,7 +57,7 @@
 
 <script>
 import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
-import { mediaList } from "@/api/media.js";
+import { mediaList, spotList } from "@/api/media.js";
 
 export default {
     name: "MediaSpotList",
@@ -66,15 +66,16 @@ export default {
         return {
             mediaSpotList: [],
             mediaSpot: Object,
-            mediaTitle: Object, // 미디어는 별도로 불러오도록 일단 구현
+            mediaTitle: Object,
             title: String,
             listCount: 1,
         };
     },
 
     created() {
-        this.title = this.$route.params.title;
+        this.title = this.$route.params.title.replace(/\s+/g, " ");
         this.searchMedia();
+        this.searchSpot();
     },
 
     mounted() {
@@ -89,10 +90,22 @@ export default {
     },
 
     methods: {
+        // 관련 스폿 리스트 가져오기
+        searchSpot() {
+            let params = this.title;
+
+            spotList(params, ({ data }) => {
+                // console.log(data[1]);
+                this.mediaSpotList = data.spots;
+                console.log("++++++++++++++++++++++");
+                console.log(this.mediaSpotList);
+            });
+        },
+
         searchMedia() {
             const params = {
                 listCount: this.listCount, // 한 화면에 최대 영화 출력 수
-                title: this.title, // 타이틀 명 검색 시
+                title: this.title, // 타이틀 명으로 검색
                 query: this.title, // 정확도를 높이기 위해 query로 동시에 검색
             };
 
