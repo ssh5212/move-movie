@@ -81,12 +81,11 @@ export default {
     },
 
     mounted() {
-        if (window.kakao && window.kakao.maps) {
-            this.loadMap();
-        } else {
-            this.loadScript();
-        }
-
+        // if (window.kakao && window.kakao.maps) {
+        //     this.loadMap();
+        // } else {
+        //     this.loadScript();
+        // }
         // this.loadArea(); // 지역 불러오기
         // this.addEventMethod(); // 이벤트 등록
     },
@@ -186,5 +185,9 @@ export default {
 .card-text-left {
     text-align: left;
     margin-bottom: 4px;
+}
+#map {
+    width: 100%;
+    height: 400px;
 }
 </style>
