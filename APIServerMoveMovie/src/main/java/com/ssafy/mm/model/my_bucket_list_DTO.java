@@ -6,6 +6,14 @@ public class my_bucket_list_DTO {
 	private int user_pk;
 	private int checked;
 
+	public my_bucket_list_DTO(int bucket_pk, int spot_pk, int user_pk, int checked) {
+		super();
+		this.bucket_pk = bucket_pk;
+		this.spot_pk = spot_pk;
+		this.user_pk = user_pk;
+		this.checked = checked;
+	}
+
 	public int getBucket_pk() {
 		return bucket_pk;
 	}
