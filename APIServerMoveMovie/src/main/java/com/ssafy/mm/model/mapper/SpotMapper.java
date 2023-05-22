@@ -13,7 +13,7 @@ import com.ssafy.mm.model.SpotDto;
 public interface SpotMapper {
 	public List<SpotDto> all_spot() throws SQLException;
 	public List<SpotDto> find_title_spot(Map<String, String> map) throws SQLException;
-	public List<SpotDto> find_sido_gugun_spot(Map<String, Integer> map) throws SQLException;
+	public List<SpotDto> find_sido_gugun_spot(String gugun_code) throws SQLException;
 	public void modify_spot(SpotDto spotdto) throws SQLException;
 	public void delete_spot(SpotDto spotdto) throws SQLException;
 	public List<SidoGugunCodeDto> getSido() throws SQLException;

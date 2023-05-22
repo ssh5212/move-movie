@@ -29,9 +29,7 @@
 
             <hr class="mb-5" />
             <!-- 화면 1 -->
-            <div class="row justify-content-xlㅌ-center my-5 align-items-center">
-                <!-- <MediaSpotListItem v-for="(mediaSpot, index) in mediaSpotList" :key="index" :mediaSpot="mediaSpot"></MediaSpotListItem> -->
-            </div>
+            <MediaSpotListItem v-for="(mediaSpot, index) in medias" :key="index" :mediaSpot="mediaSpot"></MediaSpotListItem>
         </div>
         <!-- [E] body -->
     </div>
@@ -39,12 +37,13 @@
 
 <script>
 import MediaSearchBar from "./MediaSearchBar.vue";
-// import MediaSpotListItem from "./MediaSpotListItem.vue";
+import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
+import { mapState } from "vuex";
+const mediaStore = "mediaStore";
 
 export default {
     name: "MediaLocationList",
-    // components: { MediaSearchBar, MediaSpotListItem },
-    components: { MediaSearchBar },
+    components: { MediaSearchBar, MediaSpotListItem },
     data() {
         return {
             spotInstanceList: [],
@@ -53,7 +52,9 @@ export default {
         };
     },
 
-    created() {},
+    computed: {
+        ...mapState(mediaStore, ["medias", "bucket"]),
+    },
 
     mounted() {
         if (window.kakao && window.kakao.maps) {

@@ -1,4 +1,4 @@
-import { sidoList, gugunList, mediaList } from "@/api/media.js";
+import { sidoList, gugunList, getMediaList } from "@/api/media.js";
 
 const mediaStore = {
     namespaced: true,
@@ -7,6 +7,7 @@ const mediaStore = {
         guguns: [{ value: null, text: "선택하세요" }],
         medias: [],
         media: null,
+        bucket: [],
     },
     getters: {},
     mutations: {
@@ -31,8 +32,12 @@ const mediaStore = {
                 state.guguns.push({ value: gugun.gugun_code, text: gugun.gugun_name });
             });
         },
-        SET_MEDIA_LIST(state, medias) {
-            state.medias = medias;
+        SET_MEDIA_LIST(state, m) {
+            console.log(m.spots);
+            // m.spots.forEach((media) => {
+            //     state.medias.push(media);
+            // });
+            state.medias = m.spots;
         },
         SET_DETAIL_MEDIA(state, media) {
             state.media = media;
@@ -63,20 +68,17 @@ const mediaStore = {
             );
         },
         getMediaList: ({ commit }, gugunCode) => {
-            const SERVICE_KEY = process.env.VUE_APP_API_BASE_URL;
-            const params = {
-                LAWD_CD: gugunCode,
-                DEAL_YMD: "202207",
-                serviceKey: decodeURIComponent(SERVICE_KEY),
-            };
-
-            mediaList(
+            const params = gugunCode;
+            console.log("겟 미디어 리스트 도착" + gugunCode);
+            getMediaList(
                 params,
                 ({ data }) => {
-                    commit("SET_MEDIA_LIST", data.response.body.items.item);
+                    console.log("inner" + gugunCode);
+                    commit("SET_MEDIA_LIST", data);
                 },
                 (error) => {
                     console.log(error);
+                    console.log("inner error" + gugunCode);
                 }
             );
         },

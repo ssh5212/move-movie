@@ -16,9 +16,9 @@
 		where spot_movie_title = #{spot_movie_title};
 		<!-- where spot_movie_title like concat('%', #{spot_movie_title}, '%') -->
 	</select>
-	<select id="find_sido_gugun_spot" parameterType="map">
+	<select id="find_sido_gugun_spot" parameterType="string" resultType="SpotDto">
 		select * from spot
-		where sido_code = #{sido_code} and gugun_code = #{gugun_code};
+		where gugun_code = #{gugun_code};
 	</select>
 	
 	<update id="modify_spot" parameterType="SpotDto">

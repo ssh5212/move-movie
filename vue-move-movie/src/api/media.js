@@ -32,4 +32,9 @@ function mediaLoctionList(params, success, fail) {
     localApi.get(``, { params: params }).then(success).catch(fail);
 }
 
-export { mediaList, spotList, spotDetailList, spotLocationList, sidoList, gugunList, mediaLoctionList };
+async function getMediaList(params, success, fail) {
+    await console.log("Helllo " + params);
+    await localApi.get(`/spot/spot_area/${params}`).then(success).catch(fail);
+}
+
+export { mediaList, spotList, spotDetailList, spotLocationList, sidoList, gugunList, mediaLoctionList, getMediaList };

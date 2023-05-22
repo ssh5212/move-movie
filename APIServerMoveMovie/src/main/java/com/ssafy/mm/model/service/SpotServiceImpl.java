@@ -34,11 +34,10 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public List<SpotDto> find_sido_gugun_spot(int sido_code, int gugun_code) throws SQLException {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("sido_code", sido_code);
-		map.put("gugun_code", gugun_code);
-		return sqlSession.getMapper(SpotMapper.class).find_sido_gugun_spot(map);
+	public List<SpotDto> find_sido_gugun_spot(String gugun_code) throws SQLException {
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		map.put("gugun_code", gugun_code);
+		return sqlSession.getMapper(SpotMapper.class).find_sido_gugun_spot(gugun_code);
 	}
 
 	@Override

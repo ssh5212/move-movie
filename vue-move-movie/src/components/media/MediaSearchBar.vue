@@ -45,12 +45,13 @@ export default {
             // console.log(this.sidoCode);
             this.CLEAR_GUGUN_LIST();
             this.gugunCode = null;
-            console.log("디스 시도 코드 " + this.sidoCode);
             if (this.sidoCode) this.getGugun(this.sidoCode);
         },
         searchMedia() {
-            console.log("method실행");
-            // if (this.gugunCode) this.getHouseList(this.gugunCode);
+            console.log("method실행" + this.gugunCode);
+            console.log(this.gugunCode);
+            console.log("================");
+            if (this.gugunCode) this.getMediaList(this.gugunCode);
         },
     },
 };

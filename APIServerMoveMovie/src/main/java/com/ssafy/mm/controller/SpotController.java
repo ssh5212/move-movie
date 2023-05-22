@@ -74,25 +74,46 @@ public class SpotController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-
-	@PostMapping("/spot_area")
-	public ResponseEntity<Map<String, Object>> find_title_spot(@RequestBody int sido_code,
-			@RequestBody int gugun_code) {
+	
+	// 지역으로 스팟 찾기
+	@GetMapping("/spot_area/{gugun_code}")
+	public ResponseEntity<Map<String, Object>> gugunList(@PathVariable("gugun_code") String gugun_code) throws Exception {
+		System.out.println("start gugunList");
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 
 		try {
-			List<SpotDto> list = spotService.find_sido_gugun_spot(sido_code, gugun_code);
+			List<SpotDto> list = spotService.find_sido_gugun_spot(gugun_code);
+			System.out.println("list" + list); 
+
 			resultMap.put("spots", list);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.OK;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			resultMap.put("message", FAIL);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+
+//	@PostMapping("/spot_area")
+//	public ResponseEntity<Map<String, Object>> find_title_spot(@RequestBody int sido_code,
+//			@RequestBody int gugun_code) {
+//		Map<String, Object> resultMap = new HashMap<>();
+//		HttpStatus status = null;
+//
+//		try {
+//			List<SpotDto> list = spotService.find_sido_gugun_spot(sido_code, gugun_code);
+//			resultMap.put("spots", list);
+//			resultMap.put("message", SUCCESS);
+//			status = HttpStatus.OK;
+//		} catch (SQLException e) {
+//			resultMap.put("message", FAIL);
+//			status = HttpStatus.INTERNAL_SERVER_ERROR;
+//		}
+//
+//		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+//	}
 
 	@PutMapping("/spot")
 	public ResponseEntity<Map<String, Object>> modify_spot(@RequestBody SpotDto spotdto) {
@@ -111,6 +132,7 @@ public class SpotController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 
+	
 	@DeleteMapping("/spot")
 	public ResponseEntity<Map<String, Object>> delete_spot(@RequestBody SpotDto spotdto) {
 		Map<String, Object> resultMap = new HashMap<>();
@@ -147,7 +169,6 @@ public class SpotController {
 
 	@GetMapping("/gugun/{sido}")
 	public ResponseEntity<Map<String, Object>> gugun(@PathVariable("sido") String sido) throws Exception {
-		System.out.println("start gugun");
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 
