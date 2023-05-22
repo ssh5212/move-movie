@@ -34,7 +34,7 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public List<SpotDto> find_sido_gugun_spot(String gugun_code) throws SQLException {
+	public List<SpotDto> find_sido_gugun_spot(String gugun_code) throws Exception {
 //		Map<String, Integer> map = new HashMap<String, Integer>();
 //		map.put("gugun_code", gugun_code);
 		return sqlSession.getMapper(SpotMapper.class).find_sido_gugun_spot(gugun_code);
@@ -51,12 +51,12 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public List<SidoGugunCodeDto> getSido() throws SQLException {
+	public List<SidoGugunCodeDto> getSido() throws Exception {
 		return sqlSession.getMapper(SpotMapper.class).getSido();
 	}
 
 	@Override
-	public List<SidoGugunCodeDto> getGugun(String sido) throws SQLException {
+	public List<SidoGugunCodeDto> getGugun(String sido) throws Exception {
 		return sqlSession.getMapper(SpotMapper.class).getGugun(sido);
 	}
 	
