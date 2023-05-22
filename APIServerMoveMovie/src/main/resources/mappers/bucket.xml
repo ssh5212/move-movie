@@ -11,7 +11,7 @@
 	public void bucket_delete(int bucket_pk); -->
 	
 	<!-- public List<BucketDto> all_bucket(); -->
-	<select id="all_bucket">
+	<select id="all_bucket" resultType="BucketDto">
 		select * from bucket;
 	</select>
 	
@@ -25,7 +25,7 @@
 	</select>
 	
 	<!-- public List<BucketDto> bucket_order_heart(); -->
-	<select id="bucket_order_heart">
+	<select id="bucket_order_heart" resultType="BucketDto">
 		select * from bucket order by bucket_heart desc;
 	</select>
 	
