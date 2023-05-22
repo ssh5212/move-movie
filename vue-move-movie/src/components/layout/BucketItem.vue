@@ -6,7 +6,7 @@
             <div class="notification-badge" @click="deleteItem">
                 <span>-</span>
             </div>
-            <p>{{ this.bucket.spot_name }}</p>
+            <p>{{ this.bucketItem.spot_name }}</p>
         </div>
     </div>
 </template>
@@ -24,9 +24,12 @@ export default {
     },
     methods: {
         deleteItem() {
-            let rot = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
+            let rot = 0; // 해당 스폿이 버킷에 포함되어 있는지 판단
+            // console.log("this.bucketItem.spot_pk" + this.bucketItem.spot_pk);
             this.bucket.forEach((b) => {
-                if (!b.spot_pk == this.mediaSpot.spot_pk) {
+                // console.log("rot" + rot);
+                // console.log("b.spot_pk" + b.spot_pk);
+                if (!(b.spot_pk === this.bucketItem.spot_pk)) {
                     rot++;
                 } else {
                     this.bucket.splice(rot, 1);
