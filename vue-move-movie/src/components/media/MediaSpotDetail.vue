@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import MediaSpotDetailItem from '@/components/media/MediaSpotDetailItem.vue';
+import MediaSpotDetailItem from "@/components/media/MediaSpotDetailItem.vue";
 
 export default {
-    name: 'MediaSpotDetail',
+    name: "MediaSpotDetail",
     components: { MediaSpotDetailItem },
     data() {
         return {
@@ -72,28 +72,28 @@ export default {
     created() {
         this.mediaSpot = {
             spot_pk: 77,
-            spot_name: 'b',
-            spot_scene_desc: 'c',
-            spot_img_src: 'https://placekitten.com/192/108',
+            spot_name: "b",
+            spot_scene_desc: "c",
+            spot_img_src: "https://placekitten.com/192/108",
             spot_lat: 11,
             spot_lon: 22,
-            spot_address: 'ㅍㅍㅍ',
-            spot_road_address: 'b',
-            spot_characters: 'b',
-            spot_movie_title: 'b',
-            spot_filming_seq: 'b',
+            spot_address: "ㅍㅍㅍ",
+            spot_road_address: "b",
+            spot_characters: "b",
+            spot_movie_title: "b",
+            spot_filming_seq: "b",
             user_pk: 77,
-            sido_code: 'b',
-            gugun_code: 'b',
+            sido_code: "b",
+            gugun_code: "b",
         };
 
         this.spotInstance = {
             spot_instance_pk: 66,
-            spot_instance_title: 'c',
-            spot_instance_heart: 'c',
-            spot_instance_content: 'c',
-            spot_instance_img_src: 'https://placekitten.com/100/100',
-            registertime: 'c',
+            spot_instance_title: "c",
+            spot_instance_heart: "c",
+            spot_instance_content: "c",
+            spot_instance_img_src: "https://placekitten.com/100/100",
+            registertime: "c",
             spot_pk: 66,
             user_pk: 66,
         };
@@ -116,8 +116,8 @@ export default {
     methods: {
         //api 불러오기
         loadScript() {
-            const script = document.createElement('script');
-            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
+            const script = document.createElement("script");
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -127,7 +127,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -136,18 +136,16 @@ export default {
             this.map = new window.kakao.maps.Map(mapContainer, mapOption);
         },
 
-        
-
         moveSpotCreate() {
             this.$router.push({
-                name: 'spotCreate',
+                name: "spotCreate",
             });
         },
 
         // [function - 필수] 검색 기능 구현 완료 후 연결하기
         moveRelationBucket() {
             this.$router.push({
-                name: 'bucketList',
+                name: "bucketList",
                 params: { no: this.spotInstance.spot_instance_pk },
             });
         },
