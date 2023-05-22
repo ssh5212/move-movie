@@ -34,8 +34,7 @@
                 <!-- [E] map -->
                 <!--  content -->
                 <div class="mt-5 mb-5">
-                    이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은
-                    내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.이곳은 내용입니다.
+                    {{ content }}
                 </div>
             </div>
         </div>
@@ -55,12 +54,14 @@ export default {
     data() {
         return {
             spots: [],
+            content: null,
         };
     },
     created() {
         bucketListBybucketpk(this.$route.params.no, ({ data }) => {
             this.spots = data.BucketDetailList;
         });
+        this.content = this.$route.query.content;
     },
     mounted() {
         if (window.kakao && window.kakao.maps) {

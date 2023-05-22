@@ -18,14 +18,13 @@ export default {
     components: {},
     data() {
         return {
-            spot: null,
+            spot: { spot_name: "" },
             img_src: null,
         };
     },
     created() {
         spotByspotpk(this.spot_pk, ({ data }) => {
             this.spot = data.spot;
-            console.log(this.spot.spot_name);
             this.img_src = this.spot.spot_img_src;
             if (!this.img_src) {
                 this.img_src = "https://via.placeholder.com/130x100";
