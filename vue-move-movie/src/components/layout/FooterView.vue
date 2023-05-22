@@ -1,7 +1,7 @@
 <template>
     <div id="footer">
         <div id="inner-footer" class="container justify-content-end align-items-center p-4">
-            <div class="row">
+            <div class="row align-items-end">
                 <div class="col-lg-1 h-100 text-center text-lg-start my-auto">
                     <a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp" target="_blank">
                         <img class="px-4 px-lg-0 my-3" src="@/assets/img/logo-ssafy.png" alt="" height="46px" />
@@ -51,11 +51,11 @@
 
 <script>
 export default {
-    name: 'FooterView',
+    name: "FooterView",
     components: {},
     data() {
         return {
-            message: '',
+            message: "",
         };
     },
     created() {},
