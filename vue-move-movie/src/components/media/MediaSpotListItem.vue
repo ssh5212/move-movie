@@ -56,6 +56,7 @@ export default {
                     this.bucket.push(this.mediaSpot);
                 }
             });
+            console.log(this.bucket);
         },
     },
 };
