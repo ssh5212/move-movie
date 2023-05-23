@@ -17,7 +17,15 @@
             <div class="row justify-content-end">
                 <div class="col-md-5">
                     <div class="input-group pt-5 mt-5">
-                        <input type="text" class="form-control" placeholder="영화 제목을 입력하세요" aria-label="영화 제목을 입력하세요" aria-describedby="searchTitle" v-model="title" @keydown.enter="searchByTitle" />
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="영화 제목을 입력하세요"
+                            aria-label="영화 제목을 입력하세요"
+                            aria-describedby="searchTitle"
+                            v-model="title"
+                            @keydown.enter="searchByTitle"
+                        />
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="searchTitle" @click="searchByTitle">Button</button>
                         </div>
@@ -48,7 +56,7 @@ export default {
             title: "", // 타이틀 명 검색 시
             actor: "", // 배우 검색 시
             keyword: "", // 키워드 검색 시
-            listCount: 20,
+            listCount: 50,
         };
     },
     created() {
@@ -71,16 +79,21 @@ export default {
                     console.log(data["Data"][0]["Result"]);
                     const resultData = data["Data"][0]["Result"];
                     resultData.forEach((e) => {
-                        this.mediaTitle = {
-                            // title: e.title,
-                            title: e.title.replace(/ !HS | !HE /g, "").trim(),
-                            kmdbUrl: e.kmdbUrl,
-                            prodYear: e.prodYear, // 제작년도
-                            // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
-                            keyword: e.keyword,
-                            stlls: e.posters.split("|")[0],
-                        };
-                        this.mediaTitleList.push(this.mediaTitle);
+                        // 성인물 제외
+                        //  && e.genre !== "드라마"
+                        if (e.rating !== "18세관람가(청소년관람불가)") {
+                            this.mediaTitle = {
+                                // title: e.title,
+                                title: e.title.replace(/ !HS | !HE /g, "").trim(),
+                                kmdbUrl: e.kmdbUrl,
+                                prodYear: e.prodYear, // 제작년도
+                                // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
+                                keyword: e.keyword,
+                                stlls: e.posters.split("|")[0],
+                            };
+                            this.mediaTitleList.push(this.mediaTitle);
+                        }
+
                         // console.log(this.mediaTitle);
                     });
                 },
