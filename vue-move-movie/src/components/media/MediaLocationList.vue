@@ -46,7 +46,6 @@ export default {
     components: { MediaSearchBar, MediaSpotListItem },
     data() {
         return {
-            spotInstanceList: [],
             spotInstance: Object, // 미디어는 별도로 불러오도록 일단 구현
             mediaSpot: Object,
         };
@@ -62,12 +61,27 @@ export default {
         } else {
             this.loadScript();
         }
-
-        // this.loadArea(); // 지역 불러오기
-        // this.addEventMethod(); // 이벤트 등록
+        setTimeout(() => {
+            this.makeSpotList();
+            this.loadMaker();
+        }, 300);
     },
 
     methods: {
+        // [S] kakao
+        async executeCode() {
+            if (window.kakao && window.kakao.maps) {
+                this.loadMap();
+            } else {
+                this.loadScript();
+            }
+
+            await this.$nextTick(); // 다음 뷰 업데이트 사이클 대기
+
+            this.makeSpotList();
+            this.loadMaker();
+        },
+
         //api 불러오기
         loadScript() {
             const script = document.createElement("script");
@@ -89,6 +103,36 @@ export default {
 
             this.map = new window.kakao.maps.Map(mapContainer, mapOption);
         },
+
+        makeSpotList() {
+            this.positions = [];
+            this.medias.forEach((mediaSpot) => {
+                let obj = {};
+                obj.title = mediaSpot.spot_name;
+                obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
+
+                this.positions.push(obj);
+            });
+        },
+        loadMaker() {
+            // 마커를 생성합니다
+            this.markers = [];
+            this.positions.forEach((position) => {
+                const marker = new window.kakao.maps.Marker({
+                    map: this.map, // 마커를 표시할 지도
+                    position: position.latlng, // 마커를 표시할 위치
+                    title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                });
+                this.markers.push(marker);
+            });
+
+            // 4. 지도를 이동시켜주기
+            // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
+            const bounds = this.positions.reduce((bounds, position) => bounds.extend(position.latlng), new window.kakao.maps.LatLngBounds());
+
+            this.map.setBounds(bounds);
+        },
+        // [E] kakao
 
         moveSpotCreate() {
             this.$router.push({

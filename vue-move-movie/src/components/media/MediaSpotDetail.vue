@@ -46,7 +46,7 @@
             <h3 class="pb-2 mt-5">사용자 스팟 사진</h3>
 
             <!-- 화면 1 -->
-            <div class="row justify-content-xlㅌ-center my-5 align-items-center">
+            <div class="row justify-content-xl-center my-5 align-items-center">
                 <MediaSpotDetailItem v-for="(spotInstance, index) in spotInstanceList" :key="index" :spotInstance="spotInstance"></MediaSpotDetailItem>
             </div>
 
@@ -59,6 +59,8 @@
 <script>
 import MediaSpotDetailItem from "@/components/media/MediaSpotDetailItem.vue";
 import { mapState, mapMutations } from "vuex";
+import { getSpotInstance } from "@/api/media.js";
+
 const mediaStore = "mediaStore";
 
 export default {
@@ -72,24 +74,14 @@ export default {
     data() {
         return {
             spotInstanceList: [],
-            spotInstance: Object, // 미디어는 별도로 불러오도록 일단 구현
             mediaSpot: Object,
         };
     },
 
     created() {
         this.mediaSpot = this.media;
-        this.spotInstance = {
-            spot_instance_pk: 66,
-            spot_instance_title: "c",
-            spot_instance_heart: "c",
-            spot_instance_content: "c",
-            spot_instance_img_src: "https://placekitten.com/100/100",
-            registertime: "c",
-            spot_pk: 66,
-            user_pk: 66,
-        };
-        this.spotInstanceList.push(this.spotInstance);
+
+        this.getSpotInstance();
     },
 
     mounted() {
@@ -154,8 +146,25 @@ export default {
         moveRelationBucket() {
             this.$router.push({
                 name: "bucketList",
-                params: { no: this.spotInstance.spot_instance_pk },
+                params: { no: this.mediaSpot.spot_instance_pk },
             });
+        },
+
+        // 스폿의 인스턴스 가져오기
+        getSpotInstance() {
+            const params = this.mediaSpot.spot_pk;
+            getSpotInstance(
+                params,
+                ({ data }) => {
+                    // console.log(data.spots);
+                    this.spotInstanceList = data.spots;
+                    // console.log(this.spotInstance);
+                    // console.log(this.spotInstance[0]);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
         },
     },
 };

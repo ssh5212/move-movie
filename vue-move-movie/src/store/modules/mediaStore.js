@@ -1,10 +1,10 @@
-import { sidoList, gugunList, getMediaList } from '@/api/media.js';
+import { sidoList, gugunList, getMediaList } from "@/api/media.js";
 
 const mediaStore = {
     namespaced: true,
     state: {
-        sidos: [{ value: null, text: '선택하세요' }],
-        guguns: [{ value: null, text: '선택하세요' }],
+        sidos: [{ value: null, text: "선택하세요" }],
+        guguns: [{ value: null, text: "선택하세요" }],
         medias: [],
         media: null,
         bucket: [],
@@ -12,10 +12,10 @@ const mediaStore = {
     getters: {},
     mutations: {
         CLEAR_SIDO_LIST(state) {
-            state.sidos = [{ value: null, text: '선택하세요' }];
+            state.sidos = [{ value: null, text: "선택하세요" }];
         },
         CLEAR_GUGUN_LIST(state) {
-            state.guguns = [{ value: null, text: '선택하세요' }];
+            state.guguns = [{ value: null, text: "선택하세요" }];
         },
         CLEAR_MEDIA_LIST(state) {
             state.medias = [];
@@ -53,7 +53,7 @@ const mediaStore = {
         getSido: ({ commit }) => {
             sidoList(
                 ({ data }) => {
-                    commit('SET_SIDO_LIST', data);
+                    commit("SET_SIDO_LIST", data);
                 },
                 (error) => {
                     console.log(error);
@@ -65,7 +65,7 @@ const mediaStore = {
             gugunList(
                 params,
                 ({ data }) => {
-                    commit('SET_GUGUN_LIST', data);
+                    commit("SET_GUGUN_LIST", data);
                 },
                 (error) => {
                     console.log(error);
@@ -77,7 +77,7 @@ const mediaStore = {
             getMediaList(
                 params,
                 ({ data }) => {
-                    commit('SET_MEDIA_LIST', data);
+                    commit("SET_MEDIA_LIST", data);
                 },
                 (error) => {
                     console.log(error);
