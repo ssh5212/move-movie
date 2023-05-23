@@ -1,10 +1,10 @@
-import { sidoList, gugunList, getMediaList } from "@/api/media.js";
+import { sidoList, gugunList, getMediaList } from '@/api/media.js';
 
 const mediaStore = {
     namespaced: true,
     state: {
-        sidos: [{ value: null, text: "선택하세요" }],
-        guguns: [{ value: null, text: "선택하세요" }],
+        sidos: [{ value: null, text: '선택하세요' }],
+        guguns: [{ value: null, text: '선택하세요' }],
         medias: [],
         media: null,
         bucket: [],
@@ -12,14 +12,17 @@ const mediaStore = {
     getters: {},
     mutations: {
         CLEAR_SIDO_LIST(state) {
-            state.sidos = [{ value: null, text: "선택하세요" }];
+            state.sidos = [{ value: null, text: '선택하세요' }];
         },
         CLEAR_GUGUN_LIST(state) {
-            state.guguns = [{ value: null, text: "선택하세요" }];
+            state.guguns = [{ value: null, text: '선택하세요' }];
         },
         CLEAR_MEDIA_LIST(state) {
             state.medias = [];
             state.media = null;
+        },
+        CLEAR_BUCKET_LIST(state) {
+            state.bucket = [];
         },
         SET_SIDO_LIST(state, s) {
             console.log(s);
@@ -47,7 +50,7 @@ const mediaStore = {
         getSido: ({ commit }) => {
             sidoList(
                 ({ data }) => {
-                    commit("SET_SIDO_LIST", data);
+                    commit('SET_SIDO_LIST', data);
                 },
                 (error) => {
                     console.log(error);
@@ -60,7 +63,7 @@ const mediaStore = {
             gugunList(
                 params,
                 ({ data }) => {
-                    commit("SET_GUGUN_LIST", data);
+                    commit('SET_GUGUN_LIST', data);
                 },
                 (error) => {
                     console.log(error);
@@ -69,16 +72,16 @@ const mediaStore = {
         },
         getMediaList: ({ commit }, gugunCode) => {
             const params = gugunCode;
-            console.log("겟 미디어 리스트 도착" + gugunCode);
+            console.log('겟 미디어 리스트 도착' + gugunCode);
             getMediaList(
                 params,
                 ({ data }) => {
-                    console.log("inner" + gugunCode);
-                    commit("SET_MEDIA_LIST", data);
+                    console.log('inner' + gugunCode);
+                    commit('SET_MEDIA_LIST', data);
                 },
                 (error) => {
                     console.log(error);
-                    console.log("inner error" + gugunCode);
+                    console.log('inner error' + gugunCode);
                 }
             );
         },

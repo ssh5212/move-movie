@@ -1,20 +1,39 @@
-# General
-.DS_Store
-node_modules/
+# Eclipse
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
 
-# Vue.js
-/dist/
-npm-debug.log*
-yarn-error.log*
-yarn.lock
-
-# Spring Boot
-/target/
-.classpath
-# IDE-specific
+# IntelliJ IDEA
 .idea/
-.vscode/
 
 # Maven
-mvnw
-mvnw.cmd
+APIServerMoveMovie/target/
+
+# Spring Boot
+APIServerMoveMovie/*.log
+APIServerMoveMovie/logs/
+APIServerMoveMovie/spring-boot-starter-data-rest/
+
+# Vue
+/dist/
+/node_modules/
+
+# Compiled files
+*.class
+*.war
+*.jar
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+
+backend/external
