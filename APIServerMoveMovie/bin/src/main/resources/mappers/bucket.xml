@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.mm.model.mapper.BucketMapper">
+	<!-- public List<BucketDto> all_bucket();
+	public List<BucketDto> bucket_spot_pk(int spot_pk);
+	
+	public void bucket_heart_plus(int bucket_pk);
+	public void bucket_create(BucketDto bucketDto);
+	public void bucket_delete(int bucket_pk); -->
+	
+	<!-- public List<BucketDto> all_bucket(); -->
+	<select id="all_bucket" resultType="BucketDto">
+		select * from bucket;
+	</select>
+	
+	<!-- public List<BucketDto> bucket_spot_pk(int spot_pk); -->
+	<select id="bucket_spot_pk" resultType="BucketDto">
+		SELECT b.*
+		FROM bucket b
+		JOIN bucket_detail_list bdl ON b.bucket_pk = bdl.bucket_pk
+		JOIN spot s ON bdl.spot_pk = s.spot_pk
+		WHERE s.spot_pk = #{spot_pk}
+	</select>
+	
+	<!-- public List<BucketDto> bucket_order_heart(); -->
+	<select id="bucket_order_heart" resultType="BucketDto">
+		select * from bucket order by bucket_heart desc;
+	</select>
+	
+	<!-- public void bucket_heart_plus(int bucket_pk); -->
+	<update id="bucket_heart_plus">
+		update bucket set bucket_heart = bucket_heart + 1 where bucket_pk = #{bucket_pk};
+	</update>
+	
+	<!-- public void bucket_create(BucketDto bucketDto); -->
+	<insert id="bucket_create" useGeneratedKeys="true" keyProperty="bucket_pk" keyColumn="bucket_pk">
+		insert into 
+		bucket(bucket_title, bucket_content, user_pk) 
+		values(#{bucket_title}, #{bucket_content}, #{user_pk});
+	</insert>
+<!-- 	<insert id="insertPlan" useGeneratedKeys="true" keyProperty="planId" keyColumn="plan_id">
+        INSERT INTO plan (user_id, title, created_at)
+          VALUES (#{userId}, #{title}, NOW())
+    </insert> -->
+	
+	<!--  public void bucket_delete(int bucket_pk); -->
+	<delete id="bucket_delete">
+		delete from bucket where bucket_pk = #{bucket_pk};
+	</delete>
+	
+</mapper>
