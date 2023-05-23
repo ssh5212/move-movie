@@ -151,6 +151,7 @@
 
 <script>
 import axios from "axios";
+import FormData from "form-data";
 import { mapActions } from "vuex";
 const userStore = "userStore";
 
@@ -197,8 +198,6 @@ export default {
                 });
         },
         test() {
-            const axios = require("axios");
-            const FormData = require("form-data");
             // const fs = require("fs");
 
             // 파일 경로
@@ -207,19 +206,23 @@ export default {
             const data = new FormData();
 
             // 사용자 정보를 JSON 형태로 추가
-            data.append("UserDto", JSON.stringify(this.userDto), {
-                contentType: "application/json",
-            });
+            const jsonString = JSON.stringify(this.user);
+            const blob = new Blob([jsonString], { type: "application/json" });
+            data.append("UserDto", blob);
+            // data.append("UserDto", JSON.stringify(this.userDto), {
+            //     contentType: "application/json",
+            // });
+            // data.append("UserDto", this.user);
 
             // 파일을 스트림으로 읽어 추가
             data.append("file", this.file);
-
+            console.log("123");
             const config = {
                 method: "post",
                 maxBodyLength: Infinity,
                 url: "http://localhost:9003/movemovie/user",
                 headers: {
-                    ...data.getHeaders(),
+                    "Content-Type": "multipart/form-data",
                 },
                 data: data,
             };
