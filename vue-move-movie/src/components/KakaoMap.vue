@@ -19,23 +19,14 @@ export default {
         mediaSpotList: [],
     },
     watch: {
-        // mediaSpotList() {
-        //     console.log("충전소", this.mediaSpotList);
-        //     this.positions = [];
-        //     this.mediaSpotList.forEach((mediaSpot) => {
-        //         console.log("----------");
-        //         console.log(mediaSpot);
-        //         console.log("----------");
-        //         console.log(window.kakao.maps);
-        //         let obj = {};
-        //         obj.title = mediaSpot.spot_name;
-        //         obj.latlng = new kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
-        //         console.log("========obj");
-        //         console.log(obj);
-        //         this.positions.push(obj);
-        //     });
-        //     this.loadMaker();
-        // },
+        mediaSpotList: {
+            immediate: true,
+            handler() {
+                if (this.mediaSpotList.length != 0) {
+                    this.makeMediaSpotList();
+                }
+            },
+        },
     },
     created() {},
     mounted() {
@@ -65,7 +56,6 @@ export default {
             };
 
             this.map = new window.kakao.maps.Map(container, options);
-            this.makeMediaSpotList();
             // this.loadMaker();
         },
 
@@ -73,9 +63,15 @@ export default {
             console.log("충전소", this.mediaSpotList);
             this.positions = [];
             this.mediaSpotList.forEach((mediaSpot) => {
+                // console.log("----------");
+                // console.log(mediaSpot);
+                // console.log("----------");
+                console.log(window.kakao.maps);
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
                 obj.latlng = new kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
+                // console.log("========obj");
+                // console.log(obj);
 
                 this.positions.push(obj);
             });
@@ -117,7 +113,7 @@ export default {
             // console.log("마커 싹 지우자!!!", this.markers.length);
             if (this.markers.length > 0) {
                 this.markers.forEach((item) => {
-                    // console.log(item);
+                    console.log(item);
                     item.setMap(null);
                 });
             }

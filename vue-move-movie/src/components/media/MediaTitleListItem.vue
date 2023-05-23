@@ -1,6 +1,6 @@
 <template>
     <!-- 영화 1 -->
-    <div class="col-md-3 my-4 position-relative media-item">
+    <div class="col-md-4 col-lg-3 my-4 position-relative media-item">
         <div class="card bg-dark text-white img-bg-dark">
             <div>
                 <img :src="this.mediaTitle.stlls || require('@/assets/img/no_img.png')" class="card-img" name="1" @click="moveSpotList" />
