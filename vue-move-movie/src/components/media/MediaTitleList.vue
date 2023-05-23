@@ -57,6 +57,7 @@ export default {
             actor: "", // 배우 검색 시
             keyword: "", // 키워드 검색 시
             listCount: 50,
+            sort: "prodYear,1",
         };
     },
     created() {
