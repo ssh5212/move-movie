@@ -15,7 +15,9 @@ public interface BucketMapper {
 
 	// 하트가 많은순
 	public List<BucketDto> bucket_order_heart();
-
+	
+	public BucketDto bucket_one(int bucket_pk);
+	
 	// 하트 추가
 	public void bucket_heart_plus(int bucket_pk);
 	

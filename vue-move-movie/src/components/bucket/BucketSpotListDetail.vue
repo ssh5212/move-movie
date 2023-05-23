@@ -36,6 +36,7 @@
               v-for="(spot, index) in spots"
               :key="index"
               :spot_pk="spot.spot_pk"
+              :user_pk="bucket.user_pk"
             ></bucket-spot-list-detail-item>
           </div>
         </div>
@@ -58,6 +59,7 @@
 import { bucketListBybucketpk } from "@/api/bucketList.js";
 import BucketSpotListDetailItem from "@/components/bucket/BucketSpotListDetailItem.vue";
 import { spotByspotpk } from "@/api/spot.js";
+import { bucketBybucketpk } from "@/api/bucket.js";
 // import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
@@ -74,10 +76,16 @@ export default {
       positions: [],
       markers: [],
       map: null,
+      bucket: null,
     };
   },
   created() {
+    bucketBybucketpk(this.$route.params.no, ({ data }) => {
+      this.bucket = data.Bucket;
+    });
+
     bucketListBybucketpk(this.$route.params.no, ({ data }) => {
+      console.log(data);
       this.spots = data.BucketDetailList;
       this.spots.forEach((spot) => {
         spotByspotpk(spot.spot_pk, ({ data }) => {
@@ -85,6 +93,7 @@ export default {
         });
       });
     });
+
     this.content = this.$route.query.content;
   },
   mounted() {

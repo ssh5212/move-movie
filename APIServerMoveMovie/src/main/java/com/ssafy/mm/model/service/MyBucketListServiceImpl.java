@@ -1,5 +1,6 @@
 package com.ssafy.mm.model.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -32,13 +33,18 @@ public class MyBucketListServiceImpl implements MyBucketListService {
 	}
 
 	@Override
-	public void updateChecked(int user_pk, int spot_pk, int bucket_pk, int checked) throws Exception {
-		mapper.updateChecked(user_pk, spot_pk, bucket_pk, checked);
+	public void updateChecked(int user_pk, int spot_pk, int checked) throws Exception {
+		mapper.updateChecked(user_pk, spot_pk, checked);
 	}
 
 	@Override
 	public void delete(int user_pk, int spot_pk, int bucket_pk) throws Exception {
 		mapper.delete(user_pk, spot_pk, bucket_pk);
+	}
+
+	@Override
+	public my_bucket_list_DTO selectcheck(int user_pk, int spot_pk) throws SQLException {
+		return mapper.selectcheck(user_pk, spot_pk).get(0);
 	}
 
 }

@@ -22,7 +22,8 @@ public interface BucketService {
 	public void bucket_create(Request_bucket_create_DTO bucket_info) throws Exception;
 
 	public void bucket_delete(int bucket_pk) throws Exception;
-
+	
+	public BucketDto bucket_one(int bucket_pk) throws Exception;
 	// 아직 구현 x
 //	public void bucket_modify(Map<String, String> map);
 }

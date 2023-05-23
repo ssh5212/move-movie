@@ -149,4 +149,24 @@ public class BucketController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	// bucket_pk
+		@GetMapping("/bucket/{bucket_pk}")
+		public ResponseEntity<Map<String, Object>> bucket_pk(@PathVariable("bucket_pk") int bucket_pk) {
+			Map<String, Object> resultMap = new HashMap<>();
+			HttpStatus status = null;
+
+			try {
+				BucketDto dto = bucketService.bucket_one(bucket_pk);
+				resultMap.put("Bucket", dto);
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.OK;
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				resultMap.put("message", FAIL);
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+
+			return new ResponseEntity<Map<String, Object>>(resultMap, status);
+		}
 }

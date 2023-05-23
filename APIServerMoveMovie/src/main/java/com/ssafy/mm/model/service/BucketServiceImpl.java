@@ -86,4 +86,9 @@ public class BucketServiceImpl implements BucketService {
 		bucketMapper.bucket_delete(bucket_pk);
 	}
 
+	@Override
+	public BucketDto bucket_one(int bucket_pk) throws Exception {
+		return bucketMapper.bucket_one(bucket_pk);
+	}
+
 }

@@ -7,6 +7,11 @@ async function bucketListAll(params, success, fail) {
     await api.get('/bucket/all').then(success).catch(fail);
 }
 
+// http://localhost:9003/movemovie/bucket/bucket/1
+async function bucketBybucketpk(params, success, fail) {
+    await api.get(`/bucket/bucket/${params}`).then(success).catch(fail);
+}
+
 // spot이 포함된 버킷리스트를 가져옴  : spot_pk
 async function bucketListSpot(params, success, fail) {
     await api.get('/bucket', { params: params }).then(success).catch(fail);
@@ -32,7 +37,7 @@ async function bucketDelete(params, success, fail) {
     await api.delete(`/bucket/${params}`).then(success).catch(fail);
 }
 
-export { bucketListAll, bucketListSpot, bucketHeartPlus, bucketListheart, bucketCreate, bucketDelete };
+export { bucketListAll, bucketListSpot, bucketHeartPlus, bucketListheart, bucketCreate, bucketDelete, bucketBybucketpk };
 
 // async function mediaList(params, success, fail) {
 //     await api.get(``, { params: params }).then(success).catch(fail);
