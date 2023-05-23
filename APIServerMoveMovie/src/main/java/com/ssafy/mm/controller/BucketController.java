@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.mm.model.BucketDto;
 import com.ssafy.mm.model.Request_bucket_create_DTO;
 import com.ssafy.mm.model.service.BucketService;
-import com.ssafy.mm.model.service.JwtServiceImpl;
 
 @RestController
 @RequestMapping("/bucket")
