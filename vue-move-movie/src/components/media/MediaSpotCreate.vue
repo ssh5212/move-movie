@@ -14,7 +14,6 @@
 
         <div class="container">
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <form class="needs-validation" novalidate>
                         <div class="mb-3">
@@ -32,7 +31,7 @@
                             <input type="text" class="form-control" id="spot_scene_desc" placeholder="" v-model="spot.spot_scene_desc" />
                         </div>
 
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="spot_lat">spot_lat</label>
                             <input type="text" class="form-control" id="spot_lat" placeholder="" v-model="spot.spot_lat" />
                         </div>
@@ -40,16 +39,16 @@
                         <div class="mb-3">
                             <label for="spot_lon">spot_lon</label>
                             <input type="text" class="form-control" id="spot_lon" placeholder="" v-model="spot.spot_lon" />
-                        </div>
+                        </div> -->
 
                         <div class="mb-3">
                             <label for="spot_road_address">spot_address</label>
-                            <input type="text" class="form-control" id="spot_road_address" placeholder="" v-model="spot.spot_address" />
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="대전광역시 유성구 동서대로 125" v-model="spot.spot_address" />
                         </div>
 
                         <div class="mb-3">
                             <label for="spot_road_address">spot_road_address</label>
-                            <input type="text" class="form-control" id="spot_road_address" placeholder="" v-model="spot.spot_road_address" />
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="대전광역시 유성구 동서대로 125" v-model="spot.spot_road_address" />
                         </div>
 
                         <div class="mb-3">
@@ -93,21 +92,46 @@ export default {
             },
             Address: String,
             selectedImage: Object,
+            apiURL: 'https://dapi.kakao.com/v2/local/search/address.json',
+            query: '',
+            apiKey: '',
         };
     },
     created() {
         console.log(this.$route.params.spot);
         console.log(this.$route.params.spot.title);
         this.spot.spot_movie_title = this.$route.params.spot.title;
+        this.apiKey = process.env.VUE_APP_KAKAO_MAP_API_KEY2;
     },
+
     methods: {
         spotRegister() {
-            const params = this.spot;
-            register(params, ({ data }) => {
-                console.log(data);
-            });
+            const requestURL = `${this.apiURL}?query=${this.spot.spot_address}`;
+            console.log(requestURL);
+            console.log(process.env.VUE_APP_KAKAO_MAP_API_KEY2);
+            const headers = {
+                Authorization: `KakaoAK ${process.env.VUE_APP_KAKAO_MAP_API_KEY2}`,
+            };
 
-            this.moveMedia();
+            fetch(requestURL, { headers })
+                .then(response => response.json())
+                .then(data => {
+                    // 데이터 처리 로직을 작성하세요
+                    console.log(data.documents[0].address.x);
+                    console.log(data.documents[0].address.y);
+                    this.spot_lat = data.documents[0].address.x;
+                    this.spot_lon = data.documents[0].address.y;
+
+                    const params = this.spot;
+                    register(params, ({ data }) => {
+                        console.log(data);
+                    });
+
+                    this.moveMedia();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         },
         moveMedia() {
             // this.$router.push({ name: 'home' });
