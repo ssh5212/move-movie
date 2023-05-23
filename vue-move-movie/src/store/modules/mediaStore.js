@@ -74,26 +74,13 @@ const mediaStore = {
         },
         getMediaList: ({ commit }, gugunCode) => {
             const params = gugunCode;
-<<<<<<< HEAD
-            console.log('겟 미디어 리스트 도착' + gugunCode);
             getMediaList(
                 params,
                 ({ data }) => {
-                    console.log('inner' + gugunCode);
                     commit('SET_MEDIA_LIST', data);
                 },
                 (error) => {
                     console.log(error);
-                    console.log('inner error' + gugunCode);
-=======
-            getMediaList(
-                params,
-                ({ data }) => {
-                    commit("SET_MEDIA_LIST", data);
-                },
-                (error) => {
-                    console.log(error);
->>>>>>> 0a4c23d7464140e14997fb98d084207bf63831f6
                 }
             );
         },
