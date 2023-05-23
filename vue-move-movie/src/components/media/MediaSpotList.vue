@@ -98,8 +98,6 @@ export default {
             spotList(params, ({ data }) => {
                 // console.log(data[1]);
                 this.mediaSpotList = data.spots;
-                console.log("++++++++++++++++++++++");
-                console.log(this.mediaSpotList);
             });
         },
 
@@ -114,7 +112,6 @@ export default {
                 params,
                 ({ data }) => {
                     const resultData = data["Data"][0]["Result"][0];
-                    console.log(resultData);
 
                     // resultData.forEach((e) => {
                     this.mediaTitle = {
@@ -127,7 +124,6 @@ export default {
                         genre: resultData.genre,
                     };
                     // this.mediaTitleList.push(this.mediaTitle);
-                    console.log(this.mediaTitle);
                     // });
                 },
                 (error) => {

@@ -20,15 +20,16 @@
                     <h3 class="pb-2">작중 스팟 장면</h3>
                     <img src="https://via.placeholder.com/1920x1080" alt="..." style="width: 100%" />
 
-                    <h4 class="pt-4 pb-3">[건축학개론] 남주와 여주가 만나서 엘렐레</h4>
-                    <p class="mb-2 text-left">주소 : 사랑시 고백구 행복동</p>
-                    <p class="mb-2 text-left">스팟 등록자 : 연예인원영</p>
+                    <h4 class="pt-4 pb-3">{{ mediaSpot.spot_name }}</h4>
+                    <p class="mb-2 text-left">촬영 영화 : {{ mediaSpot.spot_movie_title }}</p>
+                    <p class="mb-2 text-left">주소 : {{ mediaSpot.spot_address }}</p>
                     <p class="text-left">스팟 소개 : 영화 중반부에 남주와 여주가 함께 걸어가는 장면입니다.</p>
+                    <!-- <p class="mb-2 text-left">스팟 등록자 : 연예인원영</p> -->
 
                     <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveSpotCreate">내 사진 올리기</button>
                     <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveRelationBucket">스폿 관련 버킷 리스트 보기</button>
 
-                    <b-icon-basket2-fill id="b-icon" class="h2 col-md-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-basket2-fill>
+                    <b-icon-basket2-fill id="b-icon" class="h2 col-md-1 m-0 bucket-btn" @click="addThisSpot"></b-icon-basket2-fill>
                 </div>
                 <!-- [E] Movie -->
 
@@ -57,10 +58,17 @@
 
 <script>
 import MediaSpotDetailItem from "@/components/media/MediaSpotDetailItem.vue";
+import { mapState, mapMutations } from "vuex";
+const mediaStore = "mediaStore";
 
 export default {
     name: "MediaSpotDetail",
     components: { MediaSpotDetailItem },
+
+    computed: {
+        ...mapState(mediaStore, ["bucket", "media"]),
+    },
+
     data() {
         return {
             spotInstanceList: [],
@@ -70,23 +78,7 @@ export default {
     },
 
     created() {
-        this.mediaSpot = {
-            spot_pk: 77,
-            spot_name: "b",
-            spot_scene_desc: "c",
-            spot_img_src: "https://placekitten.com/192/108",
-            spot_lat: 11,
-            spot_lon: 22,
-            spot_address: "ㅍㅍㅍ",
-            spot_road_address: "b",
-            spot_characters: "b",
-            spot_movie_title: "b",
-            spot_filming_seq: "b",
-            user_pk: 77,
-            sido_code: "b",
-            gugun_code: "b",
-        };
-
+        this.mediaSpot = this.media;
         this.spotInstance = {
             spot_instance_pk: 66,
             spot_instance_title: "c",
@@ -97,8 +89,6 @@ export default {
             spot_pk: 66,
             user_pk: 66,
         };
-        this.spotInstanceList.push(this.spotInstance);
-        this.spotInstanceList.push(this.spotInstance);
         this.spotInstanceList.push(this.spotInstance);
     },
 
@@ -114,6 +104,8 @@ export default {
     },
 
     methods: {
+        ...mapMutations(mediaStore, ["SET_MEDIA"]),
+
         //api 불러오기
         loadScript() {
             const script = document.createElement("script");
@@ -123,6 +115,22 @@ export default {
             };
 
             document.head.appendChild(script);
+        },
+        addThisSpot() {
+            // bucket이 비어 있는 경우
+            if (this.bucket.length == 0) {
+                this.bucket.push(this.mediaSpot);
+            } else {
+                let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
+                this.bucket.forEach((b) => {
+                    if (b.spot_pk == this.mediaSpot.spot_pk) {
+                        isok = 0;
+                    }
+                });
+                if (isok == 1) {
+                    this.bucket.push(this.mediaSpot);
+                }
+            }
         },
 
         //맵 출력하기
@@ -153,4 +161,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.bucket-btn:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+    cursor: pointer;
+}
+</style>
