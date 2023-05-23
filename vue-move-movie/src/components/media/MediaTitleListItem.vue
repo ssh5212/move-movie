@@ -35,6 +35,34 @@ export default {
 </script>
 
 <style>
+.img-bg-dark {
+    filter: brightness(1);
+    transition: 0.5s;
+}
+
+.img-bg-dark:hover {
+    filter: brightness(0.6);
+    cursor: pointer;
+}
+.card-overlay {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 1);
+    width: 200px;
+}
+
+.card-text {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.img-bg-dark:hover + .card-overlay .card-text {
+    opacity: 1;
+}
+
 .hide-overflow {
     overflow: hidden;
     display: -webkit-box;
