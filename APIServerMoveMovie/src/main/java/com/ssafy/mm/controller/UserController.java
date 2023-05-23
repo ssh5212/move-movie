@@ -1,6 +1,8 @@
 package com.ssafy.mm.controller;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,15 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.mm.model.UserDto;
 import com.ssafy.mm.model.service.JwtServiceImpl;
@@ -40,6 +45,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+    @Value("${file.Path.profile}")
+    private String uploadPath;
+    
 	//로그인
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(
@@ -148,15 +156,27 @@ public class UserController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
-	@PostMapping("/register")
-	public ResponseEntity<?> register(@RequestBody UserDto userdto){
+//	@RequestBody UserDto UserDto,  @RequestParam("file") MultipartFile file
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	public ResponseEntity<?> register(@RequestPart(name="UserDto") UserDto userDto,  @RequestPart(name = "file" , required = false) MultipartFile file){
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
+		String filePath = "";
+		//이미지 파일 local에 저장하기
+        try {
+        	filePath = uploadPath + File.separator + file.getOriginalFilename();
+        	File dest = new File(filePath);
+			file.transferTo(dest);
+			System.out.println(filePath);
+			logger.debug("File uploaded successfully: {}", file.getOriginalFilename());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 		
-		System.out.println(userdto);
+		System.out.println(userDto);
+		userDto.setUser_profile_img_src(filePath);
 		try {
-			userService.register(userdto);
+			userService.register(userDto);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
@@ -168,6 +188,8 @@ public class UserController {
 		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	
 	
 	// 수정
 	@PostMapping("/edit")
