@@ -41,14 +41,18 @@
                                     <p class="card-text-left"><b>키워드</b> : {{ mediaTitle.keywords }}</p>
                                     <p class="card-text-left"><b>상세</b> : <a :href="mediaTitle.kmdbUrl">KMDB 홈페이지</a></p>
                                 </div>
+
+                                <!-- <button class="btn btn-dark m-2 mb-4 col-md-5 col-11 mb-3" variant="primary" @click="moveRelationBucket">스폿 관련 버킷 리스트 보기</button> -->
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-dark my-3" style="width: 100%" variant="primary" @click="moveSpotCreate">스팟 생성하기</button>
                 </div>
                 <!-- [E] Movie -->
             </div>
 
-            <hr class="mb-4" />
+            <hr class="mb-5" />
+
             <!-- 상세 스팟 -->
             <MediaSpotListItem v-for="(mediaSpot, index) in mediaSpotList" :key="index" :mediaSpot="mediaSpot"></MediaSpotListItem>
         </div>
@@ -57,12 +61,12 @@
 </template>
 
 <script>
-import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
-import { mediaList, spotList } from "@/api/media.js";
-import KakaoMap from "@/components/KakaoMap.vue";
+import MediaSpotListItem from '@/components/media/MediaSpotListItem.vue';
+import { mediaList, spotList } from '@/api/media.js';
+import KakaoMap from '@/components/KakaoMap.vue';
 
 export default {
-    name: "MediaSpotList",
+    name: 'MediaSpotList',
     components: { MediaSpotListItem, KakaoMap },
     data() {
         return {
@@ -111,25 +115,31 @@ export default {
             mediaList(
                 params,
                 ({ data }) => {
-                    const resultData = data["Data"][0]["Result"][0];
+                    const resultData = data['Data'][0]['Result'][0];
 
                     // resultData.forEach((e) => {
                     this.mediaTitle = {
-                        title: resultData.title.replace(/!HS |!HE /g, "").trim(),
+                        title: resultData.title.replace(/!HS |!HE /g, '').trim(),
                         kmdbUrl: resultData.kmdbUrl,
                         prodYear: resultData.prodYear, // 제작년도
                         // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
                         keywords: resultData.keywords,
-                        stills: resultData.posters.split("|")[0],
+                        stills: resultData.posters.split('|')[0],
                         genre: resultData.genre,
                     };
                     // this.mediaTitleList.push(this.mediaTitle);
                     // });
                 },
-                (error) => {
+                error => {
                     console.log(error);
                 }
             );
+        },
+        moveSpotCreate() {
+            this.$router.push({
+                name: 'spotCreate',
+                params: { spot: this.mediaTitle },
+            });
         },
 
         // //api 불러오기

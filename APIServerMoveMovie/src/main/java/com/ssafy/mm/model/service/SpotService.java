@@ -18,5 +18,6 @@ public interface SpotService {
 	public List<SidoGugunCodeDto> getGugun(String sido) throws Exception;
 	public SpotDto spotOne(int spot_pk) throws Exception;
 	public List<SpotInstanceDto> getSpotInstance(int spotNum) throws Exception;
+	public void register(SpotDto spotDto) throws Exception;
 
 }

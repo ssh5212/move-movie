@@ -21,4 +21,5 @@ public interface SpotMapper {
 	public List<SidoGugunCodeDto> getGugun(String sido) throws SQLException;
 	public SpotDto spotOne(int spot_pk) throws SQLException;
 	public List<SpotInstanceDto> getSpotInstance(int spotNum) throws SQLException;
+	public void register(SpotDto spotDto) throws SQLException;
 }
