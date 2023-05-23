@@ -1,10 +1,15 @@
 <template>
-    <div>
-        <!-- [S] Intro Image -->
-        <div class="jb-box">
-            <div class="top-img">
-                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
-            </div>
+  <div>
+    <!-- [S] Intro Image -->
+    <div class="jb-box">
+      <div class="top-img">
+        <img
+          src="@/assets/img/intro-half-img01.jpg"
+          alt=""
+          width="1920"
+          height="auto"
+        />
+      </div>
 
       <div class="jc-text">
         <p class="vtext-big">title</p>
@@ -34,40 +39,53 @@
               :user_pk="bucket.user_pk"
             ></bucket-spot-list-detail-item>
           </div>
-            <div class="jc-text">
-                <p class="vtext-big">title</p>
-            </div>
+          <div class="jc-text">
+            <p class="vtext-big">title</p>
+          </div>
         </div>
         <!-- [E] Intro Image -->
 
         <!-- [S] body -->
         <div class="container mt-5">
-            <!-- 실제 내용 -->
-            <!-- button -->
-            <div class="row justify-content-xl-end">
-                <b-button class="mr-2">나의 버킷으로 등록하기</b-button>
+          <!-- 실제 내용 -->
+          <!-- button -->
+          <div class="row justify-content-xl-end">
+            <b-button class="mr-2">나의 버킷으로 등록하기</b-button>
+          </div>
+          <div style="background-color: #ced0c3">
+            <!-- list -->
+            <div class="mt-5">
+              <div
+                class="row justify-content-xl-center m-0"
+                style="background-color: #4b6a70"
+              >
+                <!-- detailitem.vue로 빼야함 -->
+                <bucket-spot-list-detail-item
+                  v-for="(spot, index) in spots"
+                  :key="index"
+                  :spot_pk="spot.spot_pk"
+                ></bucket-spot-list-detail-item>
+              </div>
             </div>
-            <div style="background-color: #ced0c3">
-                <!-- list -->
-                <div class="mt-5">
-                    <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
-                        <!-- detailitem.vue로 빼야함 -->
-                        <bucket-spot-list-detail-item v-for="(spot, index) in spots" :key="index" :spot_pk="spot.spot_pk"></bucket-spot-list-detail-item>
-                    </div>
-                </div>
-                <!-- [S] map -->
-                <div class="container mt-5">
-                    <div id="map" class="mt-3" style="width: 100%; height: 400px"></div>
-                </div>
-                <!-- [E] map -->
-                <!--  content -->
-                <div class="mt-5 mb-5">
-                    {{ content }}
-                </div>
+            <!-- [S] map -->
+            <div class="container mt-5">
+              <div
+                id="map"
+                class="mt-3"
+                style="width: 100%; height: 400px"
+              ></div>
             </div>
+            <!-- [E] map -->
+            <!--  content -->
+            <div class="mt-5 mb-5">
+              {{ content }}
+            </div>
+          </div>
         </div>
         <!-- [E] body -->
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
