@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.mm.model.SidoGugunCodeDto;
 import com.ssafy.mm.model.SpotDto;
+import com.ssafy.mm.model.SpotInstanceDto;
 
 @Mapper
 public interface SpotMapper {
@@ -19,4 +20,5 @@ public interface SpotMapper {
 	public List<SidoGugunCodeDto> getSido() throws SQLException;
 	public List<SidoGugunCodeDto> getGugun(String sido) throws SQLException;
 	public SpotDto spotOne(int spot_pk) throws SQLException;
+	public List<SpotInstanceDto> getSpotInstance(int spotNum) throws SQLException;
 }

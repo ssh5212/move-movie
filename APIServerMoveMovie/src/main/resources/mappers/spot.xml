@@ -45,4 +45,12 @@
 		select * from spot
 		where spot_pk = #{spot_pk}
 	</select>
+	
+	<select id="getSpotInstance" parameterType="int" resultType="SpotInstanceDto">
+		select * from spot_instance
+		where spot_pk = #{spotNum}
+	</select>
+	
+	
+	
 </mapper>
