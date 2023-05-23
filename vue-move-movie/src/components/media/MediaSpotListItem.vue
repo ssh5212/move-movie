@@ -38,7 +38,7 @@ export default {
     },
 
     computed: {
-        ...mapState(mediaStore, ["bucket"]),
+        ...mapState(mediaStore, ["bucket", "media"]),
     },
 
     created() {
@@ -46,6 +46,7 @@ export default {
     },
     methods: {
         moveSpotDetail() {
+            this.media = this.mediaSpot; // vuex에 데이터 저장
             this.$router.push({
                 name: "spotDetail",
                 params: { no: this.mediaSpot.spot_pk },

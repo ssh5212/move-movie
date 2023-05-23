@@ -22,7 +22,7 @@ const mediaStore = {
             state.media = null;
         },
         SET_SIDO_LIST(state, s) {
-            console.log(s);
+            // console.log(s);
             s.spots.forEach((sido) => {
                 state.sidos.push({ value: sido.sido_code, text: sido.sido_name });
             });
@@ -33,7 +33,7 @@ const mediaStore = {
             });
         },
         SET_MEDIA_LIST(state, m) {
-            console.log(m.spots);
+            // console.log(m.spots);
             // m.spots.forEach((media) => {
             //     state.medias.push(media);
             // });
@@ -69,16 +69,13 @@ const mediaStore = {
         },
         getMediaList: ({ commit }, gugunCode) => {
             const params = gugunCode;
-            console.log("겟 미디어 리스트 도착" + gugunCode);
             getMediaList(
                 params,
                 ({ data }) => {
-                    console.log("inner" + gugunCode);
                     commit("SET_MEDIA_LIST", data);
                 },
                 (error) => {
                     console.log(error);
-                    console.log("inner error" + gugunCode);
                 }
             );
         },

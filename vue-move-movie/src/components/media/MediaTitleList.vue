@@ -78,7 +78,7 @@ export default {
             mediaList(
                 params,
                 ({ data }) => {
-                    console.log(data["Data"][0]["Result"]);
+                    // console.log(data["Data"][0]["Result"]);
                     const resultData = data["Data"][0]["Result"];
                     resultData.forEach((e) => {
                         // 성인물 제외
