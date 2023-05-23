@@ -42,6 +42,9 @@ const mediaStore = {
         SET_DETAIL_MEDIA(state, media) {
             state.media = media;
         },
+        SET_MEDIA(state, payload) {
+            state.media = payload;
+        },
     },
     actions: {
         getSido: ({ commit }) => {
@@ -56,7 +59,6 @@ const mediaStore = {
         },
         getGugun: ({ commit }, sidoCode) => {
             const params = sidoCode;
-            console.log(params);
             gugunList(
                 params,
                 ({ data }) => {

@@ -6,8 +6,8 @@
                 <img :src="mediaSpot.spot_img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
             </div>
             <div class="col-md-8">
-                <div class="card-body" @click="moveSpotDetail">
-                    <h4 class="card-title text-left mb-5">{{ mediaSpot.spot_name }}</h4>
+                <div class="card-body">
+                    <h4 class="card-title text-left mb-5" @click="moveSpotDetail">{{ mediaSpot.spot_name }}</h4>
                     <p class="text-left">영화명 : {{ mediaSpot.spot_movie_title }}</p>
                     <p class="text-left">주소 : {{ mediaSpot.spot_address }}</p>
                     <!-- <p class="card-text-left">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 const mediaStore = "mediaStore";
 export default {
     name: "MediaSpotListItem",
@@ -38,15 +38,18 @@ export default {
     },
 
     computed: {
-        ...mapState(mediaStore, ["bucket", "media"]),
+        ...mapState(mediaStore, ["bucket"]),
     },
 
-    created() {
-        console.log(this.mediaSpot);
-    },
+    created() {},
     methods: {
+        ...mapMutations(mediaStore, ["SET_MEDIA"]),
         moveSpotDetail() {
-            this.media = this.mediaSpot; // vuex에 데이터 저장
+            console.log("====moveSpotDetail");
+            this.SET_MEDIA(this.mediaSpot); // mediaStore의 media 상태 업데이트
+            console.log(this.$store.state.mediaStore.media); // mediaStore의 media 상태 확인
+            console.log("===");
+
             this.$router.push({
                 name: "spotDetail",
                 params: { no: this.mediaSpot.spot_pk },
@@ -67,7 +70,6 @@ export default {
                     this.bucket.push(this.mediaSpot);
                 }
             }
-            console.log(this.bucket);
         },
     },
 };
@@ -75,6 +77,10 @@ export default {
 
 <style>
 .bucket-btn:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+    cursor: pointer;
+}
+.card-title:hover {
     color: rgba(0, 0, 0, 0.9) !important;
     cursor: pointer;
 }

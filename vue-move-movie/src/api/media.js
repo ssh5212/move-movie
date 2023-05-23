@@ -16,7 +16,6 @@ async function spotDetailList(params, success, fail) {
 }
 
 async function spotLocationList(coordinate, success, fail) {
-    console.log(coordinate);
     await api.post(`/spot/spot_area`, coordinate).then(success).catch(fail);
 }
 
@@ -33,7 +32,6 @@ function mediaLoctionList(params, success, fail) {
 }
 
 async function getMediaList(params, success, fail) {
-    await console.log("Helllo " + params);
     await localApi.get(`/spot/spot_area/${params}`).then(success).catch(fail);
 }
 
