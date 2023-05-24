@@ -106,7 +106,7 @@ export default {
     methods: {
         // 관련 스폿 리스트 가져오기
         searchSpot() {
-            let params = this.title;
+            let params = this.$route.params.title;
 
             spotList(params, ({ data }) => {
                 this.mediaSpotList = data.spots;
