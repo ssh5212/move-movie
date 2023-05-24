@@ -4,16 +4,16 @@
       <img :src="img_src" alt="img" />
       <div>{{ spot.spot_name }}</div>
       <!-- <div v-if="this.checkUserInfo.user_pk == this.$props.user_pk"> -->
-      <div>
+      <!-- <div>
         <input type="checkbox" v-model="isChecked" @change="updatechecked" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import { spotByspotpk } from "@/api/spot.js";
-import { updateCheck, selectCheck } from "@/api/mybucket.js";
+// import { updateCheck, selectCheck } from "@/api/mybucket.js";
 import { mapGetters } from "vuex";
 
 const userStore = "userStore";
@@ -21,7 +21,7 @@ export default {
   name: "BucketSpotListDetailItem",
   props: {
     spot_pk: Number,
-    user_pk: Number,
+    // user_pk: Number,
   },
   components: {},
   data() {
@@ -36,13 +36,13 @@ export default {
     ...mapGetters(userStore, ["checkUserInfo"]),
   },
   created() {
-    let tmp = {
-      user_pk: this.$props.user_pk,
-      spot_pk: this.$props.spot_pk,
-    };
-    selectCheck(tmp, ({ data }) => {
-      this.isChecked = data.spotCheck.checked;
-    });
+    // let tmp = {
+    //   user_pk: this.$props.user_pk,
+    //   spot_pk: this.$props.spot_pk,
+    // };
+    // selectCheck(tmp, ({ data }) => {
+    //   this.isChecked = data.spotCheck.checked;
+    // });
 
     spotByspotpk(this.spot_pk, ({ data }) => {
       this.spot = data.spot;
@@ -52,29 +52,27 @@ export default {
       }
     });
 
-    console.log(this.checkUserInfo);
+    // console.log(this.checkUserInfo);
   },
   methods: {
     //updatechecked
-    updatechecked() {
-      // user_pk, spot_pk, bucket_pk, checked
-      let check = null;
-      if (this.isChecked == false) {
-        check = 0;
-      } else {
-        check = 1;
-      }
-
-      let obj = {
-        bucket_pk: this.bucket_pk,
-        spot_pk: this.$props.spot_pk,
-        ckecked: check,
-      };
-
-      updateCheck(obj, ({ data }) => {
-        console.log(data);
-      });
-    },
+    // updatechecked() {
+    //   // user_pk, spot_pk, bucket_pk, checked
+    //   let check = null;
+    //   if (this.isChecked == false) {
+    //     check = 0;
+    //   } else {
+    //     check = 1;
+    //   }
+    //   let obj = {
+    //     bucket_pk: this.bucket_pk,
+    //     spot_pk: this.$props.spot_pk,
+    //     ckecked: check,
+    //   };
+    //   updateCheck(obj, ({ data }) => {
+    //     console.log(data);
+    //   });
+    // },
   },
 };
 </script>
