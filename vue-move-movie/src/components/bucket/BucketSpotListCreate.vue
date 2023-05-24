@@ -3,7 +3,12 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
+                <img
+                    src="@/assets/img/intro-half-img01.jpg"
+                    alt=""
+                    width="1920"
+                    height="auto"
+                />
             </div>
 
             <div class="jc-text">
@@ -25,23 +30,38 @@
             <div>
                 <!-- list -->
                 <div class="mt-5">
-                    <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
+                    <div
+                        class="row justify-content-xl-center m-0"
+                        style="background-color: #4b6a70"
+                    >
                         <!-- detailitem.vue로 빼야함 -->
-                        <bucket-spot-list-detail-item v-for="(spot, index) in bucket" :key="index" :spot_pk="spot.spot_pk"></bucket-spot-list-detail-item>
+                        <bucket-spot-list-detail-item
+                            v-for="(spot, index) in bucket"
+                            :key="index"
+                            :spot_pk="spot.spot_pk"
+                        ></bucket-spot-list-detail-item>
                     </div>
                 </div>
                 <!-- title -->
                 <div class="mt-5">제목</div>
                 <div class="mb-5">
                     <b-row class="mt-1 justify-content-xl-center">
-                        <b-form-input id="textarea-default" placeholder="Default title" v-model="title"></b-form-input>
+                        <b-form-input
+                            id="textarea-default"
+                            placeholder="Default title"
+                            v-model="title"
+                        ></b-form-input>
                     </b-row>
                 </div>
                 <!--  content -->
                 <div>내용</div>
                 <div class="mb-5">
                     <b-row class="mt-2 justify-content-xl-center">
-                        <b-form-textarea id="textarea-default" placeholder="Default content" v-model="content"></b-form-textarea>
+                        <b-form-textarea
+                            id="textarea-default"
+                            placeholder="Default content"
+                            v-model="content"
+                        ></b-form-textarea>
                     </b-row>
                 </div>
             </div>
@@ -50,28 +70,28 @@
 </template>
 
 <script>
-import BucketSpotListDetailItem from '@/components/bucket/BucketSpotListDetailItem.vue';
-import { mapState, mapMutations } from 'vuex';
-import { bucketCreate } from '@/api/bucket';
+import BucketSpotListDetailItem from "@/components/bucket/BucketSpotListDetailItem.vue";
+import { mapState, mapMutations } from "vuex";
+import { bucketCreate } from "@/api/bucket";
 
-const mediaStore = 'mediaStore';
-const userStore = 'userStore';
+const mediaStore = "mediaStore";
+const userStore = "userStore";
 
 export default {
-    name: 'BucketSpotListCreate',
+    name: "BucketSpotListCreate",
     components: {
         BucketSpotListDetailItem,
     },
     data() {
         return {
-            title: '',
-            content: '',
+            title: "",
+            content: "",
             spot: [],
         };
     },
     computed: {
-        ...mapState(mediaStore, ['bucket']),
-        ...mapState(userStore, ['userInfo']),
+        ...mapState(mediaStore, ["bucket"]),
+        ...mapState(userStore, ["userInfo"]),
     },
     created() {
         console.log(this.bucket);
@@ -79,11 +99,11 @@ export default {
         // 유저 정보 가져오기
     },
     methods: {
-        ...mapMutations(mediaStore, ['CLEAR_BUCKET_LIST']),
+        ...mapMutations(mediaStore, ["CLEAR_BUCKET_LIST"]),
         async register() {
             // 등록 로직
             var spots = [];
-            this.bucket.forEach(data => {
+            this.bucket.forEach((data) => {
                 spots.push({ spot_pk: data.spot_pk });
             });
 
@@ -103,7 +123,7 @@ export default {
                     this.CLEAR_BUCKET_LIST();
                     this.moveList();
                 },
-                error => {
+                (error) => {
                     console.log(error);
                 }
             );
