@@ -37,7 +37,12 @@ async function bucketDelete(params, success, fail) {
     await api.delete(`/bucket/${params}`).then(success).catch(fail);
 }
 
-export { bucketListAll, bucketListSpot, bucketHeartPlus, bucketListheart, bucketCreate, bucketDelete, bucketBybucketpk };
+// http://localhost:9003/movemovie/bucket/byuser/12
+async function bucketByuserpk(params, success, fail) {
+    await api.get(`/bucket/byuser/${params}`).then(success).catch(fail);
+}
+
+export { bucketListAll, bucketListSpot, bucketHeartPlus, bucketListheart, bucketCreate, bucketDelete, bucketBybucketpk, bucketByuserpk };
 
 // async function mediaList(params, success, fail) {
 //     await api.get(``, { params: params }).then(success).catch(fail);

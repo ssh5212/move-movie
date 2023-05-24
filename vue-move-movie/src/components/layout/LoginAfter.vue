@@ -63,80 +63,12 @@
 
         <!-- [function - 필수] 데이터 바인딩 : 버킷 리스트 연결 -->
         <h4 class="mb-3">내 버킷리스트 진행도</h4>
-        <div class="mb-4">
-          <p style="text-align: left; margin-bottom: 5px">리포 따라가기</p>
-          <div class="progress" style="height: 5px">
-            <div
-              class="progress-bar bg-warning"
-              role="progressbar"
-              style="width: 75%"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              height
-            ></div>
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <p style="text-align: left; margin-bottom: 5px">리포 따라가기</p>
-          <div class="progress" style="height: 5px">
-            <div
-              class="progress-bar bg-warning"
-              role="progressbar"
-              style="width: 75%"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              height
-            ></div>
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <p style="text-align: left; margin-bottom: 5px">리포 따라가기</p>
-          <div class="progress" style="height: 5px">
-            <div
-              class="progress-bar bg-warning"
-              role="progressbar"
-              style="width: 75%"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              height
-            ></div>
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <p style="text-align: left; margin-bottom: 5px">리포 따라가기</p>
-          <div class="progress" style="height: 5px">
-            <div
-              class="progress-bar bg-warning"
-              role="progressbar"
-              style="width: 75%"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              height
-            ></div>
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <p style="text-align: left; margin-bottom: 5px">리포 따라가기</p>
-          <div class="progress" style="height: 5px">
-            <div
-              class="progress-bar bg-warning"
-              role="progressbar"
-              style="width: 75%"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              height
-            ></div>
-          </div>
-        </div>
+        <!--  -->
+        <mybucket-progress
+          v-for="(bucket, index) in BucketList"
+          :key="index"
+          :bucket="bucket"
+        />
       </div>
     </b-sidebar>
   </div>
@@ -144,9 +76,16 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import { bucketByuserpk } from "@/api/bucket.js";
+import MybucketProgress from "@/components/bucket/MybucketProgress.vue";
 const userStore = "userStore";
 
+//bucket user_pk
+
 export default {
+  components: {
+    MybucketProgress,
+  },
   methods: {
     ...mapActions(userStore, ["userLogout"]),
     moveMypage() {
@@ -174,15 +113,30 @@ export default {
       ...mapState(userStore, ["userInfo", "isLogin"]),
       variant: "",
       img_src: String,
+      BucketList: [],
     };
   },
   computed: {
-    ...mapGetters(userStore, ["checkUserInfo"]),
+    ...mapGetters(userStore, ["checkUserInfo", "checkTmp"]),
   },
   created() {
     this.img_src =
       process.env.VUE_APP_API_BASE_URL +
       this.checkUserInfo.user_profile_img_src;
+
+    bucketByuserpk(this.checkUserInfo.user_pk, ({ data }) => {
+      console.log(data);
+      this.BucketList = data.BucketList;
+      console.log(this.BucketList.length);
+    });
+  },
+  updated() {
+    // console.log("update!!!!!");
+    // bucketByuserpk(this.checkUserInfo.user_pk, ({ data }) => {
+    //   console.log(data);
+    //   this.BucketList = data.BucketList;
+    //   console.log(this.BucketList.length);
+    // });
   },
 };
 </script>

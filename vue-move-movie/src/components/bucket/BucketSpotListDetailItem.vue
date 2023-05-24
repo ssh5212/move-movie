@@ -20,7 +20,7 @@
 <script>
 import { spotByspotpk } from "@/api/spot.js";
 import { updateCheck, selectCheck } from "@/api/mybucket.js";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 const userStore = "userStore";
 export default {
@@ -50,6 +50,7 @@ export default {
         user_pk: this.checkUserInfo.user_pk,
         spot_pk: this.$props.spot_pk,
       };
+      console.log(tmp);
       selectCheck(tmp, ({ data }) => {
         console.log(data.spotCheck[0].checked);
         if (data.spotCheck[0].checked == 0) {
@@ -74,6 +75,7 @@ export default {
     // console.log(this.checkUserInfo);
   },
   methods: {
+    ...mapMutations("userStore", ["SET_TMP_PLUS"]),
     //updatechecked
     updatechecked() {
       // user_pk, spot_pk, bucket_pk, checked
@@ -86,6 +88,7 @@ export default {
       updateCheck(obj, ({ data }) => {
         console.log(data);
         this.requestChecked = 1 - this.requestChecked;
+        this.SET_TMP_PLUS();
       });
     },
   },
