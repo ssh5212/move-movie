@@ -36,7 +36,7 @@ public class MybucketController {
 		
 		try {
 //			myBucketListService.updateChecked(dto.getUser_pk(), dto.getSpot_pk(), dto.getChecked());
-			myBucketListService.updateChecked(dto.getUser_pk(), dto.getSpot_pk(), dto.getChecked());
+			myBucketListService.updateChecked(dto);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.OK;
 		} catch (Exception e) {
@@ -55,8 +55,29 @@ public class MybucketController {
 		System.out.println(dto);
 		
 		try {
-			List<my_bucket_list_DTO> res = myBucketListService.selectcheck(dto.getUser_pk(), dto.getSpot_pk());			
+			List<my_bucket_list_DTO> res = myBucketListService.selectcheck(dto);			
 			resultMap.put("spotCheck", res);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			resultMap.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+//	selectUserBucket
+	@PostMapping("/selectUserBucket")
+	public ResponseEntity<Map<String, Object>> selectUserBucket(@RequestBody my_bucket_list_DTO dto) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		logger.info(dto.toString());
+		List<my_bucket_list_DTO> list;
+		try {
+			list = myBucketListService.selectUserBucket(dto);
+			resultMap.put("MyBucket", list);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.OK;
 		} catch (Exception e) {

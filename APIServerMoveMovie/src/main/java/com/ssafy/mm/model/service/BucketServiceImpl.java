@@ -91,4 +91,9 @@ public class BucketServiceImpl implements BucketService {
 		return bucketMapper.bucket_one(bucket_pk);
 	}
 
+	@Override
+	public List<BucketDto> bucket_user_pk(int user_pk) throws Exception {
+		return bucketMapper.bucket_user_pk(user_pk);
+	}
+
 }

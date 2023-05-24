@@ -28,13 +28,13 @@ public class MyBucketListServiceImpl implements MyBucketListService {
 	}
 
 	@Override
-	public List<my_bucket_list_DTO> select(int user_pk, int bucket_pk) throws Exception {
-		return mapper.selectUserBucket(user_pk, bucket_pk);
+	public List<my_bucket_list_DTO> selectUserBucket(my_bucket_list_DTO dto) throws Exception {
+		return mapper.selectUserBucket(dto);
 	}
 
 	@Override
-	public void updateChecked(int user_pk, int spot_pk, int checked) throws Exception {
-		mapper.updateChecked(user_pk, spot_pk, checked);
+	public void updateChecked(my_bucket_list_DTO dto) throws Exception {
+		mapper.updateChecked(dto);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class MyBucketListServiceImpl implements MyBucketListService {
 	}
 
 	@Override
-	public List<my_bucket_list_DTO> selectcheck(int user_pk, int spot_pk) throws SQLException {
-		return mapper.selectcheck(user_pk, spot_pk);
+	public List<my_bucket_list_DTO> selectcheck(my_bucket_list_DTO dto) throws SQLException {
+		return mapper.selectcheck(dto);
 	}
 
 }
