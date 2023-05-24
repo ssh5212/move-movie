@@ -10,23 +10,30 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class AddResourceHandler implements WebMvcConfigurer {
 
-	@Value("${file.Path.profile}")
-    private String profileImagePath;
 
 	
 	@Value("${request.Path.profile}")
 	private String profilerequest;
 	
-	@Value("${file.Path.spotfile}")
-    private String spotfileImagePath;
-	
 	@Value("${request.Path.spotfile}")
 	private String spotfilerequest;
 	
+	@Value("${request.Path.spotinst}")
+	private String spotinstrequest;
+	
+	@Value("${file.Path.profile}")
+	private String profileImagePath;
+	
+	@Value("${file.Path.spotfile}")
+    private String spotfileImagePath;
+	
+	@Value("${file.Path.spotinst}")
+    private String spotinstImagePath;
+	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(profilerequest, spotfilerequest)
-                .addResourceLocations("file:///" + profileImagePath + File.separator, "file:///" + spotfileImagePath + File.separator)
+        registry.addResourceHandler(profilerequest, spotfilerequest, spotinstrequest)
+                .addResourceLocations("file:///" + profileImagePath + File.separator, "file:///" + spotfileImagePath + File.separator, "file:///" + spotinstImagePath + File.separator)
                 .setCachePeriod(60 * 10)
                 .resourceChain(true);
     }
