@@ -28,28 +28,39 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-const mediaStore = "mediaStore";
+import { mapState, mapMutations } from 'vuex';
+const mediaStore = 'mediaStore';
 export default {
-    name: "MediaSpotListItem",
+    name: 'MediaSpotListItem',
 
     computed: {
-        ...mapState(mediaStore, ["bucket"]),
+        ...mapState(mediaStore, ['bucket']),
     },
 
     created() {
-        this.img_src = process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
+        console.log('img_src' + this.img_src);
+        if (
+            this.mediaSpot.spot_img_src == '/images/spotfile/' ||
+            this.mediaSpot.spot_img_src == ' ' ||
+            this.mediaSpot.spot_img_src == null ||
+            this.mediaSpot.spot_img_src == `${process.env.VUE_APP_API_BASE_URL}null`
+        ) {
+            this.img_src = '';
+        } else {
+            this.img_src = process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
+        }
+        // console.log('img_src' + this.img_src);
     },
     methods: {
-        ...mapMutations(mediaStore, ["SET_MEDIA"]),
+        ...mapMutations(mediaStore, ['SET_MEDIA']),
         moveSpotDetail() {
-            console.log("====moveSpotDetail");
+            console.log('====moveSpotDetail');
             this.SET_MEDIA(this.mediaSpot); // mediaStore의 media 상태 업데이트
             console.log(this.$store.state.mediaStore.media); // mediaStore의 media 상태 확인
-            console.log("===");
+            console.log('===');
 
             this.$router.push({
-                name: "spotDetail",
+                name: 'spotDetail',
                 params: { no: this.mediaSpot.spot_pk },
             });
         },
@@ -59,7 +70,7 @@ export default {
                 this.bucket.push(this.mediaSpot);
             } else {
                 let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
-                this.bucket.forEach((b) => {
+                this.bucket.forEach(b => {
                     if (b.spot_pk == this.mediaSpot.spot_pk) {
                         isok = 0;
                     }
@@ -72,7 +83,7 @@ export default {
     },
     data() {
         return {
-            img_src: "",
+            img_src: '',
         };
     },
     props: {

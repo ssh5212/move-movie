@@ -46,24 +46,12 @@
 
                         <div class="mb-3">
                             <label for="spot_road_address">spot_address</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="spot_road_address"
-                                placeholder="대전광역시 유성구 동서대로 125"
-                                v-model="spot.spot_address"
-                            />
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="대전광역시 유성구 동서대로 125" v-model="spot.spot_address" />
                         </div>
 
                         <div class="mb-3">
                             <label for="spot_road_address">spot_road_address</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="spot_road_address"
-                                placeholder="대전광역시 유성구 동서대로 125"
-                                v-model="spot.spot_road_address"
-                            />
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="대전광역시 유성구 동서대로 125" v-model="spot.spot_road_address" />
                         </div>
 
                         <div class="mb-3">
@@ -87,56 +75,56 @@
 </template>
 
 <script>
-import axios from "axios";
-import MediaSearchBar from "./MediaSearchBar.vue";
+import axios from 'axios';
+import MediaSearchBar from './MediaSearchBar.vue';
 // import { register } from "@/api/media.js";
-import { mapState } from "vuex";
-const mediaStore = "mediaStore";
+import { mapState } from 'vuex';
+const mediaStore = 'mediaStore';
 
 export default {
-    name: "MediaSpotCreate",
+    name: 'MediaSpotCreate',
     components: { MediaSearchBar },
 
     data() {
         return {
             spot: {
-                spot_name: "",
-                spot_scene_desc: "",
-                spot_img_src: "",
-                spot_lat: "",
-                spot_lon: "",
-                spot_address: "",
-                spot_road_address: "",
-                spot_filming_seq: "",
-                spot_movie_title: "",
-                gugun_code: "",
-                sido_code: "",
+                spot_name: '',
+                spot_scene_desc: '',
+                spot_img_src: '',
+                spot_lat: '',
+                spot_lon: '',
+                spot_address: '',
+                spot_road_address: '',
+                spot_filming_seq: '',
+                spot_movie_title: '',
+                gugun_code: '',
+                sido_code: '',
             },
             Address: String,
             selectedImage: Object,
-            apiURL: "https://dapi.kakao.com/v2/local/search/address.json",
-            query: "",
-            apiKey: "",
+            apiURL: 'https://dapi.kakao.com/v2/local/search/address.json',
+            query: '',
+            apiKey: '',
             file: Object,
         };
     },
     computed: {
-        ...mapState(mediaStore, ["sidos", "guguns", "medias"]),
+        ...mapState(mediaStore, ['sidos', 'guguns', 'medias']),
     },
     created() {
         console.log(this.$route.params.spot);
         console.log(this.$route.params.spot.title);
-        this.spot.spot_movie_title = this.$route.params.spot.title.replace(/\s+/g, " ").trim();
+        this.spot.spot_movie_title = this.$route.params.spot.title.replace(/\s+/g, ' ').trim();
         this.apiKey = process.env.VUE_APP_KAKAO_MAP_API_KEY2;
     },
 
     methods: {
         bindmsg(msg) {
-            console.log("이걸 받나");
+            console.log('이걸 받나');
             console.log(msg);
             this.spot.gugun_code = msg.gugunCode;
             this.spot.sido_code = msg.sidoCode;
-            console.log("우오와응");
+            console.log('우오와응');
             console.log(this.spot.gugun_code);
             console.log(this.spot.sido_code);
         },
@@ -151,13 +139,13 @@ export default {
             };
 
             fetch(requestURL, { headers })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => response.json())
+                .then(data => {
                     // console.log("주소를 통한 위경도");
                     // console.log(data.documents[0].address.x);
                     // console.log(data.documents[0].address.y);
-                    this.spot.spot_lat = data.documents[0].address.x;
-                    this.spot.spot_lon = data.documents[0].address.y;
+                    this.spot.spot_lat = data.documents[0].address.y;
+                    this.spot.spot_lon = data.documents[0].address.x;
                     // console.log("vuex의 시도구군");
                     // console.log(this.sidoCode);
                     // console.log("vuex의 시도구군");
@@ -166,30 +154,30 @@ export default {
                     // console.log(this.spot.spot_lon);
 
                     const jsonString = JSON.stringify(this.spot);
-                    const blob = new Blob([jsonString], { type: "application/json" });
-                    throwData.append("SpotDto", blob);
+                    const blob = new Blob([jsonString], { type: 'application/json' });
+                    throwData.append('SpotDto', blob);
 
-                    throwData.append("file", this.file);
+                    throwData.append('file', this.file);
 
                     // const params = throwData;
 
                     const config = {
-                        method: "post",
+                        method: 'post',
                         maxBodyLength: Infinity,
-                        url: "http://localhost:9003/movemovie/spot",
+                        url: 'http://localhost:9003/movemovie/spot',
                         headers: {
-                            "Content-Type": "multipart/form-data",
+                            'Content-Type': 'multipart/form-data',
                         },
                         data: throwData,
                     };
 
                     axios
                         .request(config)
-                        .then((response) => {
+                        .then(response => {
                             console.log(JSON.stringify(response.data));
                             setTimeout(() => this.moveMedia(), 500);
                         })
-                        .catch((error) => {
+                        .catch(error => {
                             console.log(error);
                         });
 
@@ -198,14 +186,14 @@ export default {
                     // });
                     // setTimeout(() => this.moveMedia(), 500);
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.error(error);
                 });
         },
         moveMedia() {
             // this.$router.push({ name: 'home' });
             this.$router.push({
-                name: "spotList",
+                name: 'spotList',
                 params: { title: this.spot.spot_movie_title, prodYear: 2023 },
             });
         },
