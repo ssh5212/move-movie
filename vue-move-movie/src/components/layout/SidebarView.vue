@@ -1,50 +1,50 @@
 <template>
-  <div>
-    <!-- 왼쪽 사이드바 -->
-    <div
-      class="d-flex justify-content-end fixed-bottom"
-      style="margin-right: 16px; margin-bottom: 78px"
-    >
-      <b-button v-b-toggle.sidebar-left class="d-sm-block d-md-none">
-        <b-icon-basket2-fill
-          class="justify-content-end"
-          style="margin-top: 6px; margin-bottom: 2px"
-        ></b-icon-basket2-fill>
-      </b-button>
-
-      <!-- [function - 필수] 기능 구현 : 왼쪽 사이드바 (바구니)에 들어갈 내용으로 수정 필요 -->
-      <b-sidebar
-        id="sidebar-left"
-        title=""
-        :backdrop-variant="variant"
-        backdrop
-        shadow
-        left
-      >
-        <button
-          type="button"
-          class="btn btn-dark mb-4"
-          style="width: 80%"
-          @click="moveBucketCreate"
+    <div>
+        <!-- 왼쪽 사이드바 -->
+        <div
+            class="d-flex justify-content-end fixed-bottom"
+            style="margin-right: 16px; margin-bottom: 78px"
         >
-          버킷 등록하기</button
-        ><br />
-        <BucketItem
-          v-for="(bucketItem, index) in bucket"
-          :key="index"
-          :bucketItem="bucketItem"
-        ></BucketItem>
-      </b-sidebar>
-    </div>
+            <b-button v-b-toggle.sidebar-left class="d-sm-block d-md-none">
+                <b-icon-basket2-fill
+                    class="justify-content-end"
+                    style="margin-top: 6px; margin-bottom: 2px"
+                ></b-icon-basket2-fill>
+            </b-button>
 
-    <!-- 오른쪽 사이드바 -->
-    <div v-if="userInfo">
-      <LoginAfter></LoginAfter>
+            <!-- [function - 필수] 기능 구현 : 왼쪽 사이드바 (바구니)에 들어갈 내용으로 수정 필요 -->
+            <b-sidebar
+                id="sidebar-left"
+                title=""
+                :backdrop-variant="variant"
+                backdrop
+                shadow
+                left
+            >
+                <button
+                    type="button"
+                    class="btn btn-dark mb-4"
+                    style="width: 80%"
+                    @click="moveBucketCreate"
+                >
+                    버킷 등록하기</button
+                ><br />
+                <BucketItem
+                    v-for="(bucketItem, index) in bucket"
+                    :key="index"
+                    :bucketItem="bucketItem"
+                ></BucketItem>
+            </b-sidebar>
+        </div>
+
+        <!-- 오른쪽 사이드바 -->
+        <div v-if="userInfo">
+            <LoginAfter></LoginAfter>
+        </div>
+        <div v-else>
+            <LoginBefore></LoginBefore>
+        </div>
     </div>
-    <div v-else>
-      <LoginBefore></LoginBefore>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -56,29 +56,33 @@ import { mapState } from "vuex";
 const userStore = "userStore";
 const mediaStore = "mediaStore";
 export default {
-  name: "SidebarView",
-  components: { LoginAfter, LoginBefore, BucketItem },
-  data() {
-    return {
-      mediaTitleList: [],
-      mediaTitle: Object,
-      variant: "",
-    };
-  },
-  created() {},
-  computed: {
-    ...mapState(userStore, ["isLogin", "userInfo"]),
-    ...mapState(mediaStore, ["bucket"]),
-  },
-  methods: {
-    moveBucketCreate() {
-      // pass
-      // bucketCreate
-      this.$router.push({
-        name: "bucketCreate",
-      });
+    name: "SidebarView",
+    components: { LoginAfter, LoginBefore, BucketItem },
+    data() {
+        return {
+            mediaTitleList: [],
+            mediaTitle: Object,
+            variant: "",
+        };
     },
-  },
+    created() {},
+    computed: {
+        ...mapState(userStore, ["isLogin", "userInfo"]),
+        ...mapState(mediaStore, ["bucket"]),
+    },
+    methods: {
+        moveBucketCreate() {
+            // pass
+            if (!this.bucket) {
+                // bucketCreate
+                this.$router.push({
+                    name: "bucketCreate",
+                });
+            } else {
+                alert("당신의 버킷을 채우세요!");
+            }
+        },
+    },
 };
 </script>
 
