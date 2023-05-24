@@ -70,6 +70,12 @@ public class SpotServiceImpl implements SpotService {
 	public List<SpotInstanceDto> getSpotInstance(int spotNum) throws Exception {
 		return sqlSession.getMapper(SpotMapper.class).getSpotInstance(spotNum);
 	}
+
+	@Override
+	public void register(SpotDto spotDto) throws Exception {
+		sqlSession.getMapper(SpotMapper.class).register(spotDto);
+		
+	}
 	
 
 

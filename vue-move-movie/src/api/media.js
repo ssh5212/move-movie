@@ -1,4 +1,4 @@
-import { movieInstance, apiInstance } from "@/api/index";
+import { movieInstance, apiInstance } from '@/api/index';
 
 const api = movieInstance();
 const localApi = apiInstance();
@@ -40,4 +40,9 @@ async function getSpotInstance(params, success, fail) {
     await localApi.get(`/spot/spot_instance/${params}`).then(success).catch(fail);
 }
 
-export { mediaList, spotList, spotDetailList, spotLocationList, sidoList, gugunList, mediaLoctionList, getMediaList, getSpotInstance };
+async function register(spot, success, fail) {
+    console.log(spot);
+    await localApi.post(`/spot/register`, spot).then(success).catch(fail);
+}
+
+export { mediaList, spotList, spotDetailList, spotLocationList, sidoList, gugunList, mediaLoctionList, getMediaList, getSpotInstance, register };

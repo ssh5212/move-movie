@@ -7,117 +7,159 @@
             </div>
 
             <div class="jc-text">
-                <p class="vtext-big">영화 스팟 등록!!</p>
+                <p class="vtext-big">Register</p>
             </div>
         </div>
         <!-- [E] Intro Image -->
 
-        <!-- [S] body -->
         <div class="container">
-            <!-- 실제 내용 -->
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <!-- start row -->
-                <div class="row justify-content-xl-between align-items-center col-md-12">
-                    <!-- 좌 -->
-                    <div class="col-md-6">
-                        <b-button class="col-md-12" v-b-modal.modal-upload>이미지 추가</b-button>
+                <div class="col-md-8">
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="email">spot_name<span class="text-muted"></span></label>
+                            <input type="text" class="form-control" id="email" placeholder="" v-model="spot.spot_name" />
+                        </div>
 
-                        <b-modal id="modal-upload" title="이미지 추가">
-                            <input type="file" ref="fileInput" @change="handleFileUpload" />
-                            <b-button @click="uploadImage">업로드</b-button>
-                        </b-modal>
-                    </div>
-                    <!-- 우 -->
-                    <div class="col-md-6">
-                        <div class="">
-                            <div class="text-left">상세주소</div>
-                            <div class="text-left">{{ Address }}</div>
-                            <div class="text-left">(※ 상세주소가 맞지 않다면 주소 찾기로 수정해주세요!)</div>
+                        <div class="mb-3">
+                            <label for="spot_movie_title">spot_movie_title</label>
+                            <input type="text" class="form-control" id="spot_movie_title" placeholder="" v-model="spot.spot_movie_title" readonly />
                         </div>
-                    </div>
-                </div>
-                <!-- end row  -->
-                <!-- start row -->
-                <div class="row justify-content-xl-between align-items-center col-md-12">
-                    <!-- 좌 -->
-                    <div class="col-md-6">
-                        <!-- 이미지 -->
-                        <div class="mt-3"><img v-if="Object.keys(selectedImage).length > 0" :src="selectedImage" alt="Uploaded Image" width="100%" /></div>
-                    </div>
-                    <!-- 우 -->
-                    <div class="col-md-6">
-                        <!-- 글 제목 입력 -->
-                        <div>
-                            <div class="text-left">제목</div>
-                            <div>
-                                <b-form-input type="text"></b-form-input>
-                            </div>
+
+                        <div class="mb-3">
+                            <label for="spot_scene_desc">spot_scene_desc</label>
+                            <input type="text" class="form-control" id="spot_scene_desc" placeholder="" v-model="spot.spot_scene_desc" />
                         </div>
-                        <!-- 글 내용 입력 -->
-                        <div>
-                            <div class="text-left mt-3">내용</div>
-                            <div>
-                                <b-row class="mt-2">
-                                    <b-form-textarea id="textarea-default" placeholder="Default textarea" class="ml-3"></b-form-textarea>
-                                </b-row>
-                            </div>
+
+                        <!-- <div class="mb-3">
+                            <label for="spot_lat">spot_lat</label>
+                            <input type="text" class="form-control" id="spot_lat" placeholder="" v-model="spot.spot_lat" />
                         </div>
-                    </div>
+
+                        <div class="mb-3">
+                            <label for="spot_lon">spot_lon</label>
+                            <input type="text" class="form-control" id="spot_lon" placeholder="" v-model="spot.spot_lon" />
+                        </div> -->
+
+                        <div class="mb-3">
+                            <label for="spot_road_address">spot_address</label>
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="대전광역시 유성구 동서대로 125" v-model="spot.spot_address" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="spot_road_address">spot_road_address</label>
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="대전광역시 유성구 동서대로 125" v-model="spot.spot_road_address" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="spot_filming_seq">spot_filming_seq</label>
+                            <input type="text" class="form-control" id="spot_filming_seq" placeholder="" v-model="spot.spot_filming_seq" />
+                        </div>
+
+                        <div class="mb-3">
+                            <input class="float-left mb-2" type="file" ref="fileInput" @change="handleFileSelect" />
+                            <button class="btn btn-dark btn-lg btn-block" @click="uploadFile">파일 업로드</button>
+                        </div>
+
+                        <hr class="my-5" />
+                        <button class="btn btn-dark btn-lg btn-block" type="button" @click="spotRegister">등록</button>
+                    </form>
+                    <div class="col-md-2"></div>
                 </div>
-                <!-- end row  -->
-                <!-- start row -->
-                <div class="row justify-content-xl-between align-items-center col-md-12 mt-4">
-                    <!-- 좌 -->
-                    <div class="col-md-6">
-                        <b-button class="col-md-12">주소 찾기</b-button>
-                    </div>
-                    <!-- 우 -->
-                    <div class="col-md-6">
-                        <b-button class="col-md-12">등록 하기</b-button>
-                    </div>
-                </div>
-                <!-- end row  -->
             </div>
         </div>
-        <!-- [E] body -->
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+import { register } from '@/api/media.js';
 export default {
-    name: "MediaSpotCreate",
+    name: 'MediaSpotCreate',
     components: {},
     data() {
         return {
+            spot: {
+                spot_name: '',
+                spot_scene_desc: '',
+                spot_img_src: '',
+                spot_lat: '',
+                spot_lon: '',
+                spot_address: '',
+                spot_road_address: '',
+                spot_filming_seq: '',
+                spot_movie_title: '',
+            },
             Address: String,
             selectedImage: Object,
+            apiURL: 'https://dapi.kakao.com/v2/local/search/address.json',
+            query: '',
+            apiKey: '',
         };
     },
     created() {
-        this.Address = "대전 한밭대 근처 어딘가";
+        console.log(this.$route.params.spot);
+        console.log(this.$route.params.spot.title);
+        this.spot.spot_movie_title = this.$route.params.spot.title;
+        this.apiKey = process.env.VUE_APP_KAKAO_MAP_API_KEY2;
     },
+
     methods: {
-        handleFileUpload(event) {
-            const file = event.target.files[0];
-            this.selectedImage = URL.createObjectURL(file);
+        spotRegister() {
+            const requestURL = `${this.apiURL}?query=${this.spot.spot_address}`;
+            console.log(requestURL);
+            console.log(process.env.VUE_APP_KAKAO_MAP_API_KEY2);
+            const headers = {
+                Authorization: `KakaoAK ${process.env.VUE_APP_KAKAO_MAP_API_KEY2}`,
+            };
+
+            fetch(requestURL, { headers })
+                .then(response => response.json())
+                .then(data => {
+                    // 데이터 처리 로직을 작성하세요
+                    console.log(data.documents[0].address.x);
+                    console.log(data.documents[0].address.y);
+                    this.spot_lat = data.documents[0].address.x;
+                    this.spot_lon = data.documents[0].address.y;
+
+                    const params = this.spot;
+                    register(params, ({ data }) => {
+                        console.log(data);
+                    });
+
+                    this.moveMedia();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         },
-        // handleFileUpload() {
-        //   const file = this.$refs.fileInput.files[0];
-        //   const reader = new FileReader();
+        moveMedia() {
+            // this.$router.push({ name: 'home' });
+            this.$router.push({
+                name: 'spotList',
+                params: { title: this.spot.spot_movie_title, prodYear: 2023 },
+            });
+        },
 
-        //   reader.onload = (e) => {
-        //     const imageUrl = e.target.result;
-        //     const imageId = Date.now(); // 고유한 ID 생성을 위해 현재 시간 사용 (실제로는 서버에서 ID를 생성하거나 다른 방식으로 사용해야 함)
+        handleFileSelect(event) {
+            console.log(event.target.files[0]);
+            this.selectedFile = event.target.files[0];
+        },
 
-        //     this.selectedImage = { id: imageId, url: imageUrl };
-        //     this.$refs.fileInput.value = ""; // 파일 선택을 초기화하기 위해 인풋값 비우기
-        //   };
+        uploadFile() {
+            const formData = new FormData();
+            formData.append('file', this.selectedFile);
 
-        //   reader.readAsDataURL(file);
-        // },
-        uploadImage() {
-            // 이미지 업로드 로직을 추가하세요 (서버와 통신 등)
-            // 여기서는 이미지를 로컬에 저장하는 예제이므로 추가적인 로직이 필요하지 않습니다.
+            axios
+                .post(`${process.env.VUE_APP_API_BASE_URL}/api/file/upload`, formData)
+                .then(response => {
+                    // 파일 업로드 성공 시 처리
+                    console.log(response);
+                })
+                .catch(error => {
+                    // 파일 업로드 실패 시 처리
+                    console.error(error);
+                });
         },
     },
 };

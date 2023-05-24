@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +19,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.mm.model.Request_bucket_create_DTO;
 import com.ssafy.mm.model.SidoGugunCodeDto;
 import com.ssafy.mm.model.SpotDto;
 import com.ssafy.mm.model.SpotInstanceDto;
+import com.ssafy.mm.model.UserDto;
 import com.ssafy.mm.model.service.SpotService;
 
 @RestController
 @RequestMapping("/spot")
+//@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
 public class SpotController {
 
 	public static final Logger logger = LoggerFactory.getLogger(SpotController.class);
@@ -71,8 +75,51 @@ public class SpotController {
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 
+		return new ResponseEntity<Map<String, Object>>(resultMap, status) ;
+	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@RequestBody SpotDto spotDto){
+		System.out.println("+_+_+_+_+_+_+_+");
+		System.out.println(spotDto);
+		System.out.println("+_+_+_+_+_+_+_+");
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		
+		System.out.println(spotDto);
+		try {
+			spotService.register(spotDto);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			logger.error("스폿 등록 실패 : ", e);
+			resultMap.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	// spot_create
+//	@PostMapping("/spot")
+//	public ResponseEntity<Map<String, Object>> bucket_create(@RequestBody Request_bucket_create_DTO bucket_info) {
+//		Map<String, Object> resultMap = new HashMap<>();
+//		HttpStatus status = null;
+//		System.out.println(bucket_info);
+//		try {
+//			bucketService.bucket_create(bucket_info);
+//			resultMap.put("message", SUCCESS);
+//			status = HttpStatus.OK;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			resultMap.put("message", e.getMessage());
+//			status = HttpStatus.INTERNAL_SERVER_ERROR;
+//		}
+//		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+//	}
+
+	
 	
 	// 지역으로 스팟 찾기
 	@GetMapping("/spot_area/{gugun_code}")
@@ -223,6 +270,8 @@ public class SpotController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+
 	
 	// 스폿 instance 작성
 //	@PostMapping("/spot_instance")
