@@ -20,7 +20,7 @@ public class FileUploadDownController {
 
     @Value("${file.Path.profile}") 
     private String uploadPath;
-
+    
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {

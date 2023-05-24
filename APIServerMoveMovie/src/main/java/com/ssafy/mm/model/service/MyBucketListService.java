@@ -17,5 +17,5 @@ public interface MyBucketListService {
 	public void delete(int user_pk, int spot_pk, int bucket_pk) throws Exception;
 	
 	public void updateChecked(int user_pk, int spot_pk, int checked) throws Exception;
-	public my_bucket_list_DTO selectcheck(int user_pk, int spot_pk) throws SQLException;
+	public List<my_bucket_list_DTO> selectcheck(int user_pk, int spot_pk) throws SQLException;
 }

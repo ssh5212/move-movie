@@ -43,8 +43,8 @@ public class MyBucketListServiceImpl implements MyBucketListService {
 	}
 
 	@Override
-	public my_bucket_list_DTO selectcheck(int user_pk, int spot_pk) throws SQLException {
-		return mapper.selectcheck(user_pk, spot_pk).get(0);
+	public List<my_bucket_list_DTO> selectcheck(int user_pk, int spot_pk) throws SQLException {
+		return mapper.selectcheck(user_pk, spot_pk);
 	}
 
 }
