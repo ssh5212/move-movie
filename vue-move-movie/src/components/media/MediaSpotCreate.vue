@@ -158,16 +158,14 @@ export default {
                     // console.log(this.sidoCode);
                     // console.log("vuex의 시도구군");
 
-                    // console.log(this.spot.spot_lon);
-                    // console.log(this.spot.spot_lon);
+                    console.log(this.spot.spot_lon);
+                    console.log(this.spot.spot_lon);
 
                     const params = this.spot;
                     register(params, ({ data }) => {
                         console.log(data);
                     });
-                })
-                .then(() => {
-                    this.moveMedia();
+                    setTimeout(() => this.moveMedia(), 500);
                 })
                 .catch((error) => {
                     console.error(error);
