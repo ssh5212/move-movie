@@ -16,6 +16,8 @@ public interface BucketService {
 	public List<BucketDto> bucket_spot_pk(int spot_pk) throws Exception;
 
 	public List<BucketDto> bucket_order_heart() throws Exception;
+	
+	public List<BucketDto> bucket_user_pk(int user_pk) throws Exception;;
 
 	public void bucket_heart_plus(int bucket_pk) throws Exception;
 

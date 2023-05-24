@@ -12,6 +12,7 @@ public class AddResourceHandler implements WebMvcConfigurer {
 
 	@Value("${file.Path.profile}")
     private String profileImagePath;
+
 	
 	@Value("${request.Path.profile}")
 	private String profilerequest;

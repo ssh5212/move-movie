@@ -73,6 +73,26 @@ public class BucketController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	@GetMapping("byuser/{user_pk}")
+	public ResponseEntity<Map<String, Object>> bucket_user_pk(@PathVariable("user_pk") int user_pk) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		List<BucketDto> list;
+
+		try {
+			list = bucketService.bucket_user_pk(user_pk);
+			resultMap.put("BucketList", list);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			resultMap.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 
 	// bucket_order_heart
 	@GetMapping("/bucket_heart_desc")

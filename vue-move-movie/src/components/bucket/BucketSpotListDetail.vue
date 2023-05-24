@@ -36,17 +36,19 @@
               v-for="(spot, index) in spots"
               :key="index"
               :spot_pk="spot.spot_pk"
+              :isMine="bucket.user_pk == checkUserInfo.user_pk"
             ></bucket-spot-list-detail-item>
           </div>
         </div>
+        <!--  -->
         <!-- [S] map -->
         <div class="container mt-5">
           <div id="map" class="mt-3" style="width: 100%; height: 400px"></div>
         </div>
         <!-- [E] map -->
         <!--  content -->
-        <div class="mt-5 mb-5">
-          {{ content }}
+        <div v-if="bucket" class="mt-5 mb-5">
+          {{ bucket.bucket_content }}
         </div>
       </div>
     </div>
@@ -59,6 +61,9 @@ import { bucketListBybucketpk } from "@/api/bucketList.js";
 import BucketSpotListDetailItem from "@/components/bucket/BucketSpotListDetailItem.vue";
 import { spotByspotpk } from "@/api/spot.js";
 import { bucketBybucketpk } from "@/api/bucket.js";
+import { mapGetters } from "vuex";
+
+const userStore = "userStore";
 
 export default {
   name: "BucketSpotListDetail",
@@ -69,19 +74,23 @@ export default {
     return {
       spots: [],
       spots_tmp: [],
-      content: null,
       positions: [],
       markers: [],
       map: null,
-      bucket: null,
+      bucket: {
+        content: "",
+      },
     };
   },
-  created() {
-    bucketBybucketpk(this.$route.params.no, ({ data }) => {
+  computed: {
+    ...mapGetters(userStore, ["checkUserInfo"]),
+  },
+  async created() {
+    await bucketBybucketpk(this.$route.params.no, ({ data }) => {
       this.bucket = data.Bucket;
     });
 
-    bucketListBybucketpk(this.$route.params.no, ({ data }) => {
+    await bucketListBybucketpk(this.$route.params.no, ({ data }) => {
       console.log(data);
       this.spots = data.BucketDetailList;
       this.spots.forEach((spot) => {
@@ -90,8 +99,6 @@ export default {
         });
       });
     });
-
-    this.content = this.$route.query.content;
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {

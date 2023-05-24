@@ -20,7 +20,7 @@
 		select * from my_bucket_list where user_pk = #{user_pk} and bucket_pk = #{bucket_pk};
 	</select>
 	
-	<select id="selectcheck" resultType="my_bucket_list_DTO">
+	<select id="selectcheck" parameterType="my_bucket_list_DTO" resultType="my_bucket_list_DTO">
 		select * from my_bucket_list where user_pk = #{user_pk} and spot_pk = #{spot_pk};
 	</select>
 	<!-- public void updateChecked(int user_pk, int spot_pk, int bucket_pk, int checked) throws SQLException; -->

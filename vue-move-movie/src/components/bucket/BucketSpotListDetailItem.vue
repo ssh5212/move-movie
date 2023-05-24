@@ -3,24 +3,31 @@
     <div class="m-3">
       <img :src="img_src" alt="img" />
       <div>{{ spot.spot_name }}</div>
-      <!-- <div v-if="this.checkUserInfo.user_pk == this.$props.user_pk"> -->
-      <!-- <div>
-        <input type="checkbox" v-model="isChecked" @change="updatechecked" />
-      </div> -->
+      <div v-if="isMine">
+        <div>
+          <input
+            type="checkbox"
+            v-model="isChecked"
+            @change="updatechecked"
+            :disabled="isChecked"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { spotByspotpk } from "@/api/spot.js";
-// import { updateCheck, selectCheck } from "@/api/mybucket.js";
-import { mapGetters } from "vuex";
+import { updateCheck, selectCheck } from "@/api/mybucket.js";
+import { mapGetters, mapMutations } from "vuex";
 
 const userStore = "userStore";
 export default {
   name: "BucketSpotListDetailItem",
   props: {
     spot_pk: Number,
+    isMine: Boolean,
     // user_pk: Number,
   },
   components: {},
@@ -29,20 +36,33 @@ export default {
       spot: { spot_name: "" },
       img_src: null,
       login_user_pk: null,
-      isChecked: false,
+      isChecked: true,
+      requestChecked: 0,
     };
   },
   computed: {
     ...mapGetters(userStore, ["checkUserInfo"]),
   },
   created() {
-    // let tmp = {
-    //   user_pk: this.$props.user_pk,
-    //   spot_pk: this.$props.spot_pk,
-    // };
-    // selectCheck(tmp, ({ data }) => {
-    //   this.isChecked = data.spotCheck.checked;
-    // });
+    console.log(this.$props.isMine);
+    if (this.$props.isMine) {
+      let tmp = {
+        user_pk: this.checkUserInfo.user_pk,
+        spot_pk: this.$props.spot_pk,
+      };
+      console.log(tmp);
+      selectCheck(tmp, ({ data }) => {
+        console.log(data.spotCheck[0].checked);
+        if (data.spotCheck[0].checked == 0) {
+          this.isChecked = false;
+          this.requestChecked = 1;
+        } else {
+          this.isChecked = true;
+          this.requestChecked = 0;
+        }
+        console.log(this.isChecked);
+      });
+    }
 
     spotByspotpk(this.spot_pk, ({ data }) => {
       this.spot = data.spot;
@@ -55,24 +75,22 @@ export default {
     // console.log(this.checkUserInfo);
   },
   methods: {
+    ...mapMutations("userStore", ["SET_TMP_PLUS"]),
     //updatechecked
-    // updatechecked() {
-    //   // user_pk, spot_pk, bucket_pk, checked
-    //   let check = null;
-    //   if (this.isChecked == false) {
-    //     check = 0;
-    //   } else {
-    //     check = 1;
-    //   }
-    //   let obj = {
-    //     bucket_pk: this.bucket_pk,
-    //     spot_pk: this.$props.spot_pk,
-    //     ckecked: check,
-    //   };
-    //   updateCheck(obj, ({ data }) => {
-    //     console.log(data);
-    //   });
-    // },
+    updatechecked() {
+      // user_pk, spot_pk, bucket_pk, checked
+
+      let obj = {
+        user_pk: this.checkUserInfo.user_pk,
+        spot_pk: this.$props.spot_pk,
+        checked: this.requestChecked,
+      };
+      updateCheck(obj, ({ data }) => {
+        console.log(data);
+        this.requestChecked = 1 - this.requestChecked;
+        this.SET_TMP_PLUS();
+      });
+    },
   },
 };
 </script>

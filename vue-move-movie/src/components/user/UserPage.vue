@@ -51,91 +51,11 @@
           style="overflow: scroll; height: 631px; background-color: white"
         >
           <h1 class="my-5">내 버킷리스트</h1>
-
-          <div class="mb-4">
-            <h5 style="text-align: left">리포 따라가기</h5>
-            <div class="progress" style="height: 20px">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                style="width: 25%"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                25%
-              </div>
-            </div>
-            <p class="mt-1" style="text-align: right">자세히 보기 ></p>
-          </div>
-
-          <div class="mb-4">
-            <h5 style="text-align: left">리포 따라가기</h5>
-            <div class="progress" style="height: 20px">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                style="width: 25%"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                25%
-              </div>
-            </div>
-            <p class="mt-1" style="text-align: right">자세히 보기 ></p>
-          </div>
-
-          <div class="mb-4">
-            <h5 style="text-align: left">리포 따라가기</h5>
-            <div class="progress" style="height: 20px">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                style="width: 25%"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                25%
-              </div>
-            </div>
-            <p class="mt-1" style="text-align: right">자세히 보기 ></p>
-          </div>
-
-          <div class="mb-4">
-            <h5 style="text-align: left">리포 따라가기</h5>
-            <div class="progress" style="height: 20px">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                style="width: 25%"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                25%
-              </div>
-            </div>
-            <p class="mt-1" style="text-align: right">자세히 보기 ></p>
-          </div>
-
-          <div class="mb-4">
-            <h5 style="text-align: left">리포 따라가기</h5>
-            <div class="progress" style="height: 20px">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                style="width: 25%"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                25%
-              </div>
-            </div>
-            <p class="mt-1" style="text-align: right">자세히 보기 ></p>
-          </div>
+          <mybucket-progress
+            v-for="(bucket, index) in BucketList"
+            :key="index"
+            :bucket="bucket"
+          />
         </div>
       </div>
     </div>
@@ -144,6 +64,8 @@
 </template>
 
 <script>
+import MybucketProgress from "@/components/bucket/MybucketProgress.vue";
+import { bucketByuserpk } from "@/api/bucket.js";
 import { mapGetters } from "vuex";
 const userStore = "userStore";
 
@@ -151,12 +73,22 @@ export default {
   data() {
     return {
       img_src: String,
+      BucketList: [],
     };
+  },
+  components: {
+    MybucketProgress,
   },
   created() {
     this.img_src =
       process.env.VUE_APP_API_BASE_URL +
       this.checkUserInfo.user_profile_img_src;
+
+    bucketByuserpk(this.checkUserInfo.user_pk, ({ data }) => {
+      console.log(data);
+      this.BucketList = data.BucketList;
+      console.log(this.BucketList.length);
+    });
   },
   computed: {
     ...mapGetters(userStore, ["checkUserInfo"]),
