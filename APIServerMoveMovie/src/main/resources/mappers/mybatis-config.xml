@@ -10,6 +10,7 @@
   	<typeAlias type="com.ssafy.mm.model.BucketDto" alias="BucketDto"/>
   	<typeAlias type="com.ssafy.mm.model.Bucket_detail_List_DTO" alias="Bucket_detail_List_DTO"/>
   	<typeAlias type="com.ssafy.mm.model.my_bucket_list_DTO" alias="my_bucket_list_DTO"/>
+  	<typeAlias type="com.ssafy.mm.model.SpotInstanceDto" alias="SpotInstanceDto"/>
   </typeAliases>
   
   <mappers>
@@ -18,5 +19,6 @@
     <mapper resource="mappers/bucket.xml"/>
 	<mapper resource="mappers/bucketDetailList.xml"/>
     <mapper resource="mappers/myBucketList.xml"/>
+    <mapper resource="mappers/spotinst.xml"/>
   </mappers>
 </configuration>

@@ -1,12 +1,20 @@
 <template>
     <div class="col-md-4 my-4">
         <div class="card">
-            <img src="https://via.placeholder.com/1920x1080" class="card-img-top p-3 pt-5" />
+            <img :src="img_src" class="card-img-top p-3 pt-5" />
             <div class="card-body pb-5" style="text-align: left">
-                <h5 class="card-title" style="text-align: left">{{ spotInstance.spot_instance_title }}</h5>
-                <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
+                <h5 class="card-title" style="text-align: left">
+                    {{ spotInstance.spot_instance_title }}
+                </h5>
+                <b-icon-heart-fill
+                    id="b-icon"
+                    class="h5 pt-1 m-0"
+                    v-b-toggle.sidebar-backdrop
+                ></b-icon-heart-fill>
                 <span class="card-text"
-                    ><small class="text-muted">{{ spotInstance.spot_instance_heart }}</small></span
+                    ><small class="text-muted">{{
+                        spotInstance.spot_instance_heart
+                    }}</small></span
                 >
             </div>
         </div>
@@ -19,8 +27,16 @@ export default {
     props: {
         spotInstance: Object,
     },
+    data() {
+        return {
+            img_src: "https://via.placeholder.com/1920x1080",
+        };
+    },
     created() {
-        console.log(this.spotInstance);
+        console.log(this.$props.spotInstance);
+        this.img_src =
+            process.env.VUE_APP_API_BASE_URL +
+            this.$props.spotInstance.spot_instance_img_src;
     },
     methods: {
         // moveSpotDetail() {

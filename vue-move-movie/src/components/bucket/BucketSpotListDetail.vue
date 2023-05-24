@@ -96,7 +96,6 @@ export default {
         });
 
         await bucketListBybucketpk(this.$route.params.no, ({ data }) => {
-            console.log(data);
             this.spots = data.BucketDetailList;
             this.spots.forEach((spot) => {
                 spotByspotpk(spot.spot_pk, ({ data }) => {

@@ -3,7 +3,12 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
+                <img
+                    src="@/assets/img/intro-half-img01.jpg"
+                    alt=""
+                    width="1920"
+                    height="auto"
+                />
             </div>
 
             <div class="jc-text">
@@ -18,18 +23,44 @@
                 <!-- [S] Movie -->
                 <div class="col-lg-7 pb-2 pt-5">
                     <h3 class="pb-2">작중 스팟 장면</h3>
-                    <img :src="img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
+                    <img
+                        :src="img_src || require('@/assets/img/no_img_x.png')"
+                        alt="..."
+                        style="width: 100%"
+                    />
 
                     <h4 class="pt-4 pb-3">{{ mediaSpot.spot_name }}</h4>
-                    <p class="mb-2 text-left">촬영 영화 : {{ mediaSpot.spot_movie_title }}</p>
-                    <p class="mb-2 text-left">주소 : {{ mediaSpot.spot_address }}</p>
-                    <p class="text-left">스팟 소개 : {{ mediaSpot.spot_filming_seq }}</p>
+                    <p class="mb-2 text-left">
+                        촬영 영화 : {{ mediaSpot.spot_movie_title }}
+                    </p>
+                    <p class="mb-2 text-left">
+                        주소 : {{ mediaSpot.spot_address }}
+                    </p>
+                    <p class="text-left">
+                        스팟 소개 : {{ mediaSpot.spot_filming_seq }}
+                    </p>
                     <!-- <p class="mb-2 text-left">스팟 등록자 : 연예인원영</p> -->
 
-                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveSpotCreate">내 사진 올리기</button>
-                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveRelationBucket">스폿 관련 버킷 리스트 보기</button>
+                    <button
+                        class="btn btn-dark m-2 mb-4 col-md-5 col-11"
+                        variant="primary"
+                        @click="moveSpotCreate"
+                    >
+                        내 사진 올리기
+                    </button>
+                    <button
+                        class="btn btn-dark m-2 mb-4 col-md-5 col-11"
+                        variant="primary"
+                        @click="moveRelationBucket"
+                    >
+                        스폿 관련 버킷 리스트 보기
+                    </button>
 
-                    <b-icon-basket2-fill id="b-icon" class="h2 col-md-1 m-0 bucket-btn" @click="addThisSpot"></b-icon-basket2-fill>
+                    <b-icon-basket2-fill
+                        id="b-icon"
+                        class="h2 col-md-1 m-0 bucket-btn"
+                        @click="addThisSpot"
+                    ></b-icon-basket2-fill>
                 </div>
                 <!-- [E] Movie -->
 
@@ -47,7 +78,11 @@
 
             <!-- 화면 1 -->
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <MediaSpotDetailItem v-for="(spotInstance, index) in spotInstanceList" :key="index" :spotInstance="spotInstance"></MediaSpotDetailItem>
+                <MediaSpotDetailItem
+                    v-for="(spotInstance, index) in spotInstanceList"
+                    :key="index"
+                    :spotInstance="spotInstance"
+                ></MediaSpotDetailItem>
             </div>
 
             <!-- [E] 상세 스팟 -->
@@ -57,39 +92,55 @@
 </template>
 
 <script>
-import MediaSpotDetailItem from '@/components/media/MediaSpotDetailItem.vue';
-import { mapState, mapMutations } from 'vuex';
-import { getSpotInstance } from '@/api/media.js';
+import MediaSpotDetailItem from "@/components/media/MediaSpotDetailItem.vue";
+import { mapState, mapMutations } from "vuex";
+import { getSpotInstance } from "@/api/media.js";
+import { spotByspotpk } from "@/api/spot.js";
 
-const mediaStore = 'mediaStore';
+const mediaStore = "mediaStore";
 
 export default {
-    name: 'MediaSpotDetail',
+    name: "MediaSpotDetail",
     components: { MediaSpotDetailItem },
 
     computed: {
-        ...mapState(mediaStore, ['bucket', 'media']),
+        ...mapState(mediaStore, ["bucket", "media"]),
     },
 
     data() {
         return {
+            img_src: null,
             spotInstanceList: [],
             mediaSpot: Object,
+            spots_tmp: [],
         };
     },
 
     created() {
-        console.log('img_src' + this.img_src);
-        if (
-            this.mediaSpot.spot_img_src == '/images/spotfile/' ||
-            this.mediaSpot.spot_img_src == ' ' ||
-            this.mediaSpot.spot_img_src == null ||
-            this.mediaSpot.spot_img_src == `${process.env.VUE_APP_API_BASE_URL}null`
-        ) {
-            this.img_src = '';
-        } else {
-            this.img_src = process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
-        }
+        console.log(this.$route.params.no);
+
+        // spot_pk 를 통해 spot 데이터 불러오기
+        spotByspotpk(this.$route.params.no, ({ data }) => {
+            console.log(data.spot);
+            this.mediaSpot = data.spot;
+        });
+        // img src set
+        getSpotInstance(
+            this.$route.params.no,
+            ({ data }) => {
+                // console.log(data.spots);
+                this.spotInstanceList = data.spots;
+                // console.log(this.spotInstance[0]);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        //
+        setTimeout(() => {
+            this.img_src =
+                process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
+        }, 200);
     },
 
     mounted() {
@@ -99,17 +150,22 @@ export default {
             this.loadScript();
         }
 
-        this.loadArea(); // 지역 불러오기
-        this.addEventMethod(); // 이벤트 등록
+        // 해당 부분 마커 찍기
+        setTimeout(() => {
+            this.spots_tmp.push(this.mediaSpot);
+            this.makeSpotList();
+            this.loadMaker();
+        }, 300);
     },
 
     methods: {
-        ...mapMutations(mediaStore, ['SET_MEDIA']),
+        ...mapMutations(mediaStore, ["SET_MEDIA"]),
 
         //api 불러오기
         loadScript() {
-            const script = document.createElement('script');
-            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
+            const script = document.createElement("script");
+            script.src =
+                "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -122,7 +178,7 @@ export default {
                 this.bucket.push(this.mediaSpot);
             } else {
                 let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
-                this.bucket.forEach(b => {
+                this.bucket.forEach((b) => {
                     if (b.spot_pk == this.mediaSpot.spot_pk) {
                         isok = 0;
                     }
@@ -135,7 +191,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -146,33 +202,73 @@ export default {
 
         moveSpotCreate() {
             this.$router.push({
-                name: 'spotCreate',
+                name: "spotDetailCreate",
+                params: { no: this.$route.params.no },
             });
         },
 
         // [function - 필수] 검색 기능 구현 완료 후 연결하기
         moveRelationBucket() {
             this.$router.push({
-                name: 'bucketList',
+                name: "bucketList",
                 params: { no: this.mediaSpot.spot_instance_pk },
             });
         },
 
         // 스폿의 인스턴스 가져오기
         getSpotInstance() {
-            const params = this.mediaSpot.spot_pk;
+            console.log(this.$route.params.no);
+            // const params = this.$route.params.no;
             getSpotInstance(
-                params,
+                this.$route.params.no,
                 ({ data }) => {
                     // console.log(data.spots);
                     this.spotInstanceList = data.spots;
-                    // console.log(this.spotInstance);
+                    console.log(this.spotInstance);
                     // console.log(this.spotInstance[0]);
                 },
-                error => {
+                (error) => {
                     console.log(error);
                 }
             );
+        },
+
+        makeSpotList() {
+            this.positions = [];
+            this.spots_tmp.forEach((mediaSpot) => {
+                let obj = {};
+                obj.title = mediaSpot.spot_name;
+                obj.latlng = new window.kakao.maps.LatLng(
+                    mediaSpot.spot_lat,
+                    mediaSpot.spot_lon
+                );
+
+                this.positions.push(obj);
+            });
+        },
+
+        loadMaker() {
+            // 마커를 생성합니다
+            this.markers = [];
+            this.positions.forEach((position) => {
+                const marker = new window.kakao.maps.Marker({
+                    map: this.map, // 마커를 표시할 지도
+                    position: position.latlng, // 마커를 표시할 위치
+                    title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    //   image: markerImage, // 마커의 이미지
+                });
+                this.markers.push(marker);
+            });
+            // console.log("마커수 ::: " + this.markers.length);
+
+            // 4. 지도를 이동시켜주기
+            // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
+            const bounds = this.positions.reduce(
+                (bounds, position) => bounds.extend(position.latlng),
+                new window.kakao.maps.LatLngBounds()
+            );
+
+            this.map.setBounds(bounds);
         },
     },
 };

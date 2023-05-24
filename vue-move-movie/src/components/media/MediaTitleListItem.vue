@@ -9,7 +9,9 @@
         <div class="card-overlay" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" @click="moveSpotList">
             <h3 class="h3 card-text">{{ mediaTitle.title }}</h3>
             <p></p>
-            <p class="card-text mb-1 hide-overflow">{{ mediaTitle.prodYear }}</p>
+            <p class="card-text mb-1 hide-overflow">
+                {{ mediaTitle.prodYear }}
+            </p>
             <br />
         </div>
     </div>
@@ -30,7 +32,6 @@ export default {
                 name: 'spotList',
                 params: { title: this.mediaTitle.title, prodYear: this.mediaTitle.prodYear, docid: this.mediaTitle.docid },
             });
-            console.log(this.mediaTitle);
         },
 
         // 이미지 처리
