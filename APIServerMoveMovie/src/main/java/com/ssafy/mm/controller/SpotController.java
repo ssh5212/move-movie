@@ -28,7 +28,7 @@ import com.ssafy.mm.model.service.SpotService;
 
 @RestController
 @RequestMapping("/spot")
-//@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+//@CrossOrigin(origins = "*", allowCredentials = "true")
 public class SpotController {
 
 	public static final Logger logger = LoggerFactory.getLogger(SpotController.class);

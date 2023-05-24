@@ -61,12 +61,12 @@
 </template>
 
 <script>
-import MediaSpotListItem from '@/components/media/MediaSpotListItem.vue';
-import { mediaList, spotList } from '@/api/media.js';
-import KakaoMap from '@/components/KakaoMap.vue';
+import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
+import { mediaList, spotList } from "@/api/media.js";
+import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
-    name: 'MediaSpotList',
+    name: "MediaSpotList",
     components: { MediaSpotListItem, KakaoMap },
     data() {
         return {
@@ -81,6 +81,8 @@ export default {
     created() {
         this.title = this.$route.params.title;
         this.searchMedia();
+
+        console.log("created");
         this.searchSpot();
     },
 
@@ -100,7 +102,6 @@ export default {
             let params = this.title;
 
             spotList(params, ({ data }) => {
-                // console.log(data[1]);
                 this.mediaSpotList = data.spots;
             });
         },
@@ -115,29 +116,29 @@ export default {
             mediaList(
                 params,
                 ({ data }) => {
-                    const resultData = data['Data'][0]['Result'][0];
+                    const resultData = data["Data"][0]["Result"][0];
 
                     // resultData.forEach((e) => {
                     this.mediaTitle = {
-                        title: resultData.title.replace(/!HS |!HE /g, '').trim(),
+                        title: resultData.title.replace(/!HS |!HE /g, "").trim(),
                         kmdbUrl: resultData.kmdbUrl,
                         prodYear: resultData.prodYear, // 제작년도
                         // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
                         keywords: resultData.keywords,
-                        stills: resultData.posters.split('|')[0],
+                        stills: resultData.posters.split("|")[0],
                         genre: resultData.genre,
                     };
                     // this.mediaTitleList.push(this.mediaTitle);
                     // });
                 },
-                error => {
+                (error) => {
                     console.log(error);
                 }
             );
         },
         moveSpotCreate() {
             this.$router.push({
-                name: 'spotCreate',
+                name: "spotCreate",
                 params: { spot: this.mediaTitle },
             });
         },
