@@ -48,6 +48,9 @@ public class UserController {
     @Value("${file.Path.profile}")
     private String uploadPath;
     
+    @Value("${request.Path.profile.db}")
+	private String profilerequest;
+    
 	//로그인
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(
@@ -162,9 +165,11 @@ public class UserController {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		String filePath = "";
+		String filename = "";
 		//이미지 파일 local에 저장하기
         try {
-        	filePath = uploadPath + File.separator + file.getOriginalFilename();
+        	filename = userDto.getUser_email() +file.getOriginalFilename();
+        	filePath = uploadPath + File.separator + filename;
         	File dest = new File(filePath);
 			file.transferTo(dest);
 			System.out.println(filePath);
@@ -173,8 +178,10 @@ public class UserController {
 			logger.error(e.getMessage());
 		}
 		
+        String fileRequestPath = profilerequest + filename;
+        
 		System.out.println(userDto);
-		userDto.setUser_profile_img_src(filePath);
+		userDto.setUser_profile_img_src(fileRequestPath);
 		try {
 			userService.register(userDto);
 			resultMap.put("message", SUCCESS);
