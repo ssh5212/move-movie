@@ -1,8 +1,9 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
-import userStore from "@/store/modules/userStore";
-import mediaStore from "@/store/modules/mediaStore";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+import userStore from '@/store/modules/userStore';
+import mediaStore from '@/store/modules/mediaStore';
+import toastStore from '@/store/modules/toastStore';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     modules: {
         userStore,
         mediaStore,
+        toastStore,
     },
 
     plugins: [

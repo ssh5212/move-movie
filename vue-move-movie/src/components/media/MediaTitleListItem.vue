@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    name: "MediaTitleListItem",
+    name: 'MediaTitleListItem',
     props: {
         mediaTitle: Object,
     },
@@ -25,26 +25,27 @@ export default {
     created() {},
     methods: {
         moveSpotList() {
+            console.log('DDDDDDDDDDDDocid' + this.docid);
             this.$router.push({
-                name: "spotList",
-                params: { title: this.mediaTitle.title, prodYear: this.mediaTitle.prodYear },
+                name: 'spotList',
+                params: { title: this.mediaTitle.title, prodYear: this.mediaTitle.prodYear, docid: this.mediaTitle.docid },
             });
             console.log(this.mediaTitle);
         },
 
         // 이미지 처리
         handleMouseOver() {
-            const imgBgDark = this.$el.querySelector(".img-bg-dark");
+            const imgBgDark = this.$el.querySelector('.img-bg-dark');
             if (imgBgDark) {
-                imgBgDark.style.filter = "brightness(0.6)";
-                imgBgDark.style.cursor = "pointer";
+                imgBgDark.style.filter = 'brightness(0.6)';
+                imgBgDark.style.cursor = 'pointer';
             }
         },
         handleMouseLeave() {
-            const imgBgDark = this.$el.querySelector(".img-bg-dark");
+            const imgBgDark = this.$el.querySelector('.img-bg-dark');
             if (imgBgDark) {
-                imgBgDark.style.filter = "";
-                imgBgDark.style.cursor = "";
+                imgBgDark.style.filter = '';
+                imgBgDark.style.cursor = '';
             }
         },
     },

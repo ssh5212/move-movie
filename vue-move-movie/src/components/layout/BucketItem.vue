@@ -12,10 +12,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-const mediaStore = "mediaStore";
+import { mapState } from 'vuex';
+const mediaStore = 'mediaStore';
+import { mapMutations } from 'vuex';
+const toastStore = 'toastStore';
 export default {
-    name: "BucketItem",
+    name: 'BucketItem',
     props: {
         bucketItem: Object,
     },
@@ -23,26 +25,36 @@ export default {
         this.img_src = process.env.VUE_APP_API_BASE_URL + this.bucketItem.spot_img_src;
     },
     computed: {
-        ...mapState(mediaStore, ["bucket"]),
+        ...mapState(mediaStore, ['bucket']),
     },
     methods: {
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
         deleteItem() {
             let rot = 0; // 해당 스폿이 버킷에 포함되어 있는지 판단
             // console.log("this.bucketItem.spot_pk" + this.bucketItem.spot_pk);
-            this.bucket.forEach((b) => {
+            this.bucket.forEach(b => {
                 // console.log("rot" + rot);
                 // console.log("b.spot_pk" + b.spot_pk);
                 if (!(b.spot_pk === this.bucketItem.spot_pk)) {
                     rot++;
                 } else {
                     this.bucket.splice(rot, 1);
+                    // 토스트에 출력할 데이터
+                    let toast_data = {
+                        title: 'Success',
+                        sub: 'Bucket Bag',
+                        content: '스폿 삭제를 완료하였습니다.',
+                    };
+
+                    this.SET_TOAST(toast_data);
+                    this.SET_TOAST_CNT();
                 }
             });
         },
     },
     data() {
         return {
-            img_src: "",
+            img_src: '',
         };
     },
 };

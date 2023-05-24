@@ -10,7 +10,7 @@
 
             <div class="jb-text">
                 <h1 class="vtext-big">영화와 함께 여행을 떠나보세요!</h1>
-                <p class="vtext-small">내가 좋아하는 영화 속 한 장면에 내가 나올 수 없을까?</p>
+                <h4 class="vtext-small pt-3" style="color: white">내가 좋아하는 영화 속 한 장면에 내가 나올 수 없을까?</h4>
             </div>
         </div>
         <!-- [E] Movie -->
@@ -29,7 +29,7 @@
                     <br />
                     <p>내가 좋아하는 영화의<br />실제 장소를 찾아가보세요!</p>
                     <br />
-                    <button type="button" class="btn btn-secondary">바로가기</button>
+                    <button type="button" class="btn btn-secondary" @click="moveTitle">바로가기</button>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
                     <br />
                     <p>가장 좋아하는 장소에서<br />최고의 인생샷을 찍고 공유해보아요!</p>
                     <br />
-                    <button type="button" class="btn btn-secondary">바로가기</button>
+                    <button type="button" class="btn btn-secondary" @click="moveLocation">바로가기</button>
                 </div>
                 <div class="col-md-6 intro-half-img mb-5">
                     <img src="@/assets/img/intro-half-img02.jpg" width="100%" alt="intro-half-img02" />
@@ -48,12 +48,12 @@
             </div>
 
             <!-- 소개 3 -->
-            <div class="row justify-content-xl-center my-5 align-items-center">
+            <div class="row justify-content-center my-5 align-items-center">
                 <div class="col-md-10 intro-half-text mb-5">
                     <img src="@/assets/img/intro-half-img03.jpg" width="100%" alt="intro-half-img03" class="mb-5" />
                     <h1>나만의 여행지를<br />다른 사람들에게 소개해주세요!</h1>
                     <br />
-                    <button type="button" class="btn btn-secondary">바로가기</button>
+                    <button type="button" class="btn btn-secondary" @click="moveBucket">바로가기>바로가기</button>
                 </div>
             </div>
         </div>
@@ -64,7 +64,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+    name: 'HomeView',
+    methods: {
+        moveTitle() {
+            this.$router.push({
+                name: 'media',
+            });
+        },
+        moveLocation() {
+            this.$router.push({
+                name: 'media/location',
+            });
+        },
+        moveBucket() {
+            this.$router.push({
+                name: 'bucket',
+            });
+        },
+    },
+};
 </script>
 
 <style>
@@ -109,6 +128,44 @@ video {
 
     .intro-half-text {
         order: 1;
+    }
+}
+
+@media (max-width: 576px) {
+    /* 작은 화면(sm)에 대한 스타일 */
+    .vtext-big {
+        font-size: 40px;
+    }
+    .vtext-small {
+        font-size: 18px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    h3 {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    /* 중간 화면(md)에 대한 스타일 */
+    .vtext-big {
+        font-size: 60px;
+    }
+    .vtext-small {
+        font-size: 22px;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 26px;
+    }
+    h3 {
+        font-size: 22px;
     }
 }
 </style>

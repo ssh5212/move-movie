@@ -30,7 +30,7 @@
                         <div class="row no-gutters">
                             <div class="col-md-6">
                                 <div class="h-100 d-flex align-items-center">
-                                    <img :src="mediaTitle.stills || require('@/assets/img/no_img.png')" alt="..." style="width: 100%" />
+                                    <img :src="mediaTitle.stlls || require('@/assets/img/no_img.png')" style="width: 100%" />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -38,7 +38,7 @@
                                     <h4 class="">{{ mediaTitle.title }}</h4>
                                     <p class="card-text-left"><b>제작년도</b> : {{ mediaTitle.prodYear }}</p>
                                     <p class="card-text-left"><b>장르</b> : {{ mediaTitle.genre }}</p>
-                                    <p class="card-text-left"><b>키워드</b> : {{ mediaTitle.keywords }}</p>
+                                    <p class="card-text-left"><b>키워드</b> : {{ mediaTitle.keyword }}</p>
                                     <p class="card-text-left"><b>상세</b> : <a :href="mediaTitle.kmdbUrl">KMDB 홈페이지</a></p>
                                 </div>
 
@@ -73,8 +73,10 @@ export default {
 
     created() {
         this.title = this.$route.params.title;
+        this.docid = this.$route.params.docid;
+        console.log('===========');
         console.log(this.$route.params.title);
-        console.log(this.title);
+        console.log('route : ' + this.$route.params.docid);
         this.searchMedia();
 
         console.log('created');
@@ -113,26 +115,62 @@ export default {
                 query: this.title, // 정확도를 높이기 위해 query로 동시에 검색
             };
 
+            // mediaList(
+            //     params,
+            //     ({ data }) => {
+            //         const resultData = data['Data'][0]['Result'][0];
+
+            //         // resultData.forEach((e) => {
+            //         this.mediaTitle = {
+            //             title: this.$route.params.title,
+            //             kmdbUrl: resultData.kmdbUrl,
+            //             prodYear: resultData.prodYear, // 제작년도
+            //             // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
+            //             keywords: resultData.keywords,
+            //             stills: resultData.posters.split('|')[0],
+            //             genre: resultData.genre,
+            //         };
+            //         // this.mediaTitleList.push(this.mediaTitle);
+            //         // });
+            //     },
+            //     error => {
+            //         console.log(error);
+            //     }
+            // );
+
             mediaList(
                 params,
                 ({ data }) => {
-                    const resultData = data['Data'][0]['Result'][0];
-
-                    // resultData.forEach((e) => {
-                    this.mediaTitle = {
-                        title: this.$route.params.title,
-                        kmdbUrl: resultData.kmdbUrl,
-                        prodYear: resultData.prodYear, // 제작년도
-                        // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
-                        keywords: resultData.keywords,
-                        stills: resultData.posters.split('|')[0],
-                        genre: resultData.genre,
-                    };
-                    // this.mediaTitleList.push(this.mediaTitle);
-                    // });
+                    const resultData = data['Data'][0]['Result'];
+                    console.log(resultData);
+                    console.log(this.$route.params.docid);
+                    resultData.forEach(e => {
+                        console.log(e.DOCID);
+                        if (e.DOCID === this.docid) {
+                            this.mediaTitle = {
+                                title: e.title.replace(/ !HS | !HE /g, '').trim(),
+                                kmdbUrl: e.kmdbUrl,
+                                prodYear: e.prodYear, // 제작년도
+                                keyword: e.keyword,
+                                genre: e.genre,
+                                stlls: e.posters.split('|')[0],
+                                docid: e.DOCID,
+                            };
+                            console.log('MMMMMMMMMMMMmediaTitle', this.mediaTitle);
+                        }
+                    });
                 },
                 error => {
                     console.log(error);
+                    // 토스트에 출력할 데이터
+                    let toast_data = {
+                        title: 'Error', // Success, Fail 등 상태를 표기
+                        sub: 'Spot List', // 상태가 일어난 위치 or 기능 표기
+                        content: '영화 로딩 중 에러가 발생하였습니다.', // 내용 표기
+                    };
+
+                    this.SET_TOAST(toast_data);
+                    this.SET_TOAST_CNT();
                 }
             );
         },
@@ -143,28 +181,6 @@ export default {
             });
         },
 
-        // //api 불러오기
-        // loadScript() {
-        //     const script = document.createElement("script");
-
-        //     script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
-        //     script.onload = () => {
-        //         window.kakao.maps.load(this.loadMap);
-        //     };
-
-        //     document.head.appendChild(script);
-        // },
-
-        // //맵 출력하기
-        // loadMap() {
-        //     var mapContainer = document.getElementById("map"); // 지도를 표시할 div
-        //     var mapOption = {
-        //         center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
-        //         level: 5, // 지도의 확대 레벨
-        //     };
-
-        //     this.map = new window.kakao.maps.Map(mapContainer, mapOption);
-        // },
         //api 불러오기
         loadScript() {
             const script = document.createElement('script');
@@ -225,7 +241,8 @@ export default {
             mediaSpot: Object,
             mediaTitle: Object,
             title: String,
-            listCount: 1,
+            docid: String,
+            listCount: 20,
             mediaSpotListLoaded: false,
             positions: [],
         };
