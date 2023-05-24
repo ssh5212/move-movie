@@ -18,8 +18,8 @@
                 <!-- [S] map -->
                 <div class="col-lg-7 pb-2 pt-5">
                     <h3 class="pb-2">작품 스팟</h3>
-                    <KakaoMap :mediaSpotList="mediaSpotList"></KakaoMap>
-                    <!-- <div id="map" style="width: 100%; height: 100px"></div> -->
+                    <!-- <KakaoMap :mediaSpotList="mediaSpotList"></KakaoMap> -->
+                    <div id="map" style="width: 100%; height: 500px"></div>
                 </div>
                 <!-- [E] map -->
 
@@ -54,20 +54,22 @@
             <hr class="mb-5" />
 
             <!-- 상세 스팟 -->
-            <MediaSpotListItem v-for="(mediaSpot, index) in mediaSpotList" :key="index" :mediaSpot="mediaSpot"></MediaSpotListItem>
+            <template v-if="mediaSpotListLoaded">
+                <MediaSpotListItem v-for="(mediaSpot, index) in mediaSpotList" :key="index" :mediaSpot="mediaSpot"></MediaSpotListItem>
+            </template>
         </div>
         <!-- [E] body -->
     </div>
 </template>
 
 <script>
-import MediaSpotListItem from '@/components/media/MediaSpotListItem.vue';
-import { mediaList, spotList } from '@/api/media.js';
-import KakaoMap from '@/components/KakaoMap.vue';
+import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
+import { mediaList, spotList } from "@/api/media.js";
+// import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
-    name: 'MediaSpotList',
-    components: { MediaSpotListItem, KakaoMap },
+    name: "MediaSpotList",
+    components: { MediaSpotListItem },
     data() {
         return {
             mediaSpotList: [],
@@ -75,33 +77,40 @@ export default {
             mediaTitle: Object,
             title: String,
             listCount: 1,
+            mediaSpotListLoaded: false,
+            positions: [],
         };
     },
 
     created() {
         this.title = this.$route.params.title;
         this.searchMedia();
+
+        console.log("created");
         this.searchSpot();
     },
 
     mounted() {
-        // if (window.kakao && window.kakao.maps) {
-        //     this.loadMap();
-        // } else {
-        //     this.loadScript();
-        // }
-        // this.loadArea(); // 지역 불러오기
-        // this.addEventMethod(); // 이벤트 등록
+        if (window.kakao && window.kakao.maps) {
+            this.loadMap();
+        } else {
+            this.loadScript();
+        }
+
+        setTimeout(() => {
+            this.makeSpotList();
+            this.loadMaker();
+        }, 300);
     },
 
     methods: {
         // 관련 스폿 리스트 가져오기
         searchSpot() {
-            let params = this.title;
+            let params = this.$route.params.title;
 
             spotList(params, ({ data }) => {
-                // console.log(data[1]);
                 this.mediaSpotList = data.spots;
+                this.mediaSpotListLoaded = true; // 데이터 로드 완료 상태로 설정
             });
         },
 
@@ -115,29 +124,32 @@ export default {
             mediaList(
                 params,
                 ({ data }) => {
-                    const resultData = data['Data'][0]['Result'][0];
+                    const resultData = data["Data"][0]["Result"][0];
 
                     // resultData.forEach((e) => {
                     this.mediaTitle = {
-                        title: resultData.title.replace(/!HS |!HE /g, '').trim(),
+                        title: resultData.title
+                            .replace(/!HS |!HE /g, "")
+                            .replace(/\s+/g, " ")
+                            .trim(),
                         kmdbUrl: resultData.kmdbUrl,
                         prodYear: resultData.prodYear, // 제작년도
                         // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
                         keywords: resultData.keywords,
-                        stills: resultData.posters.split('|')[0],
+                        stills: resultData.posters.split("|")[0],
                         genre: resultData.genre,
                     };
                     // this.mediaTitleList.push(this.mediaTitle);
                     // });
                 },
-                error => {
+                (error) => {
                     console.log(error);
                 }
             );
         },
         moveSpotCreate() {
             this.$router.push({
-                name: 'spotCreate',
+                name: "spotCreate",
                 params: { spot: this.mediaTitle },
             });
         },
@@ -164,6 +176,59 @@ export default {
 
         //     this.map = new window.kakao.maps.Map(mapContainer, mapOption);
         // },
+        //api 불러오기
+        loadScript() {
+            const script = document.createElement("script");
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+            script.onload = () => {
+                window.kakao.maps.load(this.loadMap);
+            };
+
+            document.head.appendChild(script);
+        },
+
+        //맵 출력하기
+        loadMap() {
+            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+            var mapOption = {
+                center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
+                level: 5, // 지도의 확대 레벨
+            };
+
+            this.map = new window.kakao.maps.Map(mapContainer, mapOption);
+        },
+
+        makeSpotList() {
+            this.positions = [];
+            this.mediaSpotList.forEach((mediaSpot) => {
+                let obj = {};
+                obj.title = mediaSpot.spot_name;
+                obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
+
+                this.positions.push(obj);
+            });
+        },
+
+        loadMaker() {
+            // 마커를 생성합니다
+            this.markers = [];
+            this.positions.forEach((position) => {
+                const marker = new window.kakao.maps.Marker({
+                    map: this.map, // 마커를 표시할 지도
+                    position: position.latlng, // 마커를 표시할 위치
+                    title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    //   image: markerImage, // 마커의 이미지
+                });
+                this.markers.push(marker);
+            });
+            // console.log("마커수 ::: " + this.markers.length);
+
+            // 4. 지도를 이동시켜주기
+            // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
+            const bounds = this.positions.reduce((bounds, position) => bounds.extend(position.latlng), new window.kakao.maps.LatLngBounds());
+
+            this.map.setBounds(bounds);
+        },
     },
 };
 </script>

@@ -19,4 +19,9 @@ async function spotByspotpk(params, success, fail) {
     await api.get(`/spot/${params}`).then(success).catch(fail);
 }
 
-export { spotBymovie, spotAll, spotBygugun, spotByspotpk };
+async function register(params, success, fail) {
+    console.log(params);
+    await api.post(`/spot`, params).then(success).catch(fail);
+}
+
+export { spotBymovie, spotAll, spotBygugun, spotByspotpk, register };

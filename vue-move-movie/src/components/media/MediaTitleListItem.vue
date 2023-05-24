@@ -29,6 +29,7 @@ export default {
                 name: "spotList",
                 params: { title: this.mediaTitle.title, prodYear: this.mediaTitle.prodYear },
             });
+            console.log(this.mediaTitle);
         },
 
         // 이미지 처리

@@ -52,8 +52,8 @@
 	</select>
 	
 	<insert id="register" parameterType="SpotDto">
-		INSERT INTO spot(spot_name,spot_movie_title,spot_scene_desc,spot_lat,spot_lon,spot_address,spot_road_address,spot_filming_seq)
-		VALUES(#{spot_name},#{spot_movie_title},#{spot_scene_desc},#{spot_lat},#{spot_lon},#{spot_address},#{spot_road_address},#{spot_filming_seq});
+		INSERT INTO spot(spot_name,spot_movie_title,spot_scene_desc,spot_lat,spot_lon,spot_address,spot_road_address,spot_filming_seq, spot_img_src)
+		VALUES(#{spot_name},#{spot_movie_title},#{spot_scene_desc},#{spot_lat},#{spot_lon},#{spot_address},#{spot_road_address},#{spot_filming_seq}, #{spot_img_src});
 	</insert>
 	
 	

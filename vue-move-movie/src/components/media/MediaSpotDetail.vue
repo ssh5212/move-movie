@@ -18,7 +18,7 @@
                 <!-- [S] Movie -->
                 <div class="col-lg-7 pb-2 pt-5">
                     <h3 class="pb-2">작중 스팟 장면</h3>
-                    <img src="https://via.placeholder.com/1920x1080" alt="..." style="width: 100%" />
+                    <img :src="img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
 
                     <h4 class="pt-4 pb-3">{{ mediaSpot.spot_name }}</h4>
                     <p class="mb-2 text-left">촬영 영화 : {{ mediaSpot.spot_movie_title }}</p>
@@ -57,18 +57,18 @@
 </template>
 
 <script>
-import MediaSpotDetailItem from '@/components/media/MediaSpotDetailItem.vue';
-import { mapState, mapMutations } from 'vuex';
-import { getSpotInstance } from '@/api/media.js';
+import MediaSpotDetailItem from "@/components/media/MediaSpotDetailItem.vue";
+import { mapState, mapMutations } from "vuex";
+import { getSpotInstance } from "@/api/media.js";
 
-const mediaStore = 'mediaStore';
+const mediaStore = "mediaStore";
 
 export default {
-    name: 'MediaSpotDetail',
+    name: "MediaSpotDetail",
     components: { MediaSpotDetailItem },
 
     computed: {
-        ...mapState(mediaStore, ['bucket', 'media']),
+        ...mapState(mediaStore, ["bucket", "media"]),
     },
 
     data() {
@@ -82,6 +82,7 @@ export default {
         this.mediaSpot = this.media;
 
         this.getSpotInstance();
+        this.img_src = process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
     },
 
     mounted() {
@@ -96,12 +97,12 @@ export default {
     },
 
     methods: {
-        ...mapMutations(mediaStore, ['SET_MEDIA']),
+        ...mapMutations(mediaStore, ["SET_MEDIA"]),
 
         //api 불러오기
         loadScript() {
-            const script = document.createElement('script');
-            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
+            const script = document.createElement("script");
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -114,7 +115,7 @@ export default {
                 this.bucket.push(this.mediaSpot);
             } else {
                 let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
-                this.bucket.forEach(b => {
+                this.bucket.forEach((b) => {
                     if (b.spot_pk == this.mediaSpot.spot_pk) {
                         isok = 0;
                     }
@@ -127,7 +128,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -138,14 +139,14 @@ export default {
 
         moveSpotCreate() {
             this.$router.push({
-                name: 'spotCreate',
+                name: "spotCreate",
             });
         },
 
         // [function - 필수] 검색 기능 구현 완료 후 연결하기
         moveRelationBucket() {
             this.$router.push({
-                name: 'bucketList',
+                name: "bucketList",
                 params: { no: this.mediaSpot.spot_instance_pk },
             });
         },
@@ -161,7 +162,7 @@ export default {
                     // console.log(this.spotInstance);
                     // console.log(this.spotInstance[0]);
                 },
-                error => {
+                (error) => {
                     console.log(error);
                 }
             );
