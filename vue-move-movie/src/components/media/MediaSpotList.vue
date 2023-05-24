@@ -3,7 +3,12 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
+                <img
+                    src="@/assets/img/intro-half-img01.jpg"
+                    alt=""
+                    width="1920"
+                    height="auto"
+                />
             </div>
 
             <div class="jc-text">
@@ -30,23 +35,50 @@
                         <div class="row no-gutters">
                             <div class="col-md-6">
                                 <div class="h-100 d-flex align-items-center">
-                                    <img :src="mediaTitle.stills || require('@/assets/img/no_img.png')" alt="..." style="width: 100%" />
+                                    <img
+                                        :src="
+                                            mediaTitle.stills ||
+                                            require('@/assets/img/no_img.png')
+                                        "
+                                        alt="..."
+                                        style="width: 100%"
+                                    />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
                                     <h4 class="">{{ mediaTitle.title }}</h4>
-                                    <p class="card-text-left"><b>제작년도</b> : {{ mediaTitle.prodYear }}</p>
-                                    <p class="card-text-left"><b>장르</b> : {{ mediaTitle.genre }}</p>
-                                    <p class="card-text-left"><b>키워드</b> : {{ mediaTitle.keywords }}</p>
-                                    <p class="card-text-left"><b>상세</b> : <a :href="mediaTitle.kmdbUrl">KMDB 홈페이지</a></p>
+                                    <p class="card-text-left">
+                                        <b>제작년도</b> :
+                                        {{ mediaTitle.prodYear }}
+                                    </p>
+                                    <p class="card-text-left">
+                                        <b>장르</b> : {{ mediaTitle.genre }}
+                                    </p>
+                                    <p class="card-text-left">
+                                        <b>키워드</b> :
+                                        {{ mediaTitle.keywords }}
+                                    </p>
+                                    <p class="card-text-left">
+                                        <b>상세</b> :
+                                        <a :href="mediaTitle.kmdbUrl"
+                                            >KMDB 홈페이지</a
+                                        >
+                                    </p>
                                 </div>
 
                                 <!-- <button class="btn btn-dark m-2 mb-4 col-md-5 col-11 mb-3" variant="primary" @click="moveRelationBucket">스폿 관련 버킷 리스트 보기</button> -->
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-dark my-3" style="width: 100%" variant="primary" @click="moveSpotCreate">스팟 생성하기</button>
+                    <button
+                        class="btn btn-dark my-3"
+                        style="width: 100%"
+                        variant="primary"
+                        @click="moveSpotCreate"
+                    >
+                        스팟 생성하기
+                    </button>
                 </div>
                 <!-- [E] Movie -->
             </div>
@@ -55,7 +87,11 @@
 
             <!-- 상세 스팟 -->
             <template v-if="mediaSpotListLoaded">
-                <MediaSpotListItem v-for="(mediaSpot, index) in mediaSpotList" :key="index" :mediaSpot="mediaSpot"></MediaSpotListItem>
+                <MediaSpotListItem
+                    v-for="(mediaSpot, index) in mediaSpotList"
+                    :key="index"
+                    :mediaSpot="mediaSpot"
+                ></MediaSpotListItem>
             </template>
         </div>
         <!-- [E] body -->
@@ -63,22 +99,18 @@
 </template>
 
 <script>
-import MediaSpotListItem from '@/components/media/MediaSpotListItem.vue';
-import { mediaList, spotList } from '@/api/media.js';
+import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
+import { mediaList, spotList } from "@/api/media.js";
 // import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
-    name: 'MediaSpotList',
+    name: "MediaSpotList",
     components: { MediaSpotListItem },
 
-    created() {
+    async created() {
         this.title = this.$route.params.title;
-        console.log(this.$route.params.title);
-        console.log(this.title);
         this.searchMedia();
-
-        console.log('created');
-        this.searchSpot();
+        await this.searchSpot();
     },
 
     mounted() {
@@ -89,8 +121,10 @@ export default {
         }
 
         setTimeout(() => {
-            this.makeSpotList();
-            this.loadMaker();
+            if (this.mediaSpotList.length > 0) {
+                this.makeSpotList();
+                this.loadMaker();
+            }
         }, 300);
     },
 
@@ -102,7 +136,6 @@ export default {
             spotList(params, ({ data }) => {
                 this.mediaSpotList = data.spots;
                 this.mediaSpotListLoaded = true; // 데이터 로드 완료 상태로 설정
-                console.log('mediaSpotListLoaded is true');
             });
         },
 
@@ -116,7 +149,7 @@ export default {
             mediaList(
                 params,
                 ({ data }) => {
-                    const resultData = data['Data'][0]['Result'][0];
+                    const resultData = data["Data"][0]["Result"][0];
 
                     // resultData.forEach((e) => {
                     this.mediaTitle = {
@@ -125,20 +158,20 @@ export default {
                         prodYear: resultData.prodYear, // 제작년도
                         // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
                         keywords: resultData.keywords,
-                        stills: resultData.posters.split('|')[0],
+                        stills: resultData.posters.split("|")[0],
                         genre: resultData.genre,
                     };
                     // this.mediaTitleList.push(this.mediaTitle);
                     // });
                 },
-                error => {
+                (error) => {
                     console.log(error);
                 }
             );
         },
         moveSpotCreate() {
             this.$router.push({
-                name: 'spotCreate',
+                name: "spotCreate",
                 params: { spot: this.mediaTitle },
             });
         },
@@ -167,8 +200,9 @@ export default {
         // },
         //api 불러오기
         loadScript() {
-            const script = document.createElement('script');
-            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
+            const script = document.createElement("script");
+            script.src =
+                "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -178,7 +212,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -189,10 +223,14 @@ export default {
 
         makeSpotList() {
             // this.positions = [];
-            this.mediaSpotList.forEach(mediaSpot => {
+            console.log(this.mediaSpotList);
+            this.mediaSpotList.forEach((mediaSpot) => {
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
-                obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
+                obj.latlng = new window.kakao.maps.LatLng(
+                    mediaSpot.spot_lat,
+                    mediaSpot.spot_lon
+                );
 
                 this.positions.push(obj);
             });
@@ -200,8 +238,9 @@ export default {
 
         loadMaker() {
             // 마커를 생성합니다
+            console.log(this.loadMaker);
             this.markers = [];
-            this.positions.forEach(position => {
+            this.positions.forEach((position) => {
                 const marker = new window.kakao.maps.Marker({
                     map: this.map, // 마커를 표시할 지도
                     position: position.latlng, // 마커를 표시할 위치
@@ -214,8 +253,11 @@ export default {
 
             // 4. 지도를 이동시켜주기
             // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
-            const bounds = this.positions.reduce((bounds, position) => bounds.extend(position.latlng), new window.kakao.maps.LatLngBounds());
-
+            const bounds = this.positions.reduce(
+                (bounds, position) => bounds.extend(position.latlng),
+                new window.kakao.maps.LatLngBounds()
+            );
+            console.log(bounds);
             this.map.setBounds(bounds);
         },
     },

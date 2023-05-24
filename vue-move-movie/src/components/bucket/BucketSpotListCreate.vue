@@ -94,7 +94,6 @@ export default {
         ...mapState(userStore, ["userInfo"]),
     },
     created() {
-        console.log(this.bucket);
         // 버킷 리스트 데이터 가져오기
         // 유저 정보 가져오기
     },

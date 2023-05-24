@@ -37,6 +37,7 @@ async function getMediaList(params, success, fail) {
 
 // get spot instance
 async function getSpotInstance(params, success, fail) {
+    console.log(params);
     await localApi.get(`/spot/spot_instance/${params}`).then(success).catch(fail);
 }
 

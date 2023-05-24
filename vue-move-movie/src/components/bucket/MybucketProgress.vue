@@ -1,68 +1,65 @@
 <template>
-  <div>
-    <div class="mb-4">
-      <p style="text-align: left; margin-bottom: 5px" @click="movebucket">
-        {{ this.$props.bucket.bucket_title }}
-      </p>
-      <div class="progress" style="height: 5px">
-        <b-progress
-          :value="(checknums / checkmax) * 100"
-          :max="100"
-          show-progress
-          animated
-          style="width: 100%"
-        ></b-progress>
-      </div>
+    <div>
+        <div class="mb-4">
+            <p style="text-align: left; margin-bottom: 5px" @click="movebucket">
+                {{ this.$props.bucket.bucket_title }}
+            </p>
+            <div class="progress" style="height: 5px">
+                <b-progress
+                    :value="(checknums / checkmax) * 100"
+                    :max="100"
+                    show-progress
+                    animated
+                    style="width: 100%"
+                ></b-progress>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 import { selectUserBucket } from "@/api/mybucket.js";
 
 export default {
-  name: "MybucketProgress",
-  components: {},
-  props: {
-    bucket: Object,
-  },
-  data() {
-    return {
-      message: "",
-      MyBucketList: [],
-      checknums: 1,
-      checkmax: 1,
-    };
-  },
-  created() {
-    console.log(this.$props.bucket);
-    let mybucket = {
-      bucket_pk: this.$props.bucket.bucket_pk,
-      user_pk: this.$props.bucket.user_pk,
-    };
-    let checknnum = 0;
-    console.log(mybucket);
-    selectUserBucket(mybucket, ({ data }) => {
-      this.MyBucketList = data.MyBucket;
-      this.checkmax = this.MyBucketList.length;
-      this.MyBucketList.forEach((MyBucket) => {
-        console.log(MyBucket);
-        if (MyBucket.checked == 1) {
-          checknnum++;
-        }
-      });
-
-      this.checknums = checknnum;
-    });
-  },
-  methods: {
-    movebucket() {
-      this.$router.push({
-        name: `bucketDetail`,
-        params: { no: this.$props.bucket.bucket_pk },
-      });
+    name: "MybucketProgress",
+    components: {},
+    props: {
+        bucket: Object,
     },
-  },
+    data() {
+        return {
+            message: "",
+            MyBucketList: [],
+            checknums: 1,
+            checkmax: 1,
+        };
+    },
+    created() {
+        let mybucket = {
+            bucket_pk: this.$props.bucket.bucket_pk,
+            user_pk: this.$props.bucket.user_pk,
+        };
+        let checknnum = 0;
+        selectUserBucket(mybucket, ({ data }) => {
+            this.MyBucketList = data.MyBucket;
+            this.checkmax = this.MyBucketList.length;
+            this.MyBucketList.forEach((MyBucket) => {
+                if (MyBucket.checked == 1) {
+                    checknnum++;
+                }
+            });
+
+            this.checknums = checknnum;
+        });
+    },
+    methods: {
+        movebucket() {
+            this.$router.push({
+                name: `bucketDetail`,
+                params: { no: this.$props.bucket.bucket_pk },
+            });
+        },
+    },
 };
 </script>
 
