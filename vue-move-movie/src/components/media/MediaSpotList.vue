@@ -63,30 +63,21 @@
 </template>
 
 <script>
-import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
-import { mediaList, spotList } from "@/api/media.js";
+import MediaSpotListItem from '@/components/media/MediaSpotListItem.vue';
+import { mediaList, spotList } from '@/api/media.js';
 // import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
-    name: "MediaSpotList",
+    name: 'MediaSpotList',
     components: { MediaSpotListItem },
-    data() {
-        return {
-            mediaSpotList: [],
-            mediaSpot: Object,
-            mediaTitle: Object,
-            title: String,
-            listCount: 1,
-            mediaSpotListLoaded: false,
-            positions: [],
-        };
-    },
 
     created() {
         this.title = this.$route.params.title;
+        console.log(this.$route.params.title);
+        console.log(this.title);
         this.searchMedia();
 
-        console.log("created");
+        console.log('created');
         this.searchSpot();
     },
 
@@ -111,6 +102,7 @@ export default {
             spotList(params, ({ data }) => {
                 this.mediaSpotList = data.spots;
                 this.mediaSpotListLoaded = true; // 데이터 로드 완료 상태로 설정
+                console.log('mediaSpotListLoaded is true');
             });
         },
 
@@ -124,32 +116,29 @@ export default {
             mediaList(
                 params,
                 ({ data }) => {
-                    const resultData = data["Data"][0]["Result"][0];
+                    const resultData = data['Data'][0]['Result'][0];
 
                     // resultData.forEach((e) => {
                     this.mediaTitle = {
-                        title: resultData.title
-                            .replace(/!HS |!HE /g, "")
-                            .replace(/\s+/g, " ")
-                            .trim(),
+                        title: this.$route.params.title,
                         kmdbUrl: resultData.kmdbUrl,
                         prodYear: resultData.prodYear, // 제작년도
                         // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
                         keywords: resultData.keywords,
-                        stills: resultData.posters.split("|")[0],
+                        stills: resultData.posters.split('|')[0],
                         genre: resultData.genre,
                     };
                     // this.mediaTitleList.push(this.mediaTitle);
                     // });
                 },
-                (error) => {
+                error => {
                     console.log(error);
                 }
             );
         },
         moveSpotCreate() {
             this.$router.push({
-                name: "spotCreate",
+                name: 'spotCreate',
                 params: { spot: this.mediaTitle },
             });
         },
@@ -178,8 +167,8 @@ export default {
         // },
         //api 불러오기
         loadScript() {
-            const script = document.createElement("script");
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+            const script = document.createElement('script');
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -189,7 +178,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -199,8 +188,8 @@ export default {
         },
 
         makeSpotList() {
-            this.positions = [];
-            this.mediaSpotList.forEach((mediaSpot) => {
+            // this.positions = [];
+            this.mediaSpotList.forEach(mediaSpot => {
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
                 obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
@@ -212,7 +201,7 @@ export default {
         loadMaker() {
             // 마커를 생성합니다
             this.markers = [];
-            this.positions.forEach((position) => {
+            this.positions.forEach(position => {
                 const marker = new window.kakao.maps.Marker({
                     map: this.map, // 마커를 표시할 지도
                     position: position.latlng, // 마커를 표시할 위치
@@ -229,6 +218,17 @@ export default {
 
             this.map.setBounds(bounds);
         },
+    },
+    data() {
+        return {
+            mediaSpotList: [],
+            mediaSpot: Object,
+            mediaTitle: Object,
+            title: String,
+            listCount: 1,
+            mediaSpotListLoaded: false,
+            positions: [],
+        };
     },
 };
 </script>
