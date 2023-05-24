@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <div id="wrap-content">
+            <ToastView></ToastView>
             <header-view></header-view>
             <router-view />
             <sidebar-view></sidebar-view>
@@ -99,16 +100,18 @@ body {
 </style>
 
 <script>
-import HeaderView from '@/components/layout/HeaderView.vue';
-import FooterView from '@/components/layout/FooterView.vue';
-import SidebarView from '@/components/layout/SidebarView.vue';
+import HeaderView from "@/components/layout/HeaderView.vue";
+import FooterView from "@/components/layout/FooterView.vue";
+import SidebarView from "@/components/layout/SidebarView.vue";
+import ToastView from "@/components/layout/ToastView.vue";
 
 export default {
-    name: 'HomeView',
+    name: "HomeView",
     components: {
         HeaderView,
         FooterView,
         SidebarView,
+        ToastView,
     },
 };
 </script>

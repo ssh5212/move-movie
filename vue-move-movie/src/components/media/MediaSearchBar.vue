@@ -17,10 +17,6 @@ const mediaStore = "mediaStore";
 export default {
     emits: ["msg"],
     name: "MediaSearchBar",
-    props: {
-        gugun_code: String,
-        sido_code: String,
-    },
     data() {
         return {
             sidoCode: null,

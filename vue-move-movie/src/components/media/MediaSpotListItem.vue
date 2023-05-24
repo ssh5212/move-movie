@@ -3,7 +3,7 @@
     <div class="card mb-3 my-5" style="width: 100%">
         <div class="row no-gutters align-items-center">
             <div class="col-md-3 p-3 d-flex justify-content-center align-items-center">
-                <img :src="mediaSpot.spot_img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
+                <img :src="img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
             </div>
             <div class="col-md-8">
                 <div class="card-body">
@@ -33,15 +33,13 @@ const mediaStore = "mediaStore";
 export default {
     name: "MediaSpotListItem",
 
-    props: {
-        mediaSpot: Object,
-    },
-
     computed: {
         ...mapState(mediaStore, ["bucket"]),
     },
 
-    created() {},
+    created() {
+        this.img_src = process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
+    },
     methods: {
         ...mapMutations(mediaStore, ["SET_MEDIA"]),
         moveSpotDetail() {
@@ -71,6 +69,14 @@ export default {
                 }
             }
         },
+    },
+    data() {
+        return {
+            img_src: "",
+        };
+    },
+    props: {
+        mediaSpot: Object,
     },
 };
 </script>

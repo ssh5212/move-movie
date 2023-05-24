@@ -16,10 +16,16 @@ public class AddResourceHandler implements WebMvcConfigurer {
 	@Value("${request.Path.profile}")
 	private String profilerequest;
 	
+	@Value("${file.Path.spotfile}")
+    private String spotfileImagePath;
+	
+	@Value("${request.Path.spotfile}")
+	private String spotfilerequest;
+	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(profilerequest)
-                .addResourceLocations("file:///" + profileImagePath + File.separator)
+        registry.addResourceHandler(profilerequest, spotfilerequest)
+                .addResourceLocations("file:///" + profileImagePath + File.separator, "file:///" + spotfileImagePath + File.separator)
                 .setCachePeriod(60 * 10)
                 .resourceChain(true);
     }

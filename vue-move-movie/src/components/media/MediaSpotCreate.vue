@@ -26,7 +26,8 @@
                             <input type="text" class="form-control" id="spot_movie_title" placeholder="" v-model="spot.spot_movie_title" readonly />
                         </div>
 
-                        <MediaSearchBar :sido_code="sido_code" :gugun_code="gugun_code" @msg="bindmsg"></MediaSearchBar>
+                        <MediaSearchBar @msg="bindmsg"></MediaSearchBar>
+                        <!-- <MediaSearchBar :sido_code="sido_code" :gugun_code="gugun_code" @msg="bindmsg"></MediaSearchBar> -->
 
                         <div class="mb-3">
                             <label for="spot_scene_desc">spot_scene_desc</label>
@@ -71,8 +72,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <input class="float-left mb-2" type="file" ref="fileInput" @change="handleFileSelect" />
-                            <button class="btn btn-dark btn-lg btn-block" @click="uploadFile">파일 업로드</button>
+                            <input class="float-left mb-2" type="file" id="fileInput" ref="fileInput" @change="handleFileUpload" />
+                            <!-- <button class="btn btn-dark btn-lg btn-block" @click="uploadFile">파일 업로드</button> -->
                         </div>
 
                         <hr class="my-5" />
@@ -88,7 +89,7 @@
 <script>
 import axios from "axios";
 import MediaSearchBar from "./MediaSearchBar.vue";
-import { register } from "@/api/media.js";
+// import { register } from "@/api/media.js";
 import { mapState } from "vuex";
 const mediaStore = "mediaStore";
 
@@ -116,6 +117,7 @@ export default {
             apiURL: "https://dapi.kakao.com/v2/local/search/address.json",
             query: "",
             apiKey: "",
+            file: Object,
         };
     },
     computed: {
@@ -124,7 +126,7 @@ export default {
     created() {
         console.log(this.$route.params.spot);
         console.log(this.$route.params.spot.title);
-        this.spot.spot_movie_title = this.$route.params.spot.title;
+        this.spot.spot_movie_title = this.$route.params.spot.title.replace(/\s+/g, " ").trim();
         this.apiKey = process.env.VUE_APP_KAKAO_MAP_API_KEY2;
     },
 
@@ -139,6 +141,8 @@ export default {
             console.log(this.spot.sido_code);
         },
         spotRegister() {
+            const throwData = new FormData();
+
             const requestURL = `${this.apiURL}?query=${this.spot.spot_address}`;
             console.log(requestURL);
             console.log(process.env.VUE_APP_KAKAO_MAP_API_KEY2);
@@ -158,14 +162,41 @@ export default {
                     // console.log(this.sidoCode);
                     // console.log("vuex의 시도구군");
 
-                    console.log(this.spot.spot_lon);
-                    console.log(this.spot.spot_lon);
+                    // console.log(this.spot.spot_lon);
+                    // console.log(this.spot.spot_lon);
 
-                    const params = this.spot;
-                    register(params, ({ data }) => {
-                        console.log(data);
-                    });
-                    setTimeout(() => this.moveMedia(), 500);
+                    const jsonString = JSON.stringify(this.spot);
+                    const blob = new Blob([jsonString], { type: "application/json" });
+                    throwData.append("SpotDto", blob);
+
+                    throwData.append("file", this.file);
+
+                    // const params = throwData;
+
+                    const config = {
+                        method: "post",
+                        maxBodyLength: Infinity,
+                        url: "http://localhost:9003/movemovie/spot",
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        },
+                        data: throwData,
+                    };
+
+                    axios
+                        .request(config)
+                        .then((response) => {
+                            console.log(JSON.stringify(response.data));
+                            setTimeout(() => this.moveMedia(), 500);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                    // register(params, ({ data }) => {
+                    //     console.log(data);
+                    // });
+                    // setTimeout(() => this.moveMedia(), 500);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -184,20 +215,26 @@ export default {
             this.selectedFile = event.target.files[0];
         },
 
-        uploadFile() {
-            const formData = new FormData();
-            formData.append("file", this.selectedFile);
+        // uploadFile() {
+        //     const formData = new FormData();
+        //     formData.append("file", this.selectedFile);
 
-            axios
-                .post(`${process.env.VUE_APP_API_BASE_URL}/api/file/upload`, formData)
-                .then((response) => {
-                    // 파일 업로드 성공 시 처리
-                    console.log(response);
-                })
-                .catch((error) => {
-                    // 파일 업로드 실패 시 처리
-                    console.error(error);
-                });
+        //     axios
+        //         .post(`${process.env.VUE_APP_API_BASE_URL}/api/file/upload`, formData)
+        //         .then((response) => {
+        //             // 파일 업로드 성공 시 처리
+        //             console.log(response);
+        //         })
+        //         .catch((error) => {
+        //             // 파일 업로드 실패 시 처리
+        //             console.error(error);
+        //         });
+        // },
+        handleFileUpload(event) {
+            this.file = event.target.files[0];
+            console.log(this.file instanceof File);
+            this.selectedImage = URL.createObjectURL(this.file);
+            // this.selectedImage = event.target.files[0];
         },
     },
 };
