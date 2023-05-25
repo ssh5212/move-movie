@@ -3,12 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img
-                    src="@/assets/img/intro-half-img01.jpg"
-                    alt=""
-                    width="1920"
-                    height="auto"
-                />
+                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
@@ -22,30 +17,13 @@
                 <div class="col-md-8">
                     <form class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label for="email"
-                                >spot_name<span class="text-muted"></span
-                            ></label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="email"
-                                placeholder=""
-                                v-model="spot.spot_name"
-                            />
+                            <label for="email">spot_name<span class="text-muted"></span></label>
+                            <input type="text" class="form-control" id="email" placeholder="" v-model="spot.spot_name" />
                         </div>
 
                         <div class="mb-3">
-                            <label for="spot_movie_title"
-                                >spot_movie_title</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="spot_movie_title"
-                                placeholder=""
-                                v-model="spot.spot_movie_title"
-                                readonly
-                            />
+                            <label for="spot_movie_title">spot_movie_title</label>
+                            <input type="text" class="form-control" id="spot_movie_title" placeholder="" v-model="spot.spot_movie_title" readonly />
                         </div>
 
                         <MediaSearchBar @msg="bindmsg"></MediaSearchBar>
@@ -53,13 +31,7 @@
 
                         <div class="mb-3">
                             <label for="spot_scene_desc">spot_scene_desc</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="spot_scene_desc"
-                                placeholder=""
-                                v-model="spot.spot_scene_desc"
-                            />
+                            <input type="text" class="form-control" id="spot_scene_desc" placeholder="" v-model="spot.spot_scene_desc" />
                         </div>
 
                         <!-- <div class="mb-3">
@@ -84,9 +56,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="spot_road_address"
-                                >spot_road_address</label
-                            >
+                            <label for="spot_road_address">spot_road_address</label>
                             <input
                                 type="text"
                                 class="form-control"
@@ -97,37 +67,17 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="spot_filming_seq"
-                                >spot_filming_seq</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="spot_filming_seq"
-                                placeholder=""
-                                v-model="spot.spot_filming_seq"
-                            />
+                            <label for="spot_filming_seq">spot_filming_seq</label>
+                            <input type="text" class="form-control" id="spot_filming_seq" placeholder="" v-model="spot.spot_filming_seq" />
                         </div>
 
                         <div class="mb-3">
-                            <input
-                                class="float-left mb-2"
-                                type="file"
-                                id="fileInput"
-                                ref="fileInput"
-                                @change="handleFileUpload"
-                            />
+                            <input class="float-left mb-2" type="file" id="fileInput" ref="fileInput" @change="handleFileUpload" />
                             <!-- <button class="btn btn-dark btn-lg btn-block" @click="uploadFile">파일 업로드</button> -->
                         </div>
 
                         <hr class="my-5" />
-                        <button
-                            class="btn btn-dark btn-lg btn-block"
-                            type="button"
-                            @click="spotRegister"
-                        >
-                            등록
-                        </button>
+                        <button class="btn btn-dark btn-lg btn-block" type="button" @click="spotRegister">등록</button>
                     </form>
                     <div class="col-md-2"></div>
                 </div>
@@ -174,9 +124,7 @@ export default {
         ...mapState(mediaStore, ["sidos", "guguns", "medias"]),
     },
     created() {
-        this.spot.spot_movie_title = this.$route.params.spot.title
-            .replace(/\s+/g, " ")
-            .trim();
+        this.spot.spot_movie_title = this.$route.params.spot.title.replace(/\s+/g, " ").trim();
         this.apiKey = process.env.VUE_APP_KAKAO_MAP_API_KEY2;
     },
 

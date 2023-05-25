@@ -3,12 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img
-                    src="@/assets/img/intro-half-img01.jpg"
-                    alt=""
-                    width="1920"
-                    height="auto"
-                />
+                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
@@ -22,42 +17,23 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <div class="text-center mb-5">
-                        <img
-                            class="mb-4"
-                            src="@/assets/logo.png"
-                            alt=""
-                            width="72"
-                            height="auto"
-                        />
-                        <h1 class="mb-3 font-weight-normal">
-                            Melcome Move Movie!
-                        </h1>
+                        <img class="mb-4" src="@/assets/logo.png" alt="" width="72" height="auto" />
+                        <h1 class="mb-3 font-weight-normal">Melcome Move Movie!</h1>
                         <p>필름의 한 장 속으로 뛰어들 준비는 되셨나요?</p>
                     </div>
                     <hr class="my-5" />
 
                     <div class="mb-3">
                         Title :
-                        <b-input
-                            v-model="spotInstance.spot_instance_title"
-                        ></b-input>
+                        <b-input v-model="spotInstance.spot_instance_title"></b-input>
                         <img
                             v-if="Object.keys(selectedImage).length > 0"
                             :src="selectedImage"
                             alt="Uploaded Image"
-                            class="rounded-circle my-2"
-                            style="
-                                width: 220px;
-                                height: 220px;
-                                object-fit: cover;
-                            "
+                            class="my-2"
+                            style="width: auto; height: 220px; object-fit: cover"
                         /><br />
-                        <input
-                            type="file"
-                            id="fileInput"
-                            ref="fileInput"
-                            @change="handleFileUpload"
-                        /><br />
+                        <input type="file" id="fileInput" ref="fileInput" @change="handleFileUpload" /><br />
                     </div>
                     <!-- <h1 class="mb-3">Billing address</h1> -->
                     <form class="needs-validation" novalidate>
@@ -72,13 +48,7 @@
                         </b-row>
 
                         <hr class="my-5" />
-                        <button
-                            class="btn btn-dark btn-lg btn-block"
-                            type="button"
-                            @click="upload"
-                        >
-                            스팟 인증 하기
-                        </button>
+                        <button class="btn btn-dark btn-lg btn-block" type="button" @click="upload">스팟 인증 하기</button>
                     </form>
                 </div>
 
