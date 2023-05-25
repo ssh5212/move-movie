@@ -3,7 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
+                <img :src="getRandomImagePath()" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
@@ -93,6 +93,10 @@ export default {
         };
     },
     methods: {
+        getRandomImagePath() {
+            const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
+            return `/title-img-0${randomNumber}.png`;
+        },
         ...mapActions(userStore, ["userEdit"]),
         ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
 

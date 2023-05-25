@@ -13,7 +13,7 @@
 
 <style>
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: Jeju Gothic, Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -99,24 +99,22 @@ body {
 }
 
 .v-application {
-    font-family: 'Jeju Gothic', sans-serif !important;
+    font-family: "Jeju Gothic", sans-serif !important;
 }
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 .jejugothic * {
-    font-family: 'Jeju Gothic', sans-serif;
+    font-family: "Jeju Gothic", sans-serif;
 }
-
-
 </style>
 
 <script>
-import HeaderView from '@/components/layout/HeaderView.vue';
-import FooterView from '@/components/layout/FooterView.vue';
-import SidebarView from '@/components/layout/SidebarView.vue';
-import ToastView from '@/components/layout/ToastView.vue';
+import HeaderView from "@/components/layout/HeaderView.vue";
+import FooterView from "@/components/layout/FooterView.vue";
+import SidebarView from "@/components/layout/SidebarView.vue";
+import ToastView from "@/components/layout/ToastView.vue";
 
 export default {
-    name: 'HomeView',
+    name: "HomeView",
     components: {
         HeaderView,
         FooterView,

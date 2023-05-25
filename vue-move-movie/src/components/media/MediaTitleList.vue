@@ -3,7 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
+                <img src="@/assets/img/title-img-00.png" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">

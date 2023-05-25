@@ -3,7 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
+                <img :src="getRandomImagePath()" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
@@ -78,6 +78,10 @@ export default {
         // 유저 정보 가져오기
     },
     methods: {
+        getRandomImagePath() {
+            const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
+            return `/title-img-0${randomNumber}.png`;
+        },
         ...mapMutations(mediaStore, ["CLEAR_BUCKET_LIST"]),
         async register() {
             // 등록 로직
