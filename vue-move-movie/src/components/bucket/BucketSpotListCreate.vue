@@ -80,7 +80,7 @@ export default {
     methods: {
         getRandomImagePath() {
             const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
-            return `/title-img-0${randomNumber}.png`;
+            return `/img/title-img-0${randomNumber}.png`;
         },
         ...mapMutations(mediaStore, ["CLEAR_BUCKET_LIST"]),
         async register() {

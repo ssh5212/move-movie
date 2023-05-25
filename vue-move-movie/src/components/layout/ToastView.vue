@@ -18,28 +18,28 @@
 </template>
 
 <script>
-const toastStore = 'toastStore';
-import { mapState, mapMutations } from 'vuex';
+const toastStore = "toastStore";
+import { mapState, mapMutations } from "vuex";
 export default {
-    name: 'ToastView',
+    name: "ToastView",
     methods: {
         showToast() {
             const toast = this.$refs.toast;
-            toast.classList.remove('hide');
-            toast.classList.add('show');
+            toast.classList.remove("hide");
+            toast.classList.add("show");
             setTimeout(() => {
                 this.hideToast();
             }, 3000);
         },
         hideToast() {
             const toast = this.$refs.toast;
-            toast.classList.remove('show');
-            toast.classList.add('hide');
+            toast.classList.remove("show");
+            toast.classList.add("hide");
         },
     },
     computed: {
-        ...mapState(toastStore, ['toast_store']),
-        ...mapMutations(toastStore, ['SET_TOAST']),
+        ...mapState(toastStore, ["toast_store"]),
+        ...mapMutations(toastStore, ["SET_TOAST"]),
 
         // check_store_title() {
         //     return this.toast_store.title;
@@ -68,7 +68,7 @@ export default {
         //     this.showToast();
         // },
         check_store_count(val) {
-            console.log('check_store_count');
+            console.log("check_store_count");
             console.log(val);
             this.showToast();
         },
