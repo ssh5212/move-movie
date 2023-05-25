@@ -96,7 +96,7 @@ export default {
                     resultData.forEach((e) => {
                         // 성인물 제외
                         //  && e.genre !== "드라마"
-                        if (e.rating !== "18세관람가(청소년관람불가)") {
+                        if (e.rating !== "18세관람가(청소년관람불가)" && e.posters !== "") {
                             this.mediaTitle = {
                                 // title: e.title,
                                 title: e.title.replace(/ !HS | !HE /g, "").trim(),
