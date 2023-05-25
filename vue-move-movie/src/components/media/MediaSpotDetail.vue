@@ -7,7 +7,7 @@
             </div>
 
             <div class="jc-text">
-                <p class="vtext-big">영화 스팟 검색</p>
+                <p class="vtext-big">영화 스팟 상세 화면</p>
             </div>
         </div>
         <!-- [E] Intro Image -->
@@ -62,19 +62,19 @@
 </template>
 
 <script>
-import MediaSpotDetailItem from "@/components/media/MediaSpotDetailItem.vue";
-import { mapState, mapMutations } from "vuex";
-import { getSpotInstance } from "@/api/media.js";
-import { spotByspotpk } from "@/api/spot.js";
-
-const mediaStore = "mediaStore";
+import MediaSpotDetailItem from '@/components/media/MediaSpotDetailItem.vue';
+import { mapState, mapMutations } from 'vuex';
+import { getSpotInstance } from '@/api/media.js';
+import { spotByspotpk } from '@/api/spot.js';
+const toastStore = 'toastStore';
+const mediaStore = 'mediaStore';
 
 export default {
-    name: "MediaSpotDetail",
+    name: 'MediaSpotDetail',
     components: { MediaSpotDetailItem },
 
     computed: {
-        ...mapState(mediaStore, ["bucket", "media"]),
+        ...mapState(mediaStore, ['bucket', 'media']),
     },
 
     data() {
@@ -102,7 +102,7 @@ export default {
                 this.spotInstanceList = data.spots;
                 // console.log(this.spotInstance[0]);
             },
-            (error) => {
+            error => {
                 console.log(error);
             }
         );
@@ -132,12 +132,12 @@ export default {
             const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
             return `/img/title-img-0${randomNumber}.png`;
         },
-        ...mapMutations(mediaStore, ["SET_MEDIA"]),
-
+        ...mapMutations(mediaStore, ['SET_MEDIA']),
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
         //api 불러오기
         loadScript() {
-            const script = document.createElement("script");
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+            const script = document.createElement('script');
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -148,11 +148,29 @@ export default {
             // bucket이 비어 있는 경우
             if (this.bucket.length == 0) {
                 this.bucket.push(this.mediaSpot);
+                // 토스트에 출력할 데이터
+                let toast_data = {
+                    title: 'Success', // Error, Delete, Login 등 상태를 표기
+                    sub: 'Bucket Bag', // 상태가 일어난 위치 표기
+                    content: 'Bucket Bag에 담겼습니다.', // 내용 표기
+                };
+
+                this.SET_TOAST(toast_data);
+                this.SET_TOAST_CNT();
             } else {
                 let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
-                this.bucket.forEach((b) => {
+                this.bucket.forEach(b => {
                     if (b.spot_pk == this.mediaSpot.spot_pk) {
                         isok = 0;
+                        // 토스트에 출력할 데이터
+                        let toast_data = {
+                            title: 'Fail', // Error, Delete, Login 등 상태를 표기
+                            sub: 'Bucket Bag', // 상태가 일어난 위치 표기
+                            content: 'Bucket Bag에 이미 존재합니다.', // 내용 표기
+                        };
+
+                        this.SET_TOAST(toast_data);
+                        this.SET_TOAST_CNT();
                     }
                 });
                 if (isok == 1) {
@@ -163,7 +181,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -174,7 +192,7 @@ export default {
 
         moveSpotCreate() {
             this.$router.push({
-                name: "spotDetailCreate",
+                name: 'spotDetailCreate',
                 params: { no: this.$route.params.no },
             });
             window.scrollTo(0, 0);
@@ -183,7 +201,7 @@ export default {
         // [function - 필수] 검색 기능 구현 완료 후 연결하기
         moveRelationBucket() {
             this.$router.push({
-                name: "bucketList",
+                name: 'bucketList',
                 params: { no: this.mediaSpot.spot_instance_pk },
             });
             window.scrollTo(0, 0);
@@ -201,7 +219,7 @@ export default {
                     console.log(this.spotInstance);
                     // console.log(this.spotInstance[0]);
                 },
-                (error) => {
+                error => {
                     console.log(error);
                 }
             );
@@ -209,7 +227,7 @@ export default {
 
         makeSpotList() {
             this.positions = [];
-            this.spots_tmp.forEach((mediaSpot) => {
+            this.spots_tmp.forEach(mediaSpot => {
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
                 obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
@@ -221,7 +239,7 @@ export default {
         loadMaker() {
             // 마커를 생성합니다
             this.markers = [];
-            this.positions.forEach((position) => {
+            this.positions.forEach(position => {
                 const marker = new window.kakao.maps.Marker({
                     map: this.map, // 마커를 표시할 지도
                     position: position.latlng, // 마커를 표시할 위치

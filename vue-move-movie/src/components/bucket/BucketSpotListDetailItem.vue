@@ -1,16 +1,11 @@
 <template>
     <div>
-        <div class="m-3">
-            <img :src="img_src" alt="img" />
+        <div class="m-4">
+            <img :src="img_src" alt="img" style="width: 300px; height: 200px" class="pb-2" />
             <div>{{ spot.spot_name }}</div>
             <div v-if="isMine">
                 <div>
-                    <input
-                        type="checkbox"
-                        v-model="isChecked"
-                        @change="updatechecked"
-                        :disabled="isChecked"
-                    />
+                    <input type="checkbox" v-model="isChecked" @change="updatechecked" :disabled="isChecked" />
                 </div>
             </div>
         </div>
@@ -18,13 +13,13 @@
 </template>
 
 <script>
-import { spotByspotpk } from "@/api/spot.js";
-import { updateCheck, selectCheck } from "@/api/mybucket.js";
-import { mapGetters, mapMutations } from "vuex";
+import { spotByspotpk } from '@/api/spot.js';
+import { updateCheck, selectCheck } from '@/api/mybucket.js';
+import { mapGetters, mapMutations } from 'vuex';
 
-const userStore = "userStore";
+const userStore = 'userStore';
 export default {
-    name: "BucketSpotListDetailItem",
+    name: 'BucketSpotListDetailItem',
     props: {
         spot_pk: Number,
         isMine: Boolean,
@@ -33,7 +28,7 @@ export default {
     components: {},
     data() {
         return {
-            spot: { spot_name: "" },
+            spot: { spot_name: '' },
             img_src: null,
             login_user_pk: null,
             isChecked: true,
@@ -41,7 +36,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(userStore, ["checkUserInfo"]),
+        ...mapGetters(userStore, ['checkUserInfo']),
     },
     created() {
         if (this.$props.isMine) {
@@ -62,16 +57,17 @@ export default {
 
         spotByspotpk(this.spot_pk, ({ data }) => {
             this.spot = data.spot;
-            this.img_src = this.spot.spot_img_src;
+            this.img_src = process.env.VUE_APP_API_BASE_URL + this.spot.spot_img_src;
+            console.log(this.img_src);
             if (!this.img_src) {
-                this.img_src = "https://via.placeholder.com/130x100";
+                this.img_src = 'https://via.placeholder.com/130x100';
             }
         });
 
         // console.log(this.checkUserInfo);
     },
     methods: {
-        ...mapMutations("userStore", ["SET_TMP_PLUS"]),
+        ...mapMutations('userStore', ['SET_TMP_PLUS']),
         //updatechecked
         updatechecked() {
             // user_pk, spot_pk, bucket_pk, checked

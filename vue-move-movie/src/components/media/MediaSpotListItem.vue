@@ -25,36 +25,36 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-const mediaStore = "mediaStore";
-const toastStore = "toastStore";
+import { mapState, mapMutations } from 'vuex';
+const mediaStore = 'mediaStore';
+const toastStore = 'toastStore';
 export default {
-    name: "MediaSpotListItem",
+    name: 'MediaSpotListItem',
 
     computed: {
-        ...mapState(mediaStore, ["bucket"]),
+        ...mapState(mediaStore, ['bucket']),
     },
 
     created() {
         if (
-            this.mediaSpot.spot_img_src == "/images/spotfile/" ||
-            this.mediaSpot.spot_img_src == " " ||
+            this.mediaSpot.spot_img_src == '/images/spotfile/' ||
+            this.mediaSpot.spot_img_src == ' ' ||
             this.mediaSpot.spot_img_src == null ||
             this.mediaSpot.spot_img_src == `${process.env.VUE_APP_API_BASE_URL}null`
         ) {
-            this.img_src = "";
+            this.img_src = '';
         } else {
             this.img_src = process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
         }
     },
     methods: {
-        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
-        ...mapMutations(mediaStore, ["SET_MEDIA"]),
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
+        ...mapMutations(mediaStore, ['SET_MEDIA']),
         moveSpotDetail() {
             this.SET_MEDIA(this.mediaSpot); // mediaStore의 media 상태 업데이트
 
             this.$router.push({
-                name: "spotDetail",
+                name: 'spotDetail',
                 params: { no: this.mediaSpot.spot_pk },
             });
             window.scrollTo(0, 0);
@@ -65,23 +65,23 @@ export default {
                 this.bucket.push(this.mediaSpot);
                 // 토스트에 출력할 데이터
                 let toast_data = {
-                    title: "Success", // Error, Delete, Login 등 상태를 표기
-                    sub: "Bucket Bag", // 상태가 일어난 위치 표기
-                    content: "Bucket Bag에 담겼습니다.", // 내용 표기
+                    title: 'Success', // Error, Delete, Login 등 상태를 표기
+                    sub: 'Bucket Bag', // 상태가 일어난 위치 표기
+                    content: 'Bucket Bag에 담겼습니다.', // 내용 표기
                 };
 
                 this.SET_TOAST(toast_data);
                 this.SET_TOAST_CNT();
             } else {
                 let isok = 1; // 해당 스폿이 버킷에 포함되어 있는지 판단
-                this.bucket.forEach((b) => {
+                this.bucket.forEach(b => {
                     if (b.spot_pk == this.mediaSpot.spot_pk) {
                         isok = 0;
                         // 토스트에 출력할 데이터
                         let toast_data = {
-                            title: "Fail", // Error, Delete, Login 등 상태를 표기
-                            sub: "Bucket Bag", // 상태가 일어난 위치 표기
-                            content: "Bucket Bag에 이미 존재합니다.", // 내용 표기
+                            title: 'Fail', // Error, Delete, Login 등 상태를 표기
+                            sub: 'Bucket Bag', // 상태가 일어난 위치 표기
+                            content: 'Bucket Bag에 이미 존재합니다.', // 내용 표기
                         };
 
                         this.SET_TOAST(toast_data);
@@ -90,13 +90,22 @@ export default {
                 });
                 if (isok == 1) {
                     this.bucket.push(this.mediaSpot);
+                    // 토스트에 출력할 데이터
+                    let toast_data = {
+                        title: 'Success', // Error, Delete, Login 등 상태를 표기
+                        sub: 'Bucket Bag', // 상태가 일어난 위치 표기
+                        content: 'Bucket Bag에 담겼습니다.', // 내용 표기
+                    };
+
+                    this.SET_TOAST(toast_data);
+                    this.SET_TOAST_CNT();
                 }
             }
         },
     },
     data() {
         return {
-            img_src: "",
+            img_src: '',
         };
     },
     props: {

@@ -3,7 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img :src="getRandomImagePath()" alt="" width="1920" height="auto" />
+                <img src="/img/title-login.png" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import MybucketProgress from "@/components/bucket/MybucketProgress.vue";
-import { bucketByuserpk } from "@/api/bucket.js";
-import { mapGetters } from "vuex";
-const userStore = "userStore";
+import MybucketProgress from '@/components/bucket/MybucketProgress.vue';
+import { bucketByuserpk } from '@/api/bucket.js';
+import { mapGetters } from 'vuex';
+const userStore = 'userStore';
 
 export default {
     data() {
@@ -63,7 +63,7 @@ export default {
         });
     },
     computed: {
-        ...mapGetters(userStore, ["checkUserInfo"]),
+        ...mapGetters(userStore, ['checkUserInfo']),
     },
     methods: {
         getRandomImagePath() {
@@ -71,14 +71,14 @@ export default {
             return `/title-img-0${randomNumber}.png`;
         },
         goEdit() {
-            this.$router.push({ name: "edit" });
+            this.$router.push({ name: 'edit' });
             window.scrollTo(0, 0);
         },
         // [function] : 탈퇴 기능 구현 필요
         goDropout() {},
     },
     mounted() {
-        console.log("mount");
+        console.log('mount');
         console.log(userStore.checkUserInfo);
     },
 };

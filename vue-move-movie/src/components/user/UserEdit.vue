@@ -3,7 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img :src="getRandomImagePath()" alt="" width="1920" height="auto" />
+                <img src="/img/title-login.png" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
@@ -26,7 +26,7 @@
                     <!-- <h1 class="mb-3">Billing address</h1> -->
                     <form class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label for="email">Email <span class="text-muted"></span></label>
+                            <label for="email">ID <span class="text-muted"></span></label>
                             <input type="email" class="form-control" id="email" placeholder="you@example.com" v-model="user.user_email" readonly />
                             <div class="invalid-feedback">Please enter a valid email address for shipping updates.</div>
                         </div>
@@ -77,35 +77,35 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-const userStore = "userStore";
-import { mapMutations } from "vuex";
-const toastStore = "toastStore";
+import { mapGetters, mapActions } from 'vuex';
+const userStore = 'userStore';
+import { mapMutations } from 'vuex';
+const toastStore = 'toastStore';
 
 export default {
-    name: "UserEdit",
+    name: 'UserEdit',
     data() {
         return {
             // [feature : 필수] 비밀번호 체크 기능 추가
             user: Object,
-            user_pw: "",
+            user_pw: '',
             selectedImage: Object,
         };
     },
     methods: {
         getRandomImagePath() {
             const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
-            return `/title-img-0${randomNumber}.png`;
+            return `/img/title-img-0${randomNumber}.png`;
         },
-        ...mapActions(userStore, ["userEdit"]),
-        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
+        ...mapActions(userStore, ['userEdit']),
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
 
         edit() {
             this.userEdit(this.user);
             let toast_data = {
-                title: "Success", // Success, Fail 등 상태를 표기
-                sub: "UserEdit", // 상태가 일어난 위치 or 기능 표기
-                content: "수정 내용이 반영되었습니다.", // 내용 표기
+                title: 'Success', // Success, Fail 등 상태를 표기
+                sub: 'UserEdit', // 상태가 일어난 위치 or 기능 표기
+                content: '수정 내용이 반영되었습니다.', // 내용 표기
             };
 
             this.SET_TOAST(toast_data);
@@ -113,7 +113,7 @@ export default {
             this.goHome();
         },
         goHome() {
-            this.$router.push({ name: "home" });
+            this.$router.push({ name: 'home' });
             window.scrollTo(0, 0);
         },
         handleFileUpload(event) {
@@ -125,7 +125,7 @@ export default {
     },
     computed: {
         // 사용자 정보 불러오기
-        ...mapGetters(userStore, ["checkUserInfo"]),
+        ...mapGetters(userStore, ['checkUserInfo']),
     },
     created() {
         this.user = this.checkUserInfo;

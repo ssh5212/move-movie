@@ -52,13 +52,7 @@
 
                         <div class="mb-3">
                             <label for="spot_road_address">spot_address</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="spot_road_address"
-                                placeholder="정확한 주소명 미 기입 시 등록이 되지 않습니다!"
-                                v-model="spot.spot_address"
-                            />
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="정확한 주소명 미 기입 시 등록이 되지 않습니다!" v-model="spot.spot_address" />
                         </div>
 
                         <div class="mb-3">
@@ -87,51 +81,51 @@
 </template>
 
 <script>
-import axios from "axios";
-import MediaSearchBar from "./MediaSearchBar.vue";
+import axios from 'axios';
+import MediaSearchBar from './MediaSearchBar.vue';
 // import { register } from "@/api/media.js";
-import { mapState } from "vuex";
-const mediaStore = "mediaStore";
-import { mapMutations } from "vuex";
-const toastStore = "toastStore";
+import { mapState } from 'vuex';
+const mediaStore = 'mediaStore';
+import { mapMutations } from 'vuex';
+const toastStore = 'toastStore';
 
 export default {
-    name: "MediaSpotCreate",
+    name: 'MediaSpotCreate',
     components: { MediaSearchBar },
 
     data() {
         return {
             spot: {
-                spot_name: "",
-                spot_scene_desc: "",
-                spot_img_src: "",
-                spot_lat: "",
-                spot_lon: "",
-                spot_address: "",
-                spot_road_address: "",
-                spot_filming_seq: "",
-                spot_movie_title: "",
-                gugun_code: "",
-                sido_code: "",
+                spot_name: '',
+                spot_scene_desc: '',
+                spot_img_src: '',
+                spot_lat: '',
+                spot_lon: '',
+                spot_address: '',
+                spot_road_address: '',
+                spot_filming_seq: '',
+                spot_movie_title: '',
+                gugun_code: '',
+                sido_code: '',
             },
             Address: String,
             selectedImage: Object,
-            apiURL: "https://dapi.kakao.com/v2/local/search/address.json",
-            query: "",
-            apiKey: "",
+            apiURL: 'https://dapi.kakao.com/v2/local/search/address.json',
+            query: '',
+            apiKey: '',
             file: Object,
         };
     },
     computed: {
-        ...mapState(mediaStore, ["sidos", "guguns", "medias"]),
+        ...mapState(mediaStore, ['sidos', 'guguns', 'medias']),
     },
     created() {
-        this.spot.spot_movie_title = this.$route.params.spot.title.replace(/\s+/g, " ").trim();
+        this.spot.spot_movie_title = this.$route.params.spot.title.replace(/\s+/g, ' ').trim();
         this.apiKey = process.env.VUE_APP_KAKAO_MAP_API_KEY2;
     },
 
     methods: {
-        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
         getRandomImagePath() {
             const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
             return `/img/title-img-0${randomNumber}.png`;
@@ -149,43 +143,43 @@ export default {
             };
 
             fetch(requestURL, { headers })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => response.json())
+                .then(data => {
                     this.spot.spot_lat = data.documents[0].address.y;
                     this.spot.spot_lon = data.documents[0].address.x;
 
                     const jsonString = JSON.stringify(this.spot);
                     const blob = new Blob([jsonString], {
-                        type: "application/json",
+                        type: 'application/json',
                     });
-                    throwData.append("SpotDto", blob);
+                    throwData.append('SpotDto', blob);
 
-                    throwData.append("file", this.file);
+                    throwData.append('file', this.file);
 
                     // const params = throwData;
 
                     const config = {
-                        method: "post",
+                        method: 'post',
                         maxBodyLength: Infinity,
-                        url: "http://localhost:9003/movemovie/spot",
+                        url: 'http://localhost:9003/movemovie/spot',
                         headers: {
-                            "Content-Type": "multipart/form-data",
+                            'Content-Type': 'multipart/form-data',
                         },
                         data: throwData,
                     };
 
                     axios
                         .request(config)
-                        .then((response) => {
+                        .then(response => {
                             console.log(response);
                             setTimeout(() => this.moveMedia(), 500);
                         })
-                        .catch((error) => {
+                        .catch(error => {
                             console.log(error);
                             let toast_data = {
-                                title: "Fail", // Success, Fail 등 상태를 표기
-                                sub: "Spot Create", // 상태가 일어난 위치 or 기능 표기
-                                content: "등록 과정 중 문제가 발생하였습니다.", // 내용 표기
+                                title: 'Fail', // Success, Fail 등 상태를 표기
+                                sub: 'Spot Create', // 상태가 일어난 위치 or 기능 표기
+                                content: '등록 과정 중 문제가 발생하였습니다.', // 내용 표기
                             };
 
                             this.SET_TOAST(toast_data);
@@ -197,12 +191,12 @@ export default {
                     // });
                     // setTimeout(() => this.moveMedia(), 500);
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.error(error);
                     let toast_data = {
-                        title: "Fail", // Success, Fail 등 상태를 표기
-                        sub: "Spot Create", // 상태가 일어난 위치 or 기능 표기
-                        content: "도로명 표기가 잘못되었습니다.", // 내용 표기
+                        title: 'Fail', // Success, Fail 등 상태를 표기
+                        sub: 'Spot Create', // 상태가 일어난 위치 or 기능 표기
+                        content: '도로명 표기가 잘못되었습니다.', // 내용 표기
                     };
 
                     this.SET_TOAST(toast_data);
@@ -212,7 +206,7 @@ export default {
         moveMedia() {
             // this.$router.push({ name: 'home' });
             this.$router.push({
-                name: "spotList",
+                name: 'media',
                 params: { title: this.spot.spot_movie_title, prodYear: 2023 },
             });
             window.scrollTo(0, 0);

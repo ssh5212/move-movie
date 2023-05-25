@@ -49,22 +49,22 @@
 </template>
 
 <script>
-import MediaTitleListItem from "@/components/media/MediaTitleListItem.vue";
-import { mediaList } from "@/api/media.js";
-const toastStore = "toastStore";
-import { mapMutations } from "vuex";
+import MediaTitleListItem from '@/components/media/MediaTitleListItem.vue';
+import { mediaList } from '@/api/media.js';
+const toastStore = 'toastStore';
+import { mapMutations } from 'vuex';
 export default {
-    name: "MediaTitleList",
+    name: 'MediaTitleList',
     components: { MediaTitleListItem },
     data() {
         return {
             mediaTitleList: [],
             mediaTitle: Object,
-            title: "", // 타이틀 명 검색 시
-            actor: "", // 배우 검색 시
-            keyword: "", // 키워드 검색 시
-            listCount: 50,
-            sort: "prodYear,1",
+            title: '', // 타이틀 명 검색 시
+            actor: '', // 배우 검색 시
+            keyword: '', // 키워드 검색 시
+            listCount: 120,
+            sort: 'prodYear,1',
         };
     },
     created() {
@@ -72,10 +72,11 @@ export default {
     },
     methods: {
         getRandomImagePath() {
-            const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
-            return `/img/title-img-0${randomNumber}.png`;
+            const randomNumber = Math.floor(Math.random() * 3); // 0에서 5 사이의 랜덤한 숫자 생성
+            console.log(randomNumber);
+            return `/img/title-img-01.png`;
         },
-        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
         searchMedia() {
             this.mediaTitleList = [];
             const params = {
@@ -91,20 +92,20 @@ export default {
                 params,
                 ({ data }) => {
                     // console.log(data["Data"][0]["Result"]);
-                    const resultData = data["Data"][0]["Result"];
+                    const resultData = data['Data'][0]['Result'];
                     console.log(resultData);
-                    resultData.forEach((e) => {
+                    resultData.forEach(e => {
                         // 성인물 제외
                         //  && e.genre !== "드라마"
-                        if (e.rating !== "18세관람가(청소년관람불가)" && e.posters !== "") {
+                        if (e.rating !== '18세관람가(청소년관람불가)' && e.posters !== '') {
                             this.mediaTitle = {
                                 // title: e.title,
-                                title: e.title.replace(/ !HS | !HE /g, "").trim(),
+                                title: e.title.replace(/ !HS | !HE /g, '').trim(),
                                 kmdbUrl: e.kmdbUrl,
                                 prodYear: e.prodYear, // 제작년도
                                 // prodYear: e.regDatestr.slice(0, 4), // 개봉년도
                                 keyword: e.keyword,
-                                stlls: e.posters.split("|")[0],
+                                stlls: e.posters.split('|')[0],
                                 docid: e.DOCID,
                             };
                             // console.log('e.DOCID : ' + e.DOCID);
@@ -114,13 +115,13 @@ export default {
                         // console.log(this.mediaTitle);
                     });
                 },
-                (error) => {
+                error => {
                     console.log(error);
                     // 토스트에 출력할 데이터
                     let toast_data = {
-                        title: "Error", // Success, Fail 등 상태를 표기
-                        sub: "Movie List", // 상태가 일어난 위치 or 기능 표기
-                        content: "영화 로딩 중 에러가 발생하였습니다.", // 내용 표기
+                        title: 'Error', // Success, Fail 등 상태를 표기
+                        sub: 'Movie List', // 상태가 일어난 위치 or 기능 표기
+                        content: '영화 로딩 중 에러가 발생하였습니다.', // 내용 표기
                     };
 
                     this.SET_TOAST(toast_data);

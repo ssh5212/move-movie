@@ -27,13 +27,7 @@
                     <div class="mb-3">
                         Title :
                         <b-input v-model="spotInstance.spot_instance_title"></b-input>
-                        <img
-                            v-if="Object.keys(selectedImage).length > 0"
-                            :src="selectedImage"
-                            alt="Uploaded Image"
-                            class="my-2"
-                            style="width: auto; height: 220px; object-fit: cover"
-                        /><br />
+                        <img v-if="Object.keys(selectedImage).length > 0" :src="selectedImage" alt="Uploaded Image" class="my-2" style="width: auto; height: 220px; object-fit: cover" /><br />
                         <input type="file" id="fileInput" ref="fileInput" @change="handleFileUpload" /><br />
                     </div>
                     <!-- <h1 class="mb-3">Billing address</h1> -->
@@ -57,20 +51,20 @@
 </template>
 
 <script>
-import axios from "axios";
-import FormData from "form-data";
-import { mapActions, mapGetters } from "vuex";
-import { mapMutations } from "vuex";
-const toastStore = "toastStore";
-const userStore = "userStore";
+import axios from 'axios';
+import FormData from 'form-data';
+import { mapActions, mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
+const toastStore = 'toastStore';
+const userStore = 'userStore';
 
 export default {
-    name: "MediaSpotDetailItemCreate",
+    name: 'MediaSpotDetailItemCreate',
     data() {
         return {
             spotInstance: {
-                spot_instance_title: "",
-                spot_instance_content: "",
+                spot_instance_title: '',
+                spot_instance_content: '',
                 spot_pk: 0,
                 user_pk: 0,
             },
@@ -80,7 +74,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(userStore, ["checkUserInfo"]),
+        ...mapGetters(userStore, ['checkUserInfo']),
     },
     created() {
         this.spotInstance.spot_pk = this.$route.params.no;
@@ -89,48 +83,48 @@ export default {
     },
     methods: {
         getRandomImagePath() {
-            const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
+            const randomNumber = Math.floor(Math.random() * 1); // 0에서 5 사이의 랜덤한 숫자 생성
             return `/img/title-img-0${randomNumber}.png`;
         },
-        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
-        ...mapActions(userStore, ["userRegister"]),
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
+        ...mapActions(userStore, ['userRegister']),
         upload() {
             const data = new FormData();
 
             // 사용자 정보를 JSON 형태로 추가
             const jsonString = JSON.stringify(this.spotInstance);
-            const blob = new Blob([jsonString], { type: "application/json" });
-            data.append("spotInstance", blob);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            data.append('spotInstance', blob);
             // data.append("UserDto", JSON.stringify(this.userDto), {
             //     contentType: "application/json",
             // });
             // data.append("UserDto", this.user);
 
             // 파일을 스트림으로 읽어 추가
-            data.append("file", this.file);
+            data.append('file', this.file);
 
             const config = {
-                method: "post",
+                method: 'post',
                 maxBodyLength: Infinity,
-                url: process.env.VUE_APP_API_BASE_URL + "/SpotInst",
+                url: process.env.VUE_APP_API_BASE_URL + '/SpotInst',
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    'Content-Type': 'multipart/form-data',
                 },
                 data: data,
             };
 
             axios
                 .request(config)
-                .then((response) => {
+                .then(response => {
                     console.log(JSON.stringify(response.data));
                     this.movehome();
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.log(error);
                     let toast_data = {
-                        title: "Fail", // Success, Fail 등 상태를 표기
-                        sub: "Spot Instance Create", // 상태가 일어난 위치 or 기능 표기
-                        content: "생성 과정 중 문제가 발생하였습니다.", // 내용 표기
+                        title: 'Fail', // Success, Fail 등 상태를 표기
+                        sub: 'Spot Instance Create', // 상태가 일어난 위치 or 기능 표기
+                        content: '생성 과정 중 문제가 발생하였습니다.', // 내용 표기
                     };
 
                     this.SET_TOAST(toast_data);
@@ -138,7 +132,7 @@ export default {
                 });
         },
         movehome() {
-            this.$router.push({ name: "spotDetail" });
+            this.$router.push({ name: 'spotDetail' });
             window.scrollTo(0, 0);
         },
 

@@ -16,16 +16,12 @@
         <div class="container mt-5">
             <!-- 실제 내용 -->
             <!-- button -->
-            <div class="row justify-content-xl-start">
-                <h2 class="ml-3">나의 버킷 생성하기</h2>
-            </div>
-            <div class="row justify-content-xl-end mr-0">
-                <b-button @click="register">생성</b-button>
-            </div>
-            <div>
+
+            <div class="row justify-content-center mr-0"></div>
+            <div class="content">
                 <!-- list -->
                 <div class="mt-5">
-                    <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
+                    <div class="row justify-content-xl-center m-0">
                         <!-- detailitem.vue로 빼야함 -->
                         <bucket-spot-list-detail-item v-for="(spot, index) in bucket" :key="index" :spot_pk="spot.spot_pk"></bucket-spot-list-detail-item>
                     </div>
@@ -44,34 +40,35 @@
                         <b-form-textarea id="textarea-default" placeholder="Default content" v-model="content"></b-form-textarea>
                     </b-row>
                 </div>
+                <b-button class="mb-5" @click="register">생성</b-button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import BucketSpotListDetailItem from "@/components/bucket/BucketSpotListDetailItem.vue";
-import { mapState, mapMutations } from "vuex";
-import { bucketCreate } from "@/api/bucket";
+import BucketSpotListDetailItem from '@/components/bucket/BucketSpotListDetailItem.vue';
+import { mapState, mapMutations } from 'vuex';
+import { bucketCreate } from '@/api/bucket';
 
-const mediaStore = "mediaStore";
-const userStore = "userStore";
+const mediaStore = 'mediaStore';
+const userStore = 'userStore';
 
 export default {
-    name: "BucketSpotListCreate",
+    name: 'BucketSpotListCreate',
     components: {
         BucketSpotListDetailItem,
     },
     data() {
         return {
-            title: "",
-            content: "",
+            title: '',
+            content: '',
             spot: [],
         };
     },
     computed: {
-        ...mapState(mediaStore, ["bucket"]),
-        ...mapState(userStore, ["userInfo"]),
+        ...mapState(mediaStore, ['bucket']),
+        ...mapState(userStore, ['userInfo']),
     },
     created() {
         // 버킷 리스트 데이터 가져오기
@@ -82,11 +79,11 @@ export default {
             const randomNumber = Math.floor(Math.random() * 4); // 0에서 5 사이의 랜덤한 숫자 생성
             return `/img/title-img-0${randomNumber}.png`;
         },
-        ...mapMutations(mediaStore, ["CLEAR_BUCKET_LIST"]),
+        ...mapMutations(mediaStore, ['CLEAR_BUCKET_LIST']),
         async register() {
             // 등록 로직
             var spots = [];
-            this.bucket.forEach((data) => {
+            this.bucket.forEach(data => {
                 spots.push({ spot_pk: data.spot_pk });
             });
 
@@ -106,7 +103,7 @@ export default {
                     this.CLEAR_BUCKET_LIST();
                     this.moveList();
                 },
-                (error) => {
+                error => {
                     console.log(error);
                 }
             );

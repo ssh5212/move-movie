@@ -19,10 +19,16 @@
             <div class="row justify-content-xl-end">
                 <b-button class="mr-2">나의 버킷으로 등록하기</b-button>
             </div>
-            <div style="background-color: #ced0c3">
+            <div>
+                <!--  content -->
+                <div v-if="bucket" class="mt-5 mb-5">
+                    <h3>버킷명 : {{ bucket.bucket_content }}</h3>
+                </div>
+                <hr class="my-5" />
                 <!-- list -->
                 <div class="mt-5">
-                    <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
+                    <h4>버킷 스폿 목록</h4>
+                    <div class="row justify-content-xl-center m-0">
                         <!-- detailitem.vue로 빼야함 -->
                         <bucket-spot-list-detail-item
                             v-for="(spot, index) in spots"
@@ -35,13 +41,10 @@
                 <!--  -->
                 <!-- [S] map -->
                 <div class="container mt-5">
-                    <div id="map" class="mt-3" style="width: 100%; height: 400px"></div>
+                    <div id="map" class="mb-5" style="width: 100%; height: 400px"></div>
                 </div>
+                <hr class="my-5" />
                 <!-- [E] map -->
-                <!--  content -->
-                <div v-if="bucket" class="mt-5 mb-5">
-                    {{ bucket.bucket_content }}
-                </div>
             </div>
         </div>
         <!-- [E] body -->
@@ -49,16 +52,16 @@
 </template>
 
 <script>
-import { bucketListBybucketpk } from "@/api/bucketList.js";
-import BucketSpotListDetailItem from "@/components/bucket/BucketSpotListDetailItem.vue";
-import { spotByspotpk } from "@/api/spot.js";
-import { bucketBybucketpk } from "@/api/bucket.js";
-import { mapGetters } from "vuex";
+import { bucketListBybucketpk } from '@/api/bucketList.js';
+import BucketSpotListDetailItem from '@/components/bucket/BucketSpotListDetailItem.vue';
+import { spotByspotpk } from '@/api/spot.js';
+import { bucketBybucketpk } from '@/api/bucket.js';
+import { mapGetters } from 'vuex';
 
-const userStore = "userStore";
+const userStore = 'userStore';
 
 export default {
-    name: "BucketSpotListDetail",
+    name: 'BucketSpotListDetail',
     components: {
         BucketSpotListDetailItem,
     },
@@ -70,13 +73,13 @@ export default {
             markers: [],
             map: null,
             bucket: {
-                content: "",
+                content: '',
                 user_pk: -1,
             },
         };
     },
     computed: {
-        ...mapGetters(userStore, ["checkUserInfo"]),
+        ...mapGetters(userStore, ['checkUserInfo']),
     },
     async created() {
         await bucketBybucketpk(this.$route.params.no, ({ data }) => {
@@ -85,7 +88,7 @@ export default {
 
         await bucketListBybucketpk(this.$route.params.no, ({ data }) => {
             this.spots = data.BucketDetailList;
-            this.spots.forEach((spot) => {
+            this.spots.forEach(spot => {
                 spotByspotpk(spot.spot_pk, ({ data }) => {
                     this.spots_tmp.push(data.spot);
                 });
@@ -111,8 +114,8 @@ export default {
         },
         //api 불러오기
         loadScript() {
-            const script = document.createElement("script");
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+            const script = document.createElement('script');
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -122,7 +125,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -133,7 +136,7 @@ export default {
 
         makeSpotList() {
             this.positions = [];
-            this.spots_tmp.forEach((mediaSpot) => {
+            this.spots_tmp.forEach(mediaSpot => {
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
                 obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
@@ -145,7 +148,7 @@ export default {
         loadMaker() {
             // 마커를 생성합니다
             this.markers = [];
-            this.positions.forEach((position) => {
+            this.positions.forEach(position => {
                 const marker = new window.kakao.maps.Marker({
                     map: this.map, // 마커를 표시할 지도
                     position: position.latlng, // 마커를 표시할 위치

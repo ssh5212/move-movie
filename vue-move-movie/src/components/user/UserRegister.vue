@@ -13,7 +13,7 @@
         <!-- [E] Intro Image -->
         <!-- [S] body -->
         <div class="container">
-            <div class="row justify-content-xl-center my-5 align-items-center">
+            <div class="row justify-content-center my-5">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <div class="text-center mb-5">
@@ -26,8 +26,8 @@
                     <!-- <h1 class="mb-3">Billing address</h1> -->
                     <form class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label for="email">Email <span class="text-muted"></span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com" v-model="user.user_email" />
+                            <label for="email">ID<span class="text-muted"></span></label>
+                            <input type="email" class="form-control" id="email" placeholder="" v-model="user.user_email" />
                             <div class="invalid-feedback">Please enter a valid email address for shipping updates.</div>
                         </div>
 
@@ -52,8 +52,8 @@
                             <input type="text" class="form-control" id="nickname" placeholder="" v-model="user.user_nickname" required />
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fileInput">fileInput</label><br />
+                        <div class="mb-3 align-items-left">
+                            <!-- <label for="fileInput">fileInput</label><br /> -->
                             <img
                                 v-if="Object.keys(selectedImage).length > 0"
                                 :src="selectedImage"
@@ -62,11 +62,11 @@
                                 style="width: 220px; height: 220px; object-fit: cover"
                             /><br />
                             <input type="file" id="fileInput" ref="fileInput" @change="handleFileUpload" />
-                            <b-button @click="uploadImage">업로드</b-button><br />
+                            <b-button @click="uploadImage" style="visibility: hidden">업로드 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</b-button><br />
                         </div>
 
                         <hr class="my-5" />
-                        <button class="btn btn-dark btn-lg btn-block" type="button" @click="register">Continue to checkout</button>
+                        <button class="btn btn-dark btn-lg btn-block" type="button" @click="register">회원가입</button>
                     </form>
                 </div>
 
@@ -78,22 +78,22 @@
 </template>
 
 <script>
-import axios from "axios";
-import FormData from "form-data";
-import { mapActions } from "vuex";
-const userStore = "userStore";
-import { mapMutations } from "vuex";
-const toastStore = "toastStore";
+import axios from 'axios';
+import FormData from 'form-data';
+import { mapActions } from 'vuex';
+const userStore = 'userStore';
+import { mapMutations } from 'vuex';
+const toastStore = 'toastStore';
 
 export default {
-    name: "UserRegister",
+    name: 'UserRegister',
     data() {
         return {
             user: {
                 user_email: null,
                 user_pw: null,
                 user_name: null,
-                user_nickname: "default",
+                user_nickname: '',
             },
             selectedImage: Object,
             file: Object,
@@ -104,8 +104,8 @@ export default {
         console.log(this.selectedImage);
     },
     methods: {
-        ...mapActions(userStore, ["userRegister"]),
-        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
+        ...mapActions(userStore, ['userRegister']),
+        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
         // register() {
         //   const formData = new FormData();
         //   formData.append("UserDto", this.user, {
@@ -133,39 +133,47 @@ export default {
 
             // 사용자 정보를 JSON 형태로 추가
             const jsonString = JSON.stringify(this.user);
-            const blob = new Blob([jsonString], { type: "application/json" });
-            data.append("UserDto", blob);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            data.append('UserDto', blob);
             // data.append("UserDto", JSON.stringify(this.userDto), {
             //     contentType: "application/json",
             // });
             // data.append("UserDto", this.user);
 
             // 파일을 스트림으로 읽어 추가
-            data.append("file", this.file);
+            data.append('file', this.file);
 
             const config = {
-                method: "post",
+                method: 'post',
                 maxBodyLength: Infinity,
                 // url: "http://localhost:9003/movemovie/user",
-                url: process.env.VUE_APP_API_BASE_URL + "/user",
+                url: process.env.VUE_APP_API_BASE_URL + '/user',
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    'Content-Type': 'multipart/form-data',
                 },
                 data: data,
             };
 
             axios
                 .request(config)
-                .then((response) => {
+                .then(response => {
+                    let toast_data = {
+                        title: 'Success', // Success, Fail 등 상태를 표기
+                        sub: 'Register', // 상태가 일어난 위치 or 기능 표기
+                        content: `초면이네요 ${this.user.user_name}님, 반가워요!`, // 내용 표기
+                    };
                     console.log(JSON.stringify(response.data));
                     this.movehome();
+
+                    this.SET_TOAST(toast_data);
+                    this.SET_TOAST_CNT();
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.log(error);
                     let toast_data = {
-                        title: "Fail", // Success, Fail 등 상태를 표기
-                        sub: "Register", // 상태가 일어난 위치 or 기능 표기
-                        content: "회원가입 중 문제가 발생하였습니다.", // 내용 표기
+                        title: 'Fail', // Success, Fail 등 상태를 표기
+                        sub: 'Register', // 상태가 일어난 위치 or 기능 표기
+                        content: '회원가입 중 문제가 발생하였습니다.', // 내용 표기
                     };
 
                     this.SET_TOAST(toast_data);
@@ -173,7 +181,7 @@ export default {
                 });
         },
         movehome() {
-            this.$router.push({ name: "home" });
+            this.$router.push({ name: 'home' });
             window.scrollTo(0, 0);
         },
         handleFileUpload(event) {

@@ -8,12 +8,7 @@
 
         <b-sidebar id="sidebar-backdrop" title="" :backdrop-variant="variant" backdrop shadow right>
             <div class="px-3 py-2">
-                <img
-                    class="rounded-circle my-3"
-                    style="width: 220px; height: 220px; object-fit: cover"
-                    alt="avatar1"
-                    src="https://via.placeholder.com/300x1111"
-                />
+                <img class="rounded-circle my-3" style="width: 220px; height: 220px; object-fit: cover" alt="avatar1" src="https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927" />
                 <h3 class="mt-3 mb-4">로그인이 필요합니다.</h3>
 
                 <button type="button" class="btn btn-dark mb-4" style="width: 80%" @click="moveLogin">로그인</button><br />
@@ -27,19 +22,19 @@
 export default {
     data() {
         return {
-            variant: "",
+            variant: '',
         };
     },
     methods: {
         moveLogin() {
             this.$router.push({
-                name: "login",
+                name: 'login',
             });
             window.scrollTo(0, 0);
         },
         moveRegister() {
             this.$router.push({
-                name: "register",
+                name: 'register',
             });
             window.scrollTo(0, 0);
         },

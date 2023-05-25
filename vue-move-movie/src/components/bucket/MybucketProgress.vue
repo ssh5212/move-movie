@@ -4,7 +4,7 @@
             <p style="text-align: left; margin-bottom: 5px" @click="movebucket">
                 {{ this.$props.bucket.bucket_title }}
             </p>
-            <div class="progress" style="height: 5px">
+            <div class="progress">
                 <b-progress :value="(checknums / checkmax) * 100" :max="100" show-progress animated style="width: 100%"></b-progress>
             </div>
         </div>
@@ -12,17 +12,17 @@
 </template>
 
 <script>
-import { selectUserBucket } from "@/api/mybucket.js";
+import { selectUserBucket } from '@/api/mybucket.js';
 
 export default {
-    name: "MybucketProgress",
+    name: 'MybucketProgress',
     components: {},
     props: {
         bucket: Object,
     },
     data() {
         return {
-            message: "",
+            message: '',
             MyBucketList: [],
             checknums: 1,
             checkmax: 1,
@@ -37,7 +37,7 @@ export default {
         selectUserBucket(mybucket, ({ data }) => {
             this.MyBucketList = data.MyBucket;
             this.checkmax = this.MyBucketList.length;
-            this.MyBucketList.forEach((MyBucket) => {
+            this.MyBucketList.forEach(MyBucket => {
                 if (MyBucket.checked == 1) {
                     checknnum++;
                 }
