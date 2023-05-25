@@ -73,10 +73,12 @@ export default {
                 name: `noticeDetail`,
                 params: { no: item.notice_pk },
             });
+            window.scrollTo(0, 0);
         },
 
         moveWrite() {
             this.$router.push({ name: `noticeWrtie` });
+            window.scrollTo(0, 0);
         },
     },
 };

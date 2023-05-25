@@ -13,9 +13,10 @@
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
                     <b-collapse id="nav-collapse" is-nav>
                         <b-navbar-nav>
-                            <b-nav-item><router-link to="/media" class="nav-link p-md-0">영화 찾아보기</router-link></b-nav-item>
+                            <b-nav-item><router-link to="/media" class="nav-link p-md-0">타이틀 기반 검색</router-link></b-nav-item>
+                            <b-nav-item><router-link to="/media/list/location" class="nav-link p-md-0">주소 기반 검색</router-link></b-nav-item>
                             <b-nav-item><router-link to="/bucket" class="nav-link p-md-0">버킷 살펴보기</router-link></b-nav-item>
-                            <b-nav-item><router-link to="/notice" class="nav-link p-md-0">공지사항</router-link></b-nav-item>
+                            <!-- <b-nav-item><router-link to="/notice" class="nav-link p-md-0">공지사항</router-link></b-nav-item> -->
                         </b-navbar-nav>
                     </b-collapse>
                     <!-- 오른쪽 사이드바 버튼 -->

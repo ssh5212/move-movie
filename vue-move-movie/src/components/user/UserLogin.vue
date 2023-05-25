@@ -77,12 +77,14 @@ export default {
             if (this.isLogin) {
                 await this.getUserInfo(token);
                 this.$router.push({ name: "home" });
+                window.scrollTo(0, 0);
             }
         },
     },
 
     movePage() {
         this.$router.push({ name: "register" });
+        window.scrollTo(0, 0);
     },
 };
 </script>

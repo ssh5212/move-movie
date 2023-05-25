@@ -57,6 +57,7 @@ export default {
                 name: "spotDetail",
                 params: { no: this.mediaSpot.spot_pk },
             });
+            window.scrollTo(0, 0);
         },
         addThisSpot() {
             // bucket이 비어 있는 경우

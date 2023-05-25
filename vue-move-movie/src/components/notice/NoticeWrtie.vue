@@ -73,6 +73,7 @@ export default {
         },
         moveList() {
             this.$router.push({ name: `notice` });
+            window.scrollTo(0, 0);
         },
     },
 };

@@ -53,7 +53,7 @@
                     <img src="@/assets/img/intro-half-img03.jpg" width="100%" alt="intro-half-img03" class="mb-5" />
                     <h1>나만의 여행지를<br />다른 사람들에게 소개해주세요!</h1>
                     <br />
-                    <button type="button" class="btn btn-secondary" @click="moveBucket">바로가기>바로가기</button>
+                    <button type="button" class="btn btn-secondary" @click="moveBucket">바로가기</button>
                 </div>
             </div>
         </div>
@@ -65,22 +65,25 @@
 
 <script>
 export default {
-    name: 'HomeView',
+    name: "HomeView",
     methods: {
         moveTitle() {
             this.$router.push({
-                name: 'media',
+                name: "media",
             });
+            window.scrollTo(0, 0);
         },
         moveLocation() {
             this.$router.push({
-                name: 'media/location',
+                name: "locationList",
             });
+            window.scrollTo(0, 0);
         },
         moveBucket() {
             this.$router.push({
-                name: 'bucket',
+                name: "bucket",
             });
+            window.scrollTo(0, 0);
         },
     },
 };

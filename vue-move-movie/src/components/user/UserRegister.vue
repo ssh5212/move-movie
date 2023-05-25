@@ -162,6 +162,7 @@ export default {
         },
         movehome() {
             this.$router.push({ name: "home" });
+            window.scrollTo(0, 0);
         },
         handleFileUpload(event) {
             this.file = event.target.files[0];

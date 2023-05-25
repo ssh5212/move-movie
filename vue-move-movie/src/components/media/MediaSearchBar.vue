@@ -1,18 +1,10 @@
 <template>
     <b-row class="mt-4 mb-4 text-center">
         <b-col class="sm-3">
-            <b-form-select
-                v-model="sidoCode"
-                :options="sidos"
-                @change="gugunList"
-            ></b-form-select>
+            <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
         </b-col>
         <b-col class="sm-3">
-            <b-form-select
-                v-model="gugunCode"
-                :options="guguns"
-                @change="searchMedia"
-            ></b-form-select>
+            <b-form-select v-model="gugunCode" :options="guguns" @change="searchMedia"></b-form-select>
         </b-col>
     </b-row>
 </template>
@@ -46,11 +38,7 @@ export default {
     },
     methods: {
         ...mapActions(mediaStore, ["getSido", "getGugun", "getMediaList"]),
-        ...mapMutations(mediaStore, [
-            "CLEAR_SIDO_LIST",
-            "CLEAR_GUGUN_LIST",
-            "CLEAR_MEDIA_LIST",
-        ]),
+        ...mapMutations(mediaStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_MEDIA_LIST"]),
         // sidoList() {
         //   this.getSido();
         // },

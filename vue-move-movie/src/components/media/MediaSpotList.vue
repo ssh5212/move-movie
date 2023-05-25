@@ -63,20 +63,20 @@
 </template>
 
 <script>
-import MediaSpotListItem from '@/components/media/MediaSpotListItem.vue';
-import { mediaList, spotList } from '@/api/media.js';
+import MediaSpotListItem from "@/components/media/MediaSpotListItem.vue";
+import { mediaList, spotList } from "@/api/media.js";
 // import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
-    name: 'MediaSpotList',
+    name: "MediaSpotList",
     components: { MediaSpotListItem },
 
     async created() {
         this.title = this.$route.params.title;
         this.docid = this.$route.params.docid;
-        console.log('===========');
+        console.log("===========");
         console.log(this.$route.params.title);
-        console.log('route : ' + this.$route.params.docid);
+        console.log("route : " + this.$route.params.docid);
         this.searchMedia();
         await this.searchSpot();
     },
@@ -140,32 +140,32 @@ export default {
             mediaList(
                 params,
                 ({ data }) => {
-                    const resultData = data['Data'][0]['Result'];
+                    const resultData = data["Data"][0]["Result"];
                     console.log(resultData);
                     console.log(this.$route.params.docid);
-                    resultData.forEach(e => {
+                    resultData.forEach((e) => {
                         console.log(e.DOCID);
                         if (e.DOCID === this.docid) {
                             this.mediaTitle = {
-                                title: e.title.replace(/ !HS | !HE /g, '').trim(),
+                                title: e.title.replace(/ !HS | !HE /g, "").trim(),
                                 kmdbUrl: e.kmdbUrl,
                                 prodYear: e.prodYear, // 제작년도
                                 keyword: e.keyword,
                                 genre: e.genre,
-                                stlls: e.posters.split('|')[0],
+                                stlls: e.posters.split("|")[0],
                                 docid: e.DOCID,
                             };
-                            console.log('MMMMMMMMMMMMmediaTitle', this.mediaTitle);
+                            console.log("MMMMMMMMMMMMmediaTitle", this.mediaTitle);
                         }
                     });
                 },
-                error => {
+                (error) => {
                     console.log(error);
                     // 토스트에 출력할 데이터
                     let toast_data = {
-                        title: 'Error', // Success, Fail 등 상태를 표기
-                        sub: 'Spot List', // 상태가 일어난 위치 or 기능 표기
-                        content: '영화 로딩 중 에러가 발생하였습니다.', // 내용 표기
+                        title: "Error", // Success, Fail 등 상태를 표기
+                        sub: "Spot List", // 상태가 일어난 위치 or 기능 표기
+                        content: "영화 로딩 중 에러가 발생하였습니다.", // 내용 표기
                     };
 
                     this.SET_TOAST(toast_data);
@@ -175,15 +175,16 @@ export default {
         },
         moveSpotCreate() {
             this.$router.push({
-                name: 'spotCreate',
+                name: "spotCreate",
                 params: { spot: this.mediaTitle },
             });
+            window.scrollTo(0, 0);
         },
 
         //api 불러오기
         loadScript() {
-            const script = document.createElement('script');
-            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing';
+            const script = document.createElement("script");
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -193,7 +194,7 @@ export default {
 
         //맵 출력하기
         loadMap() {
-            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+            var mapContainer = document.getElementById("map"); // 지도를 표시할 div
             var mapOption = {
                 center: new window.kakao.maps.LatLng(37.500613, 127.036431), // 지도의 중심좌표
                 level: 5, // 지도의 확대 레벨
@@ -205,7 +206,7 @@ export default {
         makeSpotList() {
             // this.positions = [];
             console.log(this.mediaSpotList);
-            this.mediaSpotList.forEach(mediaSpot => {
+            this.mediaSpotList.forEach((mediaSpot) => {
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
                 obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
@@ -218,7 +219,7 @@ export default {
             // 마커를 생성합니다
             console.log(this.loadMaker);
             this.markers = [];
-            this.positions.forEach(position => {
+            this.positions.forEach((position) => {
                 const marker = new window.kakao.maps.Marker({
                     map: this.map, // 마커를 표시할 지도
                     position: position.latlng, // 마커를 표시할 위치

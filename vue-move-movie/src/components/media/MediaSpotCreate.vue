@@ -192,6 +192,7 @@ export default {
                 name: "spotList",
                 params: { title: this.spot.spot_movie_title, prodYear: 2023 },
             });
+            window.scrollTo(0, 0);
         },
 
         handleFileSelect(event) {

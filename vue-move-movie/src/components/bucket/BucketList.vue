@@ -36,6 +36,8 @@
 import BucketListItem from "@/components/bucket/BucketListItem.vue";
 import { bucketListheart } from "@/api/bucket.js";
 import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+const toastStore = "toastStore";
 const mediaStore = "mediaStore";
 
 export default {
@@ -57,6 +59,7 @@ export default {
         ...mapState(mediaStore, ["bucket"]),
     },
     methods: {
+        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
         moveBucketCreate() {
             // pass
             if (!this.bucket) {
@@ -64,8 +67,16 @@ export default {
                 this.$router.push({
                     name: "bucketCreate",
                 });
+                window.scrollTo(0, 0);
             } else {
-                alert("당신의 버킷을 채우세요!");
+                let toast_data = {
+                    title: "Fail", // Success, Fail 등 상태를 표기
+                    sub: "Bucket List", // 상태가 일어난 위치 or 기능 표기
+                    content: "버킷이 비어있습니다.", // 내용 표기
+                };
+
+                this.SET_TOAST(toast_data);
+                this.SET_TOAST_CNT();
             }
         },
     },

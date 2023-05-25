@@ -138,6 +138,7 @@ export default {
             this.$router.push({
                 name: "spotCreate",
             });
+            window.scrollTo(0, 0);
         },
 
         // [function - 필수] 검색 기능 구현 완료 후 연결하기
@@ -146,6 +147,7 @@ export default {
                 name: "bucketList",
                 params: { no: this.spotInstance.spot_instance_pk },
             });
+            window.scrollTo(0, 0);
         },
     },
 };

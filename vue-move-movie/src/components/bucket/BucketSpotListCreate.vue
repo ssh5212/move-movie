@@ -111,6 +111,7 @@ export default {
             this.$router.push({
                 name: `bucket`,
             });
+            window.scrollTo(0, 0);
         },
     },
 };

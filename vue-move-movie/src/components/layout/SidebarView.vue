@@ -24,51 +24,52 @@
 </template>
 
 <script>
-import LoginAfter from '@/components/layout/LoginAfter.vue';
-import LoginBefore from '@/components/layout/LoginBefore.vue';
-import BucketItem from './BucketItem.vue';
-import { mapState, mapMutations } from 'vuex';
+import LoginAfter from "@/components/layout/LoginAfter.vue";
+import LoginBefore from "@/components/layout/LoginBefore.vue";
+import BucketItem from "./BucketItem.vue";
+import { mapState, mapMutations } from "vuex";
 
-const userStore = 'userStore';
-const mediaStore = 'mediaStore';
-const toastStore = 'toastStore';
+const userStore = "userStore";
+const mediaStore = "mediaStore";
+const toastStore = "toastStore";
 export default {
-    name: 'SidebarView',
+    name: "SidebarView",
     components: { LoginAfter, LoginBefore, BucketItem },
     data() {
         return {
             mediaTitleList: [],
             mediaTitle: Object,
-            variant: '',
+            variant: "",
         };
     },
     created() {},
     computed: {
-        ...mapState(userStore, ['isLogin', 'userInfo']),
-        ...mapState(mediaStore, ['bucket']),
+        ...mapState(userStore, ["isLogin", "userInfo"]),
+        ...mapState(mediaStore, ["bucket"]),
         // ...mapState(toastStore, ['toast_store']),
     },
     methods: {
-        ...mapMutations(toastStore, ['SET_TOAST', 'SET_TOAST_CNT']),
+        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
         moveBucketCreate() {
             // pass
             // bucketCreate
 
             // 로그인이 되어 있지 않다면
             if (!this.userInfo) {
-                console.log('로그인이 되어있지 않아요!');
+                console.log("로그인이 되어있지 않아요!");
                 let toast_data = {
-                    title: 'Error',
-                    sub: 'Sidebar',
-                    content: '로그인이 필요합니다.',
+                    title: "Error",
+                    sub: "Sidebar",
+                    content: "로그인이 필요합니다.",
                 };
                 console.log(toast_data);
                 this.SET_TOAST(toast_data);
                 this.SET_TOAST_CNT();
             } else {
                 this.$router.push({
-                    name: 'bucketCreate',
+                    name: "bucketCreate",
                 });
+                window.scrollTo(0, 0);
             }
         },
     },

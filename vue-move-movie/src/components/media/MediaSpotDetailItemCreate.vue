@@ -127,7 +127,9 @@ export default {
         },
         movehome() {
             this.$router.push({ name: "spotDetail" });
+            window.scrollTo(0, 0);
         },
+
         handleFileUpload(event) {
             this.file = event.target.files[0];
             console.log(this.file instanceof File);

@@ -52,6 +52,7 @@ export default {
                 name: `bucketDetail`,
                 params: { no: this.$props.bucket.bucket_pk },
             });
+            window.scrollTo(0, 0);
         },
     },
 };

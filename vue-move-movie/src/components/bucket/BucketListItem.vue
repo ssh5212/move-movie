@@ -45,6 +45,7 @@ export default {
                 name: `bucketDetail`,
                 params: { no: this.BucketList.bucket_pk },
             });
+            window.scrollTo(0, 0);
         },
     },
 };
