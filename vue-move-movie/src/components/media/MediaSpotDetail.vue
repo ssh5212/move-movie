@@ -3,12 +3,7 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img
-                    src="@/assets/img/intro-half-img01.jpg"
-                    alt=""
-                    width="1920"
-                    height="auto"
-                />
+                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
@@ -23,44 +18,18 @@
                 <!-- [S] Movie -->
                 <div class="col-lg-7 pb-2 pt-5">
                     <h3 class="pb-2">작중 스팟 장면</h3>
-                    <img
-                        :src="img_src || require('@/assets/img/no_img_x.png')"
-                        alt="..."
-                        style="width: 100%"
-                    />
+                    <img :src="img_src || require('@/assets/img/no_img_x.png')" alt="..." style="width: 100%" />
 
                     <h4 class="pt-4 pb-3">{{ mediaSpot.spot_name }}</h4>
-                    <p class="mb-2 text-left">
-                        촬영 영화 : {{ mediaSpot.spot_movie_title }}
-                    </p>
-                    <p class="mb-2 text-left">
-                        주소 : {{ mediaSpot.spot_address }}
-                    </p>
-                    <p class="text-left">
-                        스팟 소개 : {{ mediaSpot.spot_filming_seq }}
-                    </p>
+                    <p class="mb-2 text-left">촬영 영화 : {{ mediaSpot.spot_movie_title }}</p>
+                    <p class="mb-2 text-left">주소 : {{ mediaSpot.spot_address }}</p>
+                    <p class="text-left">스팟 소개 : {{ mediaSpot.spot_filming_seq }}</p>
                     <!-- <p class="mb-2 text-left">스팟 등록자 : 연예인원영</p> -->
 
-                    <button
-                        class="btn btn-dark m-2 mb-4 col-md-5 col-11"
-                        variant="primary"
-                        @click="moveSpotCreate"
-                    >
-                        내 사진 올리기
-                    </button>
-                    <button
-                        class="btn btn-dark m-2 mb-4 col-md-5 col-11"
-                        variant="primary"
-                        @click="moveRelationBucket"
-                    >
-                        스폿 관련 버킷 리스트 보기
-                    </button>
+                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveSpotCreate">내 사진 올리기</button>
+                    <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveRelationBucket">스폿 관련 버킷 리스트 보기</button>
 
-                    <b-icon-basket2-fill
-                        id="b-icon"
-                        class="h2 col-md-1 m-0 bucket-btn"
-                        @click="addThisSpot"
-                    ></b-icon-basket2-fill>
+                    <b-icon-basket2-fill id="b-icon" class="h2 col-md-1 m-0 bucket-btn" @click="addThisSpot"></b-icon-basket2-fill>
                 </div>
                 <!-- [E] Movie -->
 
@@ -78,11 +47,7 @@
 
             <!-- 화면 1 -->
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <MediaSpotDetailItem
-                    v-for="(spotInstance, index) in spotInstanceList"
-                    :key="index"
-                    :spotInstance="spotInstance"
-                ></MediaSpotDetailItem>
+                <MediaSpotDetailItem v-for="(spotInstance, index) in spotInstanceList" :key="index" :spotInstance="spotInstance"></MediaSpotDetailItem>
             </div>
 
             <!-- [E] 상세 스팟 -->
@@ -138,8 +103,7 @@ export default {
         );
         //
         setTimeout(() => {
-            this.img_src =
-                process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
+            this.img_src = process.env.VUE_APP_API_BASE_URL + this.mediaSpot.spot_img_src;
         }, 200);
     },
 
@@ -164,8 +128,7 @@ export default {
         //api 불러오기
         loadScript() {
             const script = document.createElement("script");
-            script.src =
-                "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -238,10 +201,7 @@ export default {
             this.spots_tmp.forEach((mediaSpot) => {
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
-                obj.latlng = new window.kakao.maps.LatLng(
-                    mediaSpot.spot_lat,
-                    mediaSpot.spot_lon
-                );
+                obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
 
                 this.positions.push(obj);
             });
@@ -263,10 +223,7 @@ export default {
 
             // 4. 지도를 이동시켜주기
             // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
-            const bounds = this.positions.reduce(
-                (bounds, position) => bounds.extend(position.latlng),
-                new window.kakao.maps.LatLngBounds()
-            );
+            const bounds = this.positions.reduce((bounds, position) => bounds.extend(position.latlng), new window.kakao.maps.LatLngBounds());
 
             this.map.setBounds(bounds);
         },

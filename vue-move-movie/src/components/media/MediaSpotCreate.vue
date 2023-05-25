@@ -7,7 +7,7 @@
             </div>
 
             <div class="jc-text">
-                <p class="vtext-big">Register</p>
+                <p class="vtext-big">스팟 등록</p>
             </div>
         </div>
         <!-- [E] Intro Image -->

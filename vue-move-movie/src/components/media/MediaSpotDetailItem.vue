@@ -6,15 +6,9 @@
                 <h5 class="card-title" style="text-align: left">
                     {{ spotInstance.spot_instance_title }}
                 </h5>
-                <b-icon-heart-fill
-                    id="b-icon"
-                    class="h5 pt-1 m-0"
-                    v-b-toggle.sidebar-backdrop
-                ></b-icon-heart-fill>
+                <b-icon-heart-fill id="b-icon" class="h5 pt-1 m-0" v-b-toggle.sidebar-backdrop></b-icon-heart-fill>
                 <span class="card-text"
-                    ><small class="text-muted">{{
-                        spotInstance.spot_instance_heart
-                    }}</small></span
+                    ><small class="text-muted">{{ spotInstance.spot_instance_heart }}</small></span
                 >
             </div>
         </div>
@@ -34,9 +28,7 @@ export default {
     },
     created() {
         console.log(this.$props.spotInstance);
-        this.img_src =
-            process.env.VUE_APP_API_BASE_URL +
-            this.$props.spotInstance.spot_instance_img_src;
+        this.img_src = process.env.VUE_APP_API_BASE_URL + this.$props.spotInstance.spot_instance_img_src;
     },
     methods: {
         // moveSpotDetail() {

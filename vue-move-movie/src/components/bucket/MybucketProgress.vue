@@ -5,13 +5,7 @@
                 {{ this.$props.bucket.bucket_title }}
             </p>
             <div class="progress" style="height: 5px">
-                <b-progress
-                    :value="(checknums / checkmax) * 100"
-                    :max="100"
-                    show-progress
-                    animated
-                    style="width: 100%"
-                ></b-progress>
+                <b-progress :value="(checknums / checkmax) * 100" :max="100" show-progress animated style="width: 100%"></b-progress>
             </div>
         </div>
     </div>

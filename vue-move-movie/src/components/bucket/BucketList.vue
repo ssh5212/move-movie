@@ -1,22 +1,32 @@
 <template>
     <div>
+        <!-- [S] Intro Image -->
+        <div class="jb-box">
+            <div class="top-img">
+                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
+            </div>
+
+            <div class="jc-text">
+                <p class="vtext-big">스팟 사진 등록</p>
+            </div>
+        </div>
+        <!-- [E] Intro Image -->
         <!-- [S] body -->
         <div class="container">
             <!-- 실제 내용 -->
-            <div
-                class="row justify-content-xl-center my-5 align-items-center"
-            ></div>
+            <div class="row justify-content-xl-center my-5 align-items-center"></div>
             <div class="row justify-content-xl-end mb-3 mr-0">
-                <button @click="moveBucketCreate">버킷 리스트 생성하기</button>
+                <button class="btn btn-dark" @click="moveBucketCreate">버킷 리스트 생성하기</button>
             </div>
             <div class="row justify-content-xl-between">
                 <bucket-list-item
-                    class="col-md-4 mb-1"
+                    class="col-md-4 mb-1 py-4"
                     v-for="(bucketList, index) in bucketListList"
                     :key="index"
                     :BucketList="bucketList"
                 ></bucket-list-item>
             </div>
+            <div class="pt-5"></div>
         </div>
         <!-- [E] body -->
     </div>

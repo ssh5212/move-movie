@@ -3,16 +3,11 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img
-                    src="@/assets/img/intro-half-img01.jpg"
-                    alt=""
-                    width="1920"
-                    height="auto"
-                />
+                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
-                <p class="vtext-big">title</p>
+                <p class="vtext-big">상세 버킷 리스트</p>
             </div>
         </div>
         <!-- [E] Intro Image -->
@@ -27,10 +22,7 @@
             <div style="background-color: #ced0c3">
                 <!-- list -->
                 <div class="mt-5">
-                    <div
-                        class="row justify-content-xl-center m-0"
-                        style="background-color: #4b6a70"
-                    >
+                    <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
                         <!-- detailitem.vue로 빼야함 -->
                         <bucket-spot-list-detail-item
                             v-for="(spot, index) in spots"
@@ -43,11 +35,7 @@
                 <!--  -->
                 <!-- [S] map -->
                 <div class="container mt-5">
-                    <div
-                        id="map"
-                        class="mt-3"
-                        style="width: 100%; height: 400px"
-                    ></div>
+                    <div id="map" class="mt-3" style="width: 100%; height: 400px"></div>
                 </div>
                 <!-- [E] map -->
                 <!--  content -->
@@ -120,8 +108,7 @@ export default {
         //api 불러오기
         loadScript() {
             const script = document.createElement("script");
-            script.src =
-                "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=067b8aa6c249b51bc098f93ee739672f&autoload=false&libraries=services,clusterer,drawing";
             script.onload = () => {
                 window.kakao.maps.load(this.loadMap);
             };
@@ -145,10 +132,7 @@ export default {
             this.spots_tmp.forEach((mediaSpot) => {
                 let obj = {};
                 obj.title = mediaSpot.spot_name;
-                obj.latlng = new window.kakao.maps.LatLng(
-                    mediaSpot.spot_lat,
-                    mediaSpot.spot_lon
-                );
+                obj.latlng = new window.kakao.maps.LatLng(mediaSpot.spot_lat, mediaSpot.spot_lon);
 
                 this.positions.push(obj);
             });
@@ -170,10 +154,7 @@ export default {
 
             // 4. 지도를 이동시켜주기
             // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
-            const bounds = this.positions.reduce(
-                (bounds, position) => bounds.extend(position.latlng),
-                new window.kakao.maps.LatLngBounds()
-            );
+            const bounds = this.positions.reduce((bounds, position) => bounds.extend(position.latlng), new window.kakao.maps.LatLngBounds());
 
             this.map.setBounds(bounds);
         },

@@ -3,16 +3,11 @@
         <!-- [S] Intro Image -->
         <div class="jb-box">
             <div class="top-img">
-                <img
-                    src="@/assets/img/intro-half-img01.jpg"
-                    alt=""
-                    width="1920"
-                    height="auto"
-                />
+                <img src="@/assets/img/intro-half-img01.jpg" alt="" width="1920" height="auto" />
             </div>
 
             <div class="jc-text">
-                <p class="vtext-big">title</p>
+                <p class="vtext-big">나의 버킷 생성하기</p>
             </div>
         </div>
         <!-- [E] Intro Image -->
@@ -30,38 +25,23 @@
             <div>
                 <!-- list -->
                 <div class="mt-5">
-                    <div
-                        class="row justify-content-xl-center m-0"
-                        style="background-color: #4b6a70"
-                    >
+                    <div class="row justify-content-xl-center m-0" style="background-color: #4b6a70">
                         <!-- detailitem.vue로 빼야함 -->
-                        <bucket-spot-list-detail-item
-                            v-for="(spot, index) in bucket"
-                            :key="index"
-                            :spot_pk="spot.spot_pk"
-                        ></bucket-spot-list-detail-item>
+                        <bucket-spot-list-detail-item v-for="(spot, index) in bucket" :key="index" :spot_pk="spot.spot_pk"></bucket-spot-list-detail-item>
                     </div>
                 </div>
                 <!-- title -->
                 <div class="mt-5">제목</div>
                 <div class="mb-5">
                     <b-row class="mt-1 justify-content-xl-center">
-                        <b-form-input
-                            id="textarea-default"
-                            placeholder="Default title"
-                            v-model="title"
-                        ></b-form-input>
+                        <b-form-input id="textarea-default" placeholder="Default title" v-model="title"></b-form-input>
                     </b-row>
                 </div>
                 <!--  content -->
                 <div>내용</div>
                 <div class="mb-5">
                     <b-row class="mt-2 justify-content-xl-center">
-                        <b-form-textarea
-                            id="textarea-default"
-                            placeholder="Default content"
-                            v-model="content"
-                        ></b-form-textarea>
+                        <b-form-textarea id="textarea-default" placeholder="Default content" v-model="content"></b-form-textarea>
                     </b-row>
                 </div>
             </div>
