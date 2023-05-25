@@ -7,7 +7,7 @@
             </div>
 
             <div class="jc-text">
-                <p class="vtext-big">스팟 사진 등록</p>
+                <p class="vtext-big">버킷 살펴보기</p>
             </div>
         </div>
         <!-- [E] Intro Image -->

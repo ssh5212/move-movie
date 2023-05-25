@@ -105,6 +105,8 @@ body {
 .jejugothic * {
     font-family: 'Jeju Gothic', sans-serif;
 }
+
+
 </style>
 
 <script>

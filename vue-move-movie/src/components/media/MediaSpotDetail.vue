@@ -23,7 +23,7 @@
                     <h4 class="pt-4 pb-3">{{ mediaSpot.spot_name }}</h4>
                     <p class="mb-2 text-left">촬영 영화 : {{ mediaSpot.spot_movie_title }}</p>
                     <p class="mb-2 text-left">주소 : {{ mediaSpot.spot_address }}</p>
-                    <p class="text-left">스팟 소개 : {{ mediaSpot.spot_filming_seq }}</p>
+                    <p class="text-left">스팟 소개 : {{ mediaSpot.spot_scene_desc }}</p>
                     <!-- <p class="mb-2 text-left">스팟 등록자 : 연예인원영</p> -->
 
                     <button class="btn btn-dark m-2 mb-4 col-md-5 col-11" variant="primary" @click="moveSpotCreate">내 사진 올리기</button>
@@ -46,8 +46,13 @@
             <h3 class="pb-2 mt-5">사용자 스팟 사진</h3>
 
             <!-- 화면 1 -->
-            <div class="row justify-content-xl-center my-5 align-items-center">
-                <MediaSpotDetailItem v-for="(spotInstance, index) in spotInstanceList" :key="index" :spotInstance="spotInstance"></MediaSpotDetailItem>
+            <div class="row justify-content-center my-5 align-items-center">
+                <template v-if="spotInstanceList.length == 0">
+                    <p>등록된 사용자 스팟 사진이 없습니다.</p>
+                </template>
+                <template v-else>
+                    <MediaSpotDetailItem v-for="(spotInstance, index) in spotInstanceList" :key="index" :spotInstance="spotInstance"></MediaSpotDetailItem>
+                </template>
             </div>
 
             <!-- [E] 상세 스팟 -->

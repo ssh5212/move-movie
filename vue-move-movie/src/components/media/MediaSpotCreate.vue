@@ -13,8 +13,14 @@
         <!-- [E] Intro Image -->
 
         <div class="container">
-            <div class="row justify-content-xl-center my-5 align-items-center">
+            <div class="row justify-content-center my-5 align-items-center">
                 <div class="col-md-8">
+                    <div class="text-center mb-5">
+                        <img class="mb-4" src="@/assets/logo.png" alt="" width="72" height="auto" />
+                        <h1 class="mb-3 font-weight-normal">Make your Spot!</h1>
+                        <p>당신의 장소를 알려주세요!</p>
+                    </div>
+                    <hr class="my-5" />
                     <form class="needs-validation" novalidate>
                         <div class="mb-3">
                             <label for="email">spot_name<span class="text-muted"></span></label>
@@ -50,28 +56,22 @@
                                 type="text"
                                 class="form-control"
                                 id="spot_road_address"
-                                placeholder="대전광역시 유성구 동서대로 125"
+                                placeholder="정확한 주소명 미 기입 시 등록이 되지 않습니다!"
                                 v-model="spot.spot_address"
                             />
                         </div>
 
                         <div class="mb-3">
                             <label for="spot_road_address">spot_road_address</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="spot_road_address"
-                                placeholder="대전광역시 유성구 동서대로 125"
-                                v-model="spot.spot_road_address"
-                            />
+                            <input type="text" class="form-control" id="spot_road_address" placeholder="" v-model="spot.spot_road_address" />
                         </div>
 
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="spot_filming_seq">spot_filming_seq</label>
                             <input type="text" class="form-control" id="spot_filming_seq" placeholder="" v-model="spot.spot_filming_seq" />
-                        </div>
+                        </div> -->
 
-                        <div class="mb-3">
+                        <div class="mb-3 pb-3">
                             <input class="float-left mb-2" type="file" id="fileInput" ref="fileInput" @change="handleFileUpload" />
                             <!-- <button class="btn btn-dark btn-lg btn-block" @click="uploadFile">파일 업로드</button> -->
                         </div>
@@ -92,6 +92,8 @@ import MediaSearchBar from "./MediaSearchBar.vue";
 // import { register } from "@/api/media.js";
 import { mapState } from "vuex";
 const mediaStore = "mediaStore";
+import { mapMutations } from "vuex";
+const toastStore = "toastStore";
 
 export default {
     name: "MediaSpotCreate",
@@ -129,6 +131,7 @@ export default {
     },
 
     methods: {
+        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
         bindmsg(msg) {
             this.spot.gugun_code = msg.gugunCode;
             this.spot.sido_code = msg.sidoCode;
@@ -175,6 +178,14 @@ export default {
                         })
                         .catch((error) => {
                             console.log(error);
+                            let toast_data = {
+                                title: "Fail", // Success, Fail 등 상태를 표기
+                                sub: "Spot Create", // 상태가 일어난 위치 or 기능 표기
+                                content: "등록 과정 중 문제가 발생하였습니다.", // 내용 표기
+                            };
+
+                            this.SET_TOAST(toast_data);
+                            this.SET_TOAST_CNT();
                         });
 
                     // register(params, ({ data }) => {
@@ -184,6 +195,14 @@ export default {
                 })
                 .catch((error) => {
                     console.error(error);
+                    let toast_data = {
+                        title: "Fail", // Success, Fail 등 상태를 표기
+                        sub: "Spot Create", // 상태가 일어난 위치 or 기능 표기
+                        content: "도로명 표기가 잘못되었습니다.", // 내용 표기
+                    };
+
+                    this.SET_TOAST(toast_data);
+                    this.SET_TOAST_CNT();
                 });
         },
         moveMedia() {

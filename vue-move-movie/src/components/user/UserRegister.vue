@@ -82,6 +82,8 @@ import axios from "axios";
 import FormData from "form-data";
 import { mapActions } from "vuex";
 const userStore = "userStore";
+import { mapMutations } from "vuex";
+const toastStore = "toastStore";
 
 export default {
     name: "UserRegister",
@@ -103,6 +105,7 @@ export default {
     },
     methods: {
         ...mapActions(userStore, ["userRegister"]),
+        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
         // register() {
         //   const formData = new FormData();
         //   formData.append("UserDto", this.user, {
@@ -158,6 +161,14 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                    let toast_data = {
+                        title: "Fail", // Success, Fail 등 상태를 표기
+                        sub: "Register", // 상태가 일어난 위치 or 기능 표기
+                        content: "회원가입 중 문제가 발생하였습니다.", // 내용 표기
+                    };
+
+                    this.SET_TOAST(toast_data);
+                    this.SET_TOAST_CNT();
                 });
         },
         movehome() {

@@ -34,7 +34,12 @@
             </div>
 
             <div class="row justify-content-xl-center my-5 align-items-center">
-                <MediaTitleListItem v-for="(mediaTitle, index) in mediaTitleList" :key="index" :mediaTitle="mediaTitle"></MediaTitleListItem>
+                <template v-if="mediaTitleList.length == 0">
+                    <p>등록된 스팟 사진이 없습니다.</p>
+                </template>
+                <template v-else>
+                    <MediaTitleListItem v-for="(mediaTitle, index) in mediaTitleList" :key="index" :mediaTitle="mediaTitle"></MediaTitleListItem>
+                </template>
             </div>
         </div>
 

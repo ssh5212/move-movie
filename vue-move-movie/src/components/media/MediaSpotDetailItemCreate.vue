@@ -18,8 +18,8 @@
                 <div class="col-md-8">
                     <div class="text-center mb-5">
                         <img class="mb-4" src="@/assets/logo.png" alt="" width="72" height="auto" />
-                        <h1 class="mb-3 font-weight-normal">Melcome Move Movie!</h1>
-                        <p>필름의 한 장 속으로 뛰어들 준비는 되셨나요?</p>
+                        <h1 class="mb-3 font-weight-normal">Keep Moving!</h1>
+                        <p>당신만의 인생 사진을 다른 사람에게 자랑하세요!</p>
                     </div>
                     <hr class="my-5" />
 
@@ -39,11 +39,7 @@
                     <form class="needs-validation" novalidate>
                         <b-row class="mt-2">
                             <b-col sm="12">
-                                <b-form-textarea
-                                    id="textarea-default"
-                                    placeholder="Default textarea"
-                                    v-model="spotInstance.spot_instance_content"
-                                ></b-form-textarea>
+                                <b-form-textarea id="textarea-default" placeholder="" v-model="spotInstance.spot_instance_content"></b-form-textarea>
                             </b-col>
                         </b-row>
 
@@ -63,6 +59,8 @@
 import axios from "axios";
 import FormData from "form-data";
 import { mapActions, mapGetters } from "vuex";
+import { mapMutations } from "vuex";
+const toastStore = "toastStore";
 const userStore = "userStore";
 
 export default {
@@ -70,8 +68,8 @@ export default {
     data() {
         return {
             spotInstance: {
-                spot_instance_title: "your title",
-                spot_instance_content: "your content",
+                spot_instance_title: "",
+                spot_instance_content: "",
                 spot_pk: 0,
                 user_pk: 0,
             },
@@ -89,6 +87,7 @@ export default {
         console.log(this.selectedImage);
     },
     methods: {
+        ...mapMutations(toastStore, ["SET_TOAST", "SET_TOAST_CNT"]),
         ...mapActions(userStore, ["userRegister"]),
         upload() {
             const data = new FormData();
@@ -123,6 +122,14 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                    let toast_data = {
+                        title: "Fail", // Success, Fail 등 상태를 표기
+                        sub: "Spot Instance Create", // 상태가 일어난 위치 or 기능 표기
+                        content: "생성 과정 중 문제가 발생하였습니다.", // 내용 표기
+                    };
+
+                    this.SET_TOAST(toast_data);
+                    this.SET_TOAST_CNT();
                 });
         },
         movehome() {
